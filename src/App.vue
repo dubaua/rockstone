@@ -5,6 +5,7 @@
     overview(:content="currentLanguage")
     how-we-work(:content="currentLanguage")
     our-projects(:content="currentLanguage")
+    how-to-work-with-us(:content="currentLanguage")
 </template>
 
 <script>
@@ -12,6 +13,7 @@ import api from '@/api/';
 import Overview from '@/components/Overview';
 import HowWeWork from '@/components/HowWeWork';
 import OurProjects from '@/components/OurProjects';
+import HowToWorkWithUs from '@/components/HowToWorkWithUs';
 
 export default {
   name: 'app',
@@ -19,6 +21,7 @@ export default {
     Overview,
     HowWeWork,
     OurProjects,
+    HowToWorkWithUs,
   },
   data() {
     return {
