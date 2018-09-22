@@ -1,0 +1,71 @@
+//Grid Variables
+$columns: 12;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px
+);
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.row--between {
+  justify-content: space-between;
+}
+
+.row--middle {
+  align-items: center;
+}
+
+.col {
+  box-sizing: border-box;
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+}
+
+//mixins
+
+// this will generate the media query for sizes above the one passed on "$size"
+// example breakpoint-up(xs) = @media (min-width: 30em)
+@mixin breakpoint-up($size, $breakpoint: $grid-breakpoints) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+// code to generate the columns. (eg. col-sm-4)
+@mixin make-cols($size, $columns: $columns) {
+  @for $i from 1 through $columns {
+    .col-#{$size}-#{$i} {
+      flex-basis: percentage($i / $columns);
+      max-width: percentage($i / $columns);
+    }
+    .order-#{$i} {
+      order: $i;
+    }
+    .order-#{$size}-#{$i} {
+      order: $i;
+    }
+  }
+}
+
+// creating the colums (eg: col-sm-4)
+@each $name, $size in $grid-breakpoints {
+  // don't define media query and container max-size if we're on the smallest size(xs)
+  @if ($name == "xs") {
+    @include make-cols($name);
+  } @else {
+    @include breakpoint-up($size) {
+      @include make-cols($name);
+    }
+  }
+}

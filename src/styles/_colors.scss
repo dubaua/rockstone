@@ -1,0 +1,10 @@
+$color-primary: hsl(170, 100%, 35%);
+$color-primary-l: lighten(saturate($color-primary, 1), 2);
+$color-primary-d: darken(desaturate($color-primary, 1), 2);
+
+$color-text: white;
+
+$color-background: #0b2637;
+$color-background--l: #0b2637;
+$color-background--light: #194058;
+$color-background--dark: #071a26;

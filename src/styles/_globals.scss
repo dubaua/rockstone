@@ -1,0 +1,34 @@
+@import "./_colors";
+@import "./_breakpoints";
+
+$font-size-medium: 16px;
+$font-montserrat: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$base: 16px;
+
+$timing: 0.33s;
+$timing-fast: $timing * 0.5;
+$timing-long: $timing * 1.5;
+
+@mixin font-montserrat {
+  font-family: $font-montserrat;
+
+  line-height: 1.07;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+$noise-bg: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlBAMAAAA3sD0wAAAAD1BMVEUAAADv7+/q6uro6Ojl5eWwy84/AAAABXRSTlMAAwkOF8JfOpkAAAEqSURBVCjPVVKLcYUwDJMdBlDoAqZdIPQtwP5TNVLguEK+tuxYSoACBgigfYNzTgAg4oSsoRZye11Y/YmJ0QF2m/bGOUcZnDGwvnADmyYm7mx94nghsQsMhsFfSu9QjkSgdFqD3TY3jJX0HUH0f0c9J+M4lJxzASr0V5j7pIVjhVxkeJvz7+IAE8LO4WSF7MLVpd2FZkbu0ZEhs9OsIm6SpokydxmjOhoUfK1KNyHBOCxnFuCoDyqIH5HenInIyngIJtriS+FsnfvSImo6mdHxfq57WqWuy1ahrm80Uztv8azLnTn6+Ui8DdKo6rRP+B0bH5mI9BiwliEuVrNok0HH9t7Xe0WttP6EUanbd2FnIw8cqfpsuYtiqIF+Ec8zNMgC+31+50tcbQ/8AXBnE04uBnGiAAAAAElFTkSuQmCC")
+    repeat,
+  center center,
+  url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzBAMAAADIjy0ZAAAAKlBMVEUAAAALCwsGBgYEBAQICAgGBgYODg4NDQ0KCgoQEBARERESEhITExMUFBQco9F/AAAADnRSTlMAGwkDDgYvJxM4QkxYcbMc5PkAAAK5SURBVDjLbNGxihRBAIThr7tndnbnPOhIwaiRw+SSvsDEaLhQk8FD5LIRTeSSCXyAeYRNBMMVAzHbxHzNFAz2BXwXgw0EMS7+KqrK4KmaQ+NRcJ2yrmu+bb7G71jrl4Ai3lQRudWa6mh0t81iWAP1DIuYA9WK1NnCDAr8PPGD98UcEj0LeA3Wh3L4HwzsW3IV9u4koY7O0oFEfisQAUzvqok6NI8p28QB9npsIJaNrpF2KchDLLkpV8zz8xEVTQH76b7bNuyftRxhajK1NRMM46/eqXm8sdptQA8g15JgmdPvByAalKbjbFvjaJOyWHv5pCxaybYtETtrsMqujqLqsoEFqvbFqj5MnQ8B+bQef09I9d5wIbEsdk+ACZdI9j1tFtNa5F+bjgbgmDJIvCxvwq7OmzET6LsDHdcWaY7jyhrOkSIXn02KVM6O8haRCXx8lR3rGOoXIXcghgjNjy53c6PntkQUp/xPRxaGc/nwp266V3EiCsMA/JwzyfxtAgcLLUQ47N7AiGAnzCUkqIXduGKfQrAdwQsYsViwmtJytLEVEbHUTrwaA8JiCsvve5v3t7C4Ue5MzAfk4y/QeIWCmJnukhXi0qMOBJ1tGopHPX5oSoEiIs22sC19gSUN0f6ggrNNvPQUaS2DauTc5PDvbHqRF3ZNZMPLBVe5TjYyRt45Ev/qJvWw+Xz55JY5OpnPaXISHquPJ5LwkQy47r6zkRyYKX3DcqbUe9auIMN7jDCNjFF/4LmBWMRmv8CpcRfmgLxS016QAMFAJ5S9BAMNb0BcFcV52zORVVIAVAUVmQ4ErHdG9xC4nUVAvfo1ToS6AEFLQ1z3J/I/oK48+HkAuML3DRSvtXXi9zrqdOa+CpvskxbVDjAwpf+YD6BEXP7CM3uya/EZoCzfKnVYS+4/1JQgNO0dalb+AFQtgojED4DKAAAAAElFTkSuQmCC")
+    repeat,
+  center center;
+
+@mixin fixed-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

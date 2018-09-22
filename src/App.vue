@@ -1,27 +1,51 @@
 <template lang="pug">
   #app(v-if="isLoaded")
-    button(@click="setLanguage('ru')") RU
-    button(@click="setLanguage('en')") EN
-    overview(:content="currentLanguage")
-    how-we-work(:content="currentLanguage")
-    our-projects(:content="currentLanguage")
-    how-to-work-with-us(:content="currentLanguage")
+    .page(
+      v-touch:swipe.right="openMenu",
+      v-touch:swipe.left="closeMenu",
+    )
+      //- button(@click="setLanguage('ru')") RU
+      //- button(@click="setLanguage('en')") EN
+      //- button(@click="toggleMenu") Открыть меню
+      homescreen
+      overview(:content="currentLanguage")
+      how-we-work(:content="currentLanguage")
+      our-projects(:content="currentLanguage")
+      how-to-work-with-us(:content="currentLanguage")
+      careers(:content="currentLanguage")
+      contact(:content="currentLanguage")
+      template(v-if="page.isMenuOpen")
+        slide-in(
+          direction="right",
+          :isActive="page.isMenuOpen",
+          :swipeAction="closeMenu",
+          title="Меню",
+        )
+      overlay
+      .noise-overlay.noise-bg
 </template>
 
 <script>
 import api from '@/api/';
+import Homescreen from '@/components/Homescreen';
 import Overview from '@/components/Overview';
 import HowWeWork from '@/components/HowWeWork';
 import OurProjects from '@/components/OurProjects';
 import HowToWorkWithUs from '@/components/HowToWorkWithUs';
+import Careers from '@/components/Careers';
+import Contact from '@/components/Contact';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'app',
   components: {
+    Homescreen,
     Overview,
     HowWeWork,
     OurProjects,
     HowToWorkWithUs,
+    Careers,
+    Contact,
   },
   data() {
     return {
@@ -46,6 +70,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['page']),
     currentLanguage() {
       return this.content[this.currentLanguageCode];
     },
@@ -90,15 +115,19 @@ export default {
     })
   },
   methods: {
+    ...mapActions(['toggleByKey', 'setByKey']),
     setLanguage(languageCode) {
       this.currentLanguageCode = languageCode;
-    }
+    },
+    openMenu() {
+      this.setByKey({key: 'isMenuOpen', value: true});
+    },
+    toggleMenu() {
+      this.toggleByKey('isMenuOpen')
+    },
+    closeMenu() {
+      this.setByKey({key: 'isMenuOpen', value: false});
+    },
   },
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: "Montserrat", sans-serif;
-}
-</style>
