@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import Vue2TouchEvents from "vue2-touch-events";
+import VueMq from "vue-mq";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "@/components/globals";
 import store from "./store";
@@ -9,7 +10,15 @@ import "normalize.css";
 import "./styles/main.scss";
 
 Vue.use(Vue2TouchEvents);
-
+Vue.use(VueMq, {
+  breakpoints: {
+    xs: 576,
+    sm: 768,
+    md: 992,
+    lg: 1200,
+    xl: Infinity
+  }
+});
 Vue.use(VueAwesomeSwiper /* { default global options } */);
 
 Vue.config.productionTip = false;

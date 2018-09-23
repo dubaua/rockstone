@@ -1,32 +1,63 @@
 <template lang="pug">
   #app(v-if="isLoaded")
     .page(
-      v-touch:swipe.right="openMenu",
       v-touch:swipe.left="closeMenu",
     )
-      //- button(@click="setLanguage('ru')") RU
-      //- button(@click="setLanguage('en')") EN
-      //- button(@click="toggleMenu") Открыть меню
+      navigation(:content="currentLanguage")
+      mq-layout(mq="lg+")
+        page-state
+      a(name="homescreen")
       homescreen
+      a(name="overview")
       overview(:content="currentLanguage")
+      a(name="how-we-work")
       how-we-work(:content="currentLanguage")
+      a(name="our-projects")
       our-projects(:content="currentLanguage")
+      a(name="how-to-work-with-us")
       how-to-work-with-us(:content="currentLanguage")
+      a(name="careers")
       careers(:content="currentLanguage")
+      a(name="contact")
       contact(:content="currentLanguage")
-      template(v-if="page.isMenuOpen")
-        slide-in(
-          direction="right",
-          :isActive="page.isMenuOpen",
-          :swipeAction="closeMenu",
-          title="Меню",
+
+      slide-in(
+        direction="right",
+        :isActive="page.isMenuOpen",
+        :onClose="closeMenu",
+        isWide
         )
+        | Меню
+      slide-in(
+        direction="left",
+        :isActive="page.isFeedbackOpen",
+        :onClose="closeFeedback",
+        )
+        | Фидбек
+      slide-in(
+        direction="left",
+        :isActive="page.isProjectOpen",
+        :onClose="closeProject",
+        )
+        h2.subtitle {{currentProject.title}}
+        p {{currentProject.city}}
+        .typographic(v-html="currentProject.details")
+      slide-in(
+        direction="left",
+        :isActive="page.isPositionOpen",
+        :onClose="closePosition",
+        )
+        h2.subtitle {{currentPosition.title}}
+        p {{currentPosition.city}}
+        .typographic(v-html="currentPosition.details")
       overlay
       .noise-overlay.noise-bg
 </template>
 
 <script>
 import api from '@/api/';
+import Navigation from '@/components/Navigation';
+import PageState from '@/components/PageState';
 import Homescreen from '@/components/Homescreen';
 import Overview from '@/components/Overview';
 import HowWeWork from '@/components/HowWeWork';
@@ -39,6 +70,8 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: 'app',
   components: {
+    Navigation,
+    PageState,
     Homescreen,
     Overview,
     HowWeWork,
@@ -50,7 +83,6 @@ export default {
   data() {
     return {
       isLoaded: false,
-      currentLanguageCode: 'ru',
       content: {
         ru: {
           common: null,
@@ -72,7 +104,13 @@ export default {
   computed: {
     ...mapState(['page']),
     currentLanguage() {
-      return this.content[this.currentLanguageCode];
+      return this.content[this.page.currentLanguageCode];
+    },
+    currentPosition() {
+      return this.currentLanguage.careers[this.page.currentPosition];
+    },
+    currentProject() {
+      return this.currentLanguage.our_projects[this.page.currentProject];
     },
   },
   mounted: function () {
@@ -115,18 +153,18 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['toggleByKey', 'setByKey']),
-    setLanguage(languageCode) {
-      this.currentLanguageCode = languageCode;
-    },
-    openMenu() {
-      this.setByKey({key: 'isMenuOpen', value: true});
-    },
-    toggleMenu() {
-      this.toggleByKey('isMenuOpen')
-    },
+    ...mapActions(['setByKey']),
     closeMenu() {
       this.setByKey({key: 'isMenuOpen', value: false});
+    },
+    closeFeedback() {
+      this.setByKey({key: 'isFeedbackOpen', value: false});
+    },
+    closeProject() {
+      this.setByKey({key: 'isProjectOpen', value: false});
+    },
+    closePosition() {
+      this.setByKey({key: 'isPositionOpen', value: false});
     },
   },
 }

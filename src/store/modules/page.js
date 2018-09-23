@@ -8,7 +8,8 @@ const state = {
   currentProject: 0,
   currentPosition: 0,
   isFrozen: false,
-  nextAction: ""
+  nextAction: "",
+  currentLanguageCode: "ru"
 };
 
 const getters = {

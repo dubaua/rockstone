@@ -105,10 +105,10 @@ $transitions: (
     transition-duration: $timing;
   }
   .#{$name}-leave-active {
-    transition-timing-function: $easeInCubic;
+    transition-timing-function: $easeInCirc;
   }
   .#{$name}-enter-active {
-    transition-timing-function: $easeOutCubic;
+    transition-timing-function: $easeOutCirc;
   }
   .#{$name}-enter,
   .#{$name}-leave-to {
