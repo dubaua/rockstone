@@ -35,7 +35,7 @@ export default {
   left: auto;
   right: 27px;
   width: 26px;
-  z-index: 11;
+  z-index: 9;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

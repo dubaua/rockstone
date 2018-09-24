@@ -4,7 +4,7 @@
       h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
       .our-projects__pagination(v-if="isReady")
         pagination(:config="paginationConfig")
-      mq-layout(v-if="isReady", mq="lg+", :style="coverStyle").our-projects__cover
+      mq-layout(v-if="isReady && coverStyle", mq="lg+", :style="coverStyle").our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
         mq-layout(mq="lg+").our-projects__dotted
           .dots
@@ -16,12 +16,11 @@
               .work__readmore(@click="openProject(index)")
                 | {{content.common.readmore}}
               .work__social-links
-                a.work__link(:href="work.vk_link") 
-                  icon(glyph="vk", :width="40", :height="40").work__link-icon
-                a.work__link(:href="work.fb_link") 
-                  icon(glyph="fb", :width="40", :height="40").work__link-icon
-                a.work__link(:href="work.ok_link") 
-                  icon(glyph="ok", :width="40", :height="40").work__link-icon
+                work-link(:link="work.vk_link", glyph="vk", :width="40", :height="40")
+                work-link(:link="work.fb_link", glyph="fb", :width="40", :height="40")
+                work-link(:link="work.ok_link", glyph="ok", :width="40", :height="40")
+                work-link(:link="work.appstore_link", glyph="app-store", :width="140", :height="40")
+                work-link(:link="work.google_play_link", glyph="google-play", :width="140", :height="40")
               .work__gallery(v-if="work.gallery.length")
                 swiper(:options="workGallerySwiperOptions" ref="workGallerySwiper")
                   swiper-slide(v-for="photo in work.gallery")
@@ -30,9 +29,9 @@
                   icon(glyph="arrow-left", :width="24", :height="24").slider-button__glyph
                 button(slot="button-next").js-work-gallery-swiper-next.slider-button.slider-button--light.work__next
                   icon(glyph="arrow-right", :width="24", :height="24").slider-button__glyph
-        button(slot="button-prev").js-our-projects-swiper-prev.slider-button.slider-button--round.our-projects__prev
+        button(:class="{'slider-button--dark': fromLg}").js-our-projects-swiper-prev.slider-button.slider-button--round.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button(slot="button-next").js-our-projects-swiper-next.slider-button.slider-button--round.our-projects__next
+        button(:class="{'slider-button--dark': fromLg}").js-our-projects-swiper-next.slider-button.slider-button--round.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--4-1.section__mountain--d-n
       icon(glyph="mountain-group-4-1")
@@ -75,11 +74,19 @@ export default {
         total: this.content.our_projects.length,
       }
     },
+    currentProjectIndex() {
+      return this.ourProjectsSwiperInstance.activeIndex;
+    },
+    coverUrl() {
+      return this.content.our_projects[this.currentProjectIndex].cover 
+        ? this.content.our_projects[this.currentProjectIndex].cover.path
+        : null;
+    },
     coverStyle() {
-      const currentProjectIndex = this.ourProjectsSwiperInstance.activeIndex;
-      const currentWorkIndex = this.workGallerySwiperInstance.activeIndex;
-      const url = this.content.our_projects[currentProjectIndex].gallery[currentWorkIndex].path;
-      return `background-image: url(${url})`;
+      return this.coverUrl ? `background-image: url(${this.coverUrl})` : null;
+    },
+    fromLg() {
+      return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
     }
   },
   mounted() {
@@ -130,13 +137,14 @@ export default {
     z-index: 0;
     background-position: center center;
     background-size: cover;
+    background-repeat: no-repeat;
     @include breakpoint("xl") {
       left: 42%;
     }
     &:before {
       content: "";
       position: absolute;
-      bottom: 0;
+      bottom: -1px;
       right: 0;
       left: 0;
       background: linear-gradient(transparent, $color-background--dark);
@@ -218,13 +226,6 @@ export default {
   &__social-links {
     display: flex;
     margin-top: $base;
-  }
-  &__link {
-    display: block;
-    margin-right: $base * 2;
-  }
-  &__link-icon {
-    fill: $color-text;
   }
 }
 </style>

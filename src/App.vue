@@ -25,7 +25,8 @@
         direction="right",
         :isActive="page.isMenuOpen",
         :onClose="closeMenu",
-        isWide
+        isWide,
+        noClose,
         )
         | Меню
       slide-in(
@@ -41,7 +42,7 @@
         )
         h2.subtitle {{currentProject.title}}
         p {{currentProject.city}}
-        .typographic(v-html="currentProject.details")
+        .typographic(v-html="currentProject.more")
       slide-in(
         direction="left",
         :isActive="page.isPositionOpen",

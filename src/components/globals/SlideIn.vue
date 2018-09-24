@@ -8,7 +8,7 @@
       v-touch:swipe.bottom="direction === 'up' && onClose ? onClose : null",
       :class="[{'slide-in--wide': isWide}, directionMod]"
     )
-      button.slide-in__close(@click="onClose")
+      button.slide-in__close(v-if="!noClose", @click="onClose")
         icon(glyph="close", :width="11", :height="11").slide-in__close-icon
       swiper(:options="slideInSwiperOptions" ref="slideInSwiper")
         swiper-slide
@@ -34,6 +34,7 @@ export default {
     },
     onClose: Function,
     isWide: Boolean,
+    noClose: Boolean,
   },
   data() {
     return {
@@ -96,6 +97,18 @@ export default {
     @include breakpoint("xl") {
       right: 0;
       left: 66.67%;
+    }
+  }
+
+  &--wide {
+    @include breakpoint("sm") {
+      right: 0;
+      left: 0;
+    }
+
+    @include breakpoint("xl") {
+      right: 0;
+      left: 0;
     }
   }
 

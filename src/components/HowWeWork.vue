@@ -20,9 +20,9 @@
                   :width="iconSize",
                   :height="iconSize",
                 )
-        button.js-how-we-work-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-we-work__prev
+        button(:class="{'slider-button--dark': fromLg}").js-how-we-work-swiper-prev.slider-button.slider-button--round.how-we-work__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
+        button(:class="{'slider-button--dark': fromLg}").js-how-we-work-swiper-next.slider-button.slider-button--round.how-we-work__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--3-2.section__mountain--l-n
       icon(glyph="mountain-group-3-2")
@@ -68,6 +68,9 @@ export default {
         xl: 465,
       }
       return _config[this.$mq];
+    },
+    fromLg() {
+      return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
     }
   },
   mounted() {
