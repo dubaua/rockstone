@@ -4,12 +4,22 @@
       <stop offset="0%" stop-color="#194058" />
       <stop offset="100%" stop-color="#0b2637" />
     </linearGradient>
+    <linearGradient id="l-n-n" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#194058" />
+      <stop offset="75%" stop-color="#0b2637" />
+      <stop offset="100%" stop-color="#0b2637" />
+    </linearGradient>
     <linearGradient id="n-l" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0%" stop-color="#0b2637" />
       <stop offset="100%" stop-color="#194058" />
     </linearGradient>
     <linearGradient id="d-n" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0%" stop-color="#071a26" />
+      <stop offset="100%" stop-color="#0b2637" />
+    </linearGradient>
+    <linearGradient id="d-n-n" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#071a26" />
+      <stop offset="75%" stop-color="#0b2637" />
       <stop offset="100%" stop-color="#0b2637" />
     </linearGradient>
     <linearGradient id="n-d" x1="0" x2="0" y1="0" y2="1">

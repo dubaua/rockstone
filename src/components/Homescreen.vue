@@ -7,7 +7,7 @@
       icon(glyph="logo")
     .section__mountain.section__mountain--1-1.section__mountain--l-n
       icon(glyph="mountain-group-1-1")
-    .section__mountain.section__mountain--1-3.section__mountain--d-n
+    .section__mountain.section__mountain--1-3.section__mountain--d-n-n
       icon(glyph="mountain-group-1-3")
 </template>
 

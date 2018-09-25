@@ -53,6 +53,9 @@
     &--l-n {
       fill: url(#gradients_l-n);
     }
+    &--l-n-n {
+      fill: url(#gradients_l-n-n);
+    }
     &--n-l {
       fill: url(#gradients_n-l);
     }
@@ -61,6 +64,9 @@
     }
     &--d-n {
       fill: url(#gradients_d-n);
+    }
+    &--d-n-n {
+      fill: url(#gradients_d-n-n);
     }
     &--1-1 {
       top: 51%;
@@ -87,7 +93,7 @@
       padding-bottom: 33.587786259541986%;
     }
     &--2-2 {
-      top: 10%;
+      top: -10%;
       left: -25%;
       right: -25%;
       padding-bottom: 47.21448467966574%;
@@ -95,11 +101,11 @@
         left: -50%;
         right: -50%;
         padding-bottom: 62.95264623955432%;
-        top: -10%;
+        top: -21%;
       }
     }
     &--2-3 {
-      top: 10%;
+      top: -25%;
       left: -25%;
       right: -25%;
       padding-bottom: 55.5984555984556%;
@@ -107,7 +113,7 @@
         left: -60%;
         right: -40%;
         padding-bottom: 74.13127413127414%;
-        top: -10%;
+        top: -50%;
       }
     }
     &--3-1 {
@@ -154,16 +160,59 @@
     }
     &--6-1 {
       top: 0;
+      left: 0;
+      right: 52.63157894736842%;
+      padding-bottom: 17.859293%;
+    }
+    &--6-2 {
+      top: -2%;
+      left: 15.521855486173058%;
+      right: 11.59678858162355%;
+      // padding-bottom: 23.368543%;
+      padding-bottom: 18.568543%;
+    }
+    &--6-3 {
+      top: -2%;
+      left: 54.237288%;
+      right: 0;
+      padding-bottom: 20.468543%;
+    }
+    &--6-4 {
+      top: 0;
       padding-bottom: 71.9892952720785%;
       @include breakpoint("sm") {
         padding-bottom: 47.992863514719%;
       }
     }
-    &--6-2 {
+    &--6-5 {
       top: -2%;
       padding-bottom: 65.56645851917929%;
       @include breakpoint("sm") {
         padding-bottom: 43.71097234611953%;
+      }
+    }
+    &--7-1 {
+      top: 10%;
+      left: -25%;
+      right: -25%;
+      padding-bottom: 47.21448467966574%;
+      @include breakpoint("lg") {
+        left: -50%;
+        right: -50%;
+        padding-bottom: 62.95264623955432%;
+        top: -25%;
+      }
+    }
+    &--7-2 {
+      top: 10%;
+      left: -25%;
+      right: -25%;
+      padding-bottom: 55.5984555984556%;
+      @include breakpoint("lg") {
+        left: -60%;
+        right: -40%;
+        padding-bottom: 74.13127413127414%;
+        top: -50%;
       }
     }
   }
@@ -229,13 +278,17 @@ body {
       margin-left: auto;
       margin-right: auto;
       padding-top: $base * 6;
+      @include breakpoint("lg") {
+        margin-top: -50px;
+      }
     }
     &--right {
       margin-left: auto;
       padding-top: $base * 6;
+      @include breakpoint("lg") {
+        margin-top: -50px;
+      }
     }
-  }
-  @include breakpoint("lg") {
   }
 }
 

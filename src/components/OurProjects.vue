@@ -106,15 +106,16 @@ export default {
 @import "~@/styles/_globals";
 
 .our-projects {
-  &__title,
-  &__pagination {
+  &__title {
     @include global-padding;
-    margin-bottom: $base;
+    margin-bottom: 0 !important;
   }
   &__slider {
     position: relative;
   }
   &__pagination {
+    @include global-padding;
+    margin-bottom: $base;
     @include breakpoint("lg") {
       position: absolute;
       padding: 0;
@@ -168,9 +169,12 @@ export default {
   }
 }
 .work {
+  padding-top: $base;
   overflow: hidden;
   &__title {
     @include global-padding;
+    text-shadow: 5px 5px 15px transparentize($color-background--dark, 0.75),
+      7px 7px 25px transparentize($color-background--dark, 0.25);
   }
   &__details {
     @include global-padding;
