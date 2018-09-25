@@ -29,9 +29,9 @@
                   icon(glyph="arrow-left", :width="24", :height="24").slider-button__glyph
                 button(slot="button-next").js-work-gallery-swiper-next.slider-button.slider-button--light.work__next
                   icon(glyph="arrow-right", :width="24", :height="24").slider-button__glyph
-        button(:class="{'slider-button--dark': fromLg}").js-our-projects-swiper-prev.slider-button.slider-button--round.our-projects__prev
+        button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--dark.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button(:class="{'slider-button--dark': fromLg}").js-our-projects-swiper-next.slider-button.slider-button--round.our-projects__next
+        button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--dark.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--4-1.section__mountain--d-n
       icon(glyph="mountain-group-4-1")

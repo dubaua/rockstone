@@ -32,8 +32,8 @@ $noise-bg: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE8AAABPBAMAAABYGo
 }
 
 @mixin global-padding {
-  padding-left: $base * 2;
-  padding-right: $base * 2;
+  padding-left: $base * 2.5;
+  padding-right: $base * 2.5;
   @include breakpoint("sm") {
     padding-left: $base * 4;
     padding-right: $base * 4;
@@ -41,7 +41,7 @@ $noise-bg: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE8AAABPBAMAAABYGo
 }
 
 @mixin global-arrow-prev {
-  left: $base * -0.5;
+  left: $base * -0.62;
   position: absolute;
   z-index: 1;
   @include breakpoint("sm") {
@@ -53,7 +53,7 @@ $noise-bg: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE8AAABPBAMAAABYGo
 }
 
 @mixin global-arrow-next {
-  right: $base * -0.5;
+  right: $base * -0.62;
   position: absolute;
   z-index: 1;
   @include breakpoint("sm") {

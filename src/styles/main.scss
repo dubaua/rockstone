@@ -192,7 +192,7 @@
       }
     }
     &--7-1 {
-      top: 10%;
+      top: -10%;
       left: -25%;
       right: -25%;
       padding-bottom: 47.21448467966574%;
@@ -204,7 +204,7 @@
       }
     }
     &--7-2 {
-      top: 10%;
+      top: -50%;
       left: -25%;
       right: -25%;
       padding-bottom: 55.5984555984556%;
@@ -303,6 +303,7 @@ a {
   margin: 0;
   padding: 12px;
   cursor: pointer;
+  background-color: $color-background;
 
   background-color: transparent;
   transition: background $timing-fast;

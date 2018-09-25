@@ -20,9 +20,9 @@
               div(v-html="way.details").way__details
         mq-layout(mq="lg+").how-to-work-with-us__dots
           .dots
-        button(:class="{'slider-button--dark': fromLg}").js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.how-to-work-with-us__prev
+        button.js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button(:class="{'slider-button--dark': fromLg}").js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.how-to-work-with-us__next
+        button.js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--5-2.section__mountain--l-n
       icon(glyph="mountain-group-5-2")

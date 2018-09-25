@@ -44,9 +44,16 @@ export default {
 
 .navigation {
   @include fixed-overlay;
+  bottom: auto;
+  height: 70px;
   right: auto;
   width: 78px;
   z-index: 11;
+
+  @include breakpoint("lg") {
+    bottom: 0;
+    height: 100%;
+  }
 
   &__logo {
     position: absolute;

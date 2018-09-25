@@ -20,9 +20,9 @@
                   :width="iconSize",
                   :height="iconSize",
                 )
-        button(:class="{'slider-button--dark': fromLg}").js-how-we-work-swiper-prev.slider-button.slider-button--round.how-we-work__prev
+        button.js-how-we-work-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-we-work__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button(:class="{'slider-button--dark': fromLg}").js-how-we-work-swiper-next.slider-button.slider-button--round.how-we-work__next
+        button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--3-2.section__mountain--l-n
       icon(glyph="mountain-group-3-2")
@@ -139,6 +139,10 @@ export default {
 .principle {
   padding-top: $base * 2;
   position: relative;
+  min-height: 400px;
+  @include breakpoint("sm") {
+    min-height: 240px;
+  }
   @include breakpoint("lg") {
     padding: $base 0;
   }
@@ -155,22 +159,23 @@ export default {
   &__icon {
     text-align: center;
     line-height: 0;
-    margin-top: $base * -1.5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     @include breakpoint("sm") {
-      position: absolute;
-      bottom: 0;
       left: 195px;
-      right: 0;
+      bottom: auto;
+      top: -59px;
     }
     @include breakpoint("md") {
       left: 0;
     }
     @include breakpoint("lg") {
-      bottom: auto;
-      top: -172px;
+      top: -195px;
     }
     @include breakpoint("xl") {
-      top: -230px;
+      top: -254px;
     }
   }
 }
