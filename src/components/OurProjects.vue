@@ -4,7 +4,7 @@
       h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
       .our-projects__pagination(v-if="isReady")
         pagination(:config="paginationConfig")
-      mq-layout(v-if="isReady && coverStyle", mq="lg+", :style="coverStyle").our-projects__cover
+      mq-layout(v-if="isReady && coverStyle", mq="lg+", :style="coverStyle", :class="coverClass").our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
         mq-layout(mq="lg+").our-projects__dotted
           .dots
@@ -74,16 +74,19 @@ export default {
         total: this.content.our_projects.length,
       }
     },
-    currentProjectIndex() {
-      return this.ourProjectsSwiperInstance.activeIndex;
+    currentProject() {
+      return this.content.our_projects[this.ourProjectsSwiperInstance.activeIndex];
     },
     coverUrl() {
-      return this.content.our_projects[this.currentProjectIndex].cover 
-        ? this.content.our_projects[this.currentProjectIndex].cover.path
+      return this.currentProject.cover 
+        ? this.currentProject.cover.path
         : null;
     },
     coverStyle() {
       return this.coverUrl ? `background-image: url(${this.coverUrl})` : null;
+    },
+    coverClass() {
+      return this.currentProject.cover_align ? `our-projects__cover--${this.currentProject.cover_align}` : null
     },
     fromLg() {
       return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
@@ -139,6 +142,7 @@ export default {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    box-shadow: 0 200px 0 $color-background--dark;
     @include breakpoint("xl") {
       left: 42%;
     }
@@ -151,7 +155,15 @@ export default {
       background: linear-gradient(transparent, $color-background--dark);
       height: 38%;
     }
-    box-shadow: 0 200px 0 $color-background--dark;
+    &--left {
+      background-position: left center;
+    }
+    &--center {
+      background-position: center center;
+    }
+    &--right {
+      background-position: right center;
+    }
   }
   &__prev {
     @include global-arrow-prev;
@@ -173,8 +185,8 @@ export default {
   overflow: hidden;
   &__title {
     @include global-padding;
-    text-shadow: 5px 5px 15px transparentize($color-background--dark, 0.75),
-      7px 7px 25px transparentize($color-background--dark, 0.25);
+    text-shadow: 5px 5px 15px transparentize($color-background--dark, 0.5),
+      7px 7px 25px transparentize($color-background--dark, 0.15);
   }
   &__details {
     @include global-padding;
@@ -193,6 +205,10 @@ export default {
     text-transform: uppercase;
     letter-spacing: 0.02em;
     font-weight: 700;
+    cursor: pointer;
+    &:hover {
+      color: $color-text;
+    }
   }
   &__gallery {
     margin-top: $base;
@@ -220,12 +236,6 @@ export default {
   &__shot {
     max-width: 100%;
     height: auto;
-  }
-  &__cover {
-    & img {
-      max-width: 100%;
-      height: auto;
-    }
   }
   &__social-links {
     display: flex;
