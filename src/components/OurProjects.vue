@@ -55,6 +55,7 @@ export default {
         navigation: {
           prevEl: '.js-work-gallery-swiper-prev',
           nextEl: '.js-work-gallery-swiper-next',
+          loop: true,
         },
       },
       isReady: false,
