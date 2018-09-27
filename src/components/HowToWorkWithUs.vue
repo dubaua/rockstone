@@ -2,11 +2,9 @@
   section.section.how-to-work-with-us
     .section__container
       h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
-      .how-to-work-with-us__pagination(v-if="isReady")
-        pagination(:config="paginationConfig")
       .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
       .how-to-work-with-us__slider
-        swiper(:options="HowToWorkWithUsSwiperOptions" ref="HowToWorkWithUsSwiper")
+        swiper(:options="HowToWorkWithUsSwiperOptions")
           swiper-slide(v-for="(way, index) in content.how_to_work_with_us")
             .way
               .way__icon
@@ -45,6 +43,7 @@ export default {
           prevEl: '.js-how-to-work-with-us-swiper-prev',
           nextEl: '.js-how-to-work-with-us-swiper-next',
         },
+        speed: 450,
         slidesPerView: 1,
         breakpointsInverse: true,
         breakpoints: {
@@ -57,21 +56,6 @@ export default {
         }
       },
       isReady: false,
-    }
-  },
-  computed: {
-    HowToWorkWithUsSwiperInstance() {
-      return this.$refs.HowToWorkWithUsSwiper.swiper;
-    },
-    paginationConfig() {
-      return {
-        current: this.HowToWorkWithUsSwiperInstance.activeIndex + 1,
-        divider: this.content.common.fraction_divider,
-        total: this.content.how_to_work_with_us.length,
-      }
-    },
-    fromLg() {
-      return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
     }
   },
   mounted() {
