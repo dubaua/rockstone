@@ -186,8 +186,8 @@ export default {
   overflow: hidden;
   &__title {
     @include global-padding;
-    text-shadow: 5px 5px 15px transparentize($color-background--dark, 0.5),
-      7px 7px 25px transparentize($color-background--dark, 0.15);
+    text-shadow: 5px 5px 15px transparentize($color-background--dark, 0.9),
+      7px 7px 25px transparentize($color-background--dark, 0.75);
   }
   &__details {
     @include global-padding;
