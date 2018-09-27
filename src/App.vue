@@ -34,7 +34,7 @@
         :isActive="page.isFeedbackOpen",
         :onClose="closeFeedback",
         )
-        | Фидбек
+        feedback(:content="currentLanguage")
       slide-in(
         direction="left",
         :isActive="page.isProjectOpen",
@@ -66,6 +66,7 @@ import OurProjects from '@/components/OurProjects';
 import HowToWorkWithUs from '@/components/HowToWorkWithUs';
 import Careers from '@/components/Careers';
 import Contact from '@/components/Contact';
+import Feedback from '@/components/Feedback';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -80,6 +81,7 @@ export default {
     HowToWorkWithUs,
     Careers,
     Contact,
+    Feedback,
   },
   data() {
     return {

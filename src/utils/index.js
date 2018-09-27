@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 export const numberWithSpaces = number =>
   number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
@@ -12,3 +14,5 @@ export const declOfNum = (n, titles) =>
 
 export const upperCasefirst = string =>
   string.charAt(0).toUpperCase() + string.slice(1);
+
+export const EventBus = new Vue();

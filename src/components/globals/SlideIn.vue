@@ -19,6 +19,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { EventBus } from "@/utils";
 
 export default {
   name: 'SlideIn',
@@ -63,6 +64,14 @@ export default {
   methods: {
     ...mapActions(['dispatchNext']),
   },
+  mounted () {
+    var self = this;
+    EventBus.$on('resetScroller', function () {
+      if (self.$refs.slideInSwiper) {
+       self.$refs.slideInSwiper.swiper.slideReset(300);
+      }
+    });
+  }
 };
 </script>
 

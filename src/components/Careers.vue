@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { EventBus } from "@/utils";
+
 export default {
   name: 'Careers',
   props: {
@@ -28,6 +30,7 @@ export default {
     openPosition(index) {
       this.$store.dispatch('setByKey', {key: 'isPositionOpen', value: true});
       this.$store.dispatch('setByKey', {key: 'currentPosition', value: index});
+      EventBus.$emit('resetScroller');
     },
     openFeedback() {
       this.$store.dispatch('setByKey', {key: 'isFeedbackOpen', value: true});
