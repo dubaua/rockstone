@@ -10,10 +10,10 @@
         swiper(:options="howWeWorkSwiperOptions" ref="howWeWorkSwiper")
           swiper-slide(v-for="(principle, index) in content.how_we_work")
             .principle
-              .principle__about
+              .principle__about(data-swiper-parallax="-400", data-swiper-parallax-opacity="0")
                 h2.subtitle.principle__title {{principle.title}}
                 .principle__details.typographic(v-html="principle.details")
-              .principle__icon
+              .principle__icon(data-swiper-parallax="-800", data-swiper-parallax-opacity="0")
                 animated-icon(
                   :front="'principles-'+(index+1)",
                   back="principles-back",
@@ -39,11 +39,13 @@ export default {
   data() {
     return {
       howWeWorkSwiperOptions: {
-        spaceBetween:  1000,
+        speed: 1000,
+        spaceBetween: 0,
         navigation: {
           prevEl: '.js-how-we-work-swiper-prev',
           nextEl: '.js-how-we-work-swiper-next',
         },
+        parallax: true,
       },
       isReady: false,
     }
