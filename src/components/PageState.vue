@@ -1,21 +1,26 @@
 <template lang="pug">
-  aside.progress
-    button(@click="setLanguage('ru')", :class="{'progress__lang--active': $store.state.page.currentLanguageCode === 'ru'}").progress__lang RU
-    button(@click="setLanguage('en')", :class="{'progress__lang--active': $store.state.page.currentLanguageCode === 'en'}").progress__lang EN
-    .progress__stage 01
-    .progress__stage 02
-    .progress__stage 03
-    .progress__stage 04
-    .progress__stage 05
-    .progress__stage 06
-    .progress__stage 07
-    .progress__music
-      icon(glyph="sound", :width="23", :height="12")
+  aside.page-state
+    button(@click="setLanguage('ru')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'ru'}").page-state__lang RU
+    button(@click="setLanguage('en')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'en'}").page-state__lang EN
+    .page-state__stage 01
+    .page-state__stage 02
+    .page-state__stage 03
+    .page-state__stage 04
+    .page-state__stage 05
+    .page-state__stage 06
+    .page-state__stage 07
+    .page-state__music
+      player
 </template>
 
 <script>
+import Player from '@/components/Player';
+
 export default {
   name: 'PageState',
+  components: {
+    Player,
+  },
   props: {
     content: Object,
   },
@@ -30,7 +35,7 @@ export default {
 <style lang="scss">
 @import "~@/styles/_globals";
 
-.progress {
+.page-state {
   @include fixed-overlay;
   left: auto;
   right: 27px;
