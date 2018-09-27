@@ -45,13 +45,14 @@ export default {
           prevEl: '.js-how-to-work-with-us-swiper-prev',
           nextEl: '.js-how-to-work-with-us-swiper-next',
         },
-        slidesPerView: 3,
+        slidesPerView: 1,
+        breakpointsInverse: true,
         breakpoints: {
-          767: {
-            slidesPerView: 1,
-          },
-          1199: {
+          768: {
             slidesPerView: 2,
+          },
+          1200: {
+            slidesPerView: 3,
           }
         }
       },
