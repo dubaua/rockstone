@@ -33,8 +33,8 @@ export default {
     z-index: -1;
 
     @include breakpoint("lg") {
-      left: 20%;
-      right: 20%;
+      left: 20.5%;
+      right: 19.5%;
     }
 
     svg {
