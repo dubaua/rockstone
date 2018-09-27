@@ -9,26 +9,8 @@
         mq-layout(mq="lg+").our-projects__dotted
           .dots
         swiper(:options="ourProjectsSwiperOptions" ref="ourProjectsSwiper")
-          swiper-slide(v-for="(work, index) in content.our_projects")
-            .work
-              h2.title.work__title {{work.title}}
-              .work__details.typographic(v-html="work.details")
-              .work__readmore(@click="openProject(index)")
-                | {{content.common.readmore}}
-              .work__social-links
-                work-link(:link="work.vk_link", glyph="vk", :width="40", :height="40")
-                work-link(:link="work.fb_link", glyph="fb", :width="40", :height="40")
-                work-link(:link="work.ok_link", glyph="ok", :width="40", :height="40")
-                work-link(:link="work.appstore_link", glyph="app-store", :width="140", :height="40")
-                work-link(:link="work.google_play_link", glyph="google-play", :width="140", :height="40")
-              .work__gallery(v-if="work.gallery.length")
-                swiper(:options="workGallerySwiperOptions" ref="workGallerySwiper")
-                  swiper-slide(v-for="photo in work.gallery")
-                    img(:src="photo.path").work__shot
-                button(slot="button-prev").js-work-gallery-swiper-prev.slider-button.slider-button--light.work__prev
-                  icon(glyph="arrow-left", :width="24", :height="24").slider-button__glyph
-                button(slot="button-next").js-work-gallery-swiper-next.slider-button.slider-button--light.work__next
-                  icon(glyph="arrow-right", :width="24", :height="24").slider-button__glyph
+          swiper-slide(v-for="(project, index) in content.our_projects")
+            project(:project="project", :readmore="content.common.readmore", :id="index")
         button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--dark.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
         button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--dark.our-projects__next
@@ -37,9 +19,13 @@
       icon(glyph="mountain-group-4-1")
 </template>
 <script>
+import Project from './Project';
 
 export default {
   name: 'OurProjects',
+  components: {
+    Project,
+  },
   props: {
     content: Object,
   },
@@ -50,13 +36,7 @@ export default {
           prevEl: '.js-our-projects-swiper-prev',
           nextEl: '.js-our-projects-swiper-next',
         },
-      },
-      workGallerySwiperOptions: {
-        navigation: {
-          prevEl: '.js-work-gallery-swiper-prev',
-          nextEl: '.js-work-gallery-swiper-next',
-          loop: true,
-        },
+        allowTouchMove: false,
       },
       isReady: false,
     }
@@ -64,9 +44,6 @@ export default {
   computed: {
     ourProjectsSwiperInstance() {
       return this.$refs.ourProjectsSwiper.swiper;
-    },
-    workGallerySwiperInstance() {
-      return this.$refs.workGallerySwiper[this.ourProjectsSwiperInstance.activeIndex].swiper;
     },
     paginationConfig() {
       return {
@@ -95,13 +72,6 @@ export default {
   },
   mounted() {
     this.isReady = true;
-    
-  },
-  methods: {
-    openProject(index) {
-      this.$store.dispatch('setByKey', {key: 'isProjectOpen', value: true});
-      this.$store.dispatch('setByKey', {key: 'currentProject', value: index});
-    },
   },
 }
 </script>
@@ -179,68 +149,6 @@ export default {
     @include breakpoint("lg") {
       top: 16px;
     }
-  }
-}
-.work {
-  padding-top: $base;
-  overflow: hidden;
-  &__title {
-    @include global-padding;
-    text-shadow: 5px 5px 15px transparentize($color-background--dark, 0.9),
-      7px 7px 25px transparentize($color-background--dark, 0.75);
-  }
-  &__details {
-    @include global-padding;
-    @include breakpoint("lg") {
-      max-width: 360px;
-    }
-  }
-  &__social-links {
-    @include global-padding;
-  }
-  &__readmore {
-    color: $color-primary;
-    padding-bottom: $base;
-    padding-top: $base;
-    @include global-padding;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    font-weight: 700;
-    cursor: pointer;
-    &:hover {
-      color: $color-text;
-    }
-  }
-  &__gallery {
-    margin-top: $base;
-    position: relative;
-    padding-bottom: $base * 1.5;
-    @include breakpoint("lg") {
-      max-width: 480px;
-      margin-left: $base * 4;
-    }
-  }
-  &__prev {
-    position: absolute;
-    z-index: 6;
-    bottom: 0;
-    left: $base * 2;
-    transform: translate(0, 0);
-  }
-  &__next {
-    position: absolute;
-    z-index: 6;
-    bottom: 0;
-    left: $base * 2;
-    transform: translate(120%, 0);
-  }
-  &__shot {
-    max-width: 100%;
-    height: auto;
-  }
-  &__social-links {
-    display: flex;
-    margin-top: $base;
   }
 }
 </style>

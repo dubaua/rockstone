@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'WorkLink',
+  name: 'ProjectLink',
   props: {
     link: String,
     glyph: String,
@@ -16,13 +16,13 @@ export default {
       case '#':
         return h( 'span', {
             class: {
-              "work-link": true,
+              "project-link": true,
             }
           },
           [
             h('icon', {
                 class: {
-                  'work-link__icon': true, 
+                  'project-link__icon': true, 
                 },
                 props,
               }
@@ -32,7 +32,7 @@ export default {
       default:
         return h( 'a', {
             class: {
-              "work-link": true,
+              "project-link": true,
             },
             attrs: {
               href: props.link,
@@ -41,7 +41,7 @@ export default {
           [
             h('icon', {
                 class: {
-                  'work-link__icon': true, 
+                  'project-link__icon': true, 
                 },
                 props,
               }
@@ -55,7 +55,8 @@ export default {
 
 <style lang="scss">
 @import "~@/styles/_globals";
-.work-link {
+
+.project-link {
   display: block;
   margin-right: $base * 2;
 
