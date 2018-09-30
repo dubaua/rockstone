@@ -11,6 +11,11 @@
           icon(glyph="arrow-right", :width="24", :height="24").position__icon
       .careers__apply(v-scroll-reveal)
         button.button.button--wide(@click="openFeedback") {{ content.common.apply_button_text }}
+    .scrolldown.scrolldown--above.scrolldown--accent(v-scroll-reveal)
+      .scrolldown__text
+        running-text(text="scroll down")
+      .scrolldown__arrow
+        icon(glyph="double-arrow--bottom", :width="16", :height="16")
 </template>
 
 <script>

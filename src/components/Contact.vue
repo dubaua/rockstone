@@ -24,6 +24,11 @@
       icon(glyph="mountain-group-6-5")
     mq-layout(:mq="['xs', 'sm', 'md']").section__mountain.section__mountain--6-4.section__mountain--l-n
       icon(glyph="mountain-group-6-4")
+    .scrolldown.scrolldown--above.scrolldown--accent(v-scroll-reveal)
+      .scrolldown__text
+        running-text(text="go back", reverse)
+      .scrolldown__arrow
+        icon(glyph="double-arrow--top", :width="16", :height="16")
 </template>
 
 <script>

@@ -28,6 +28,11 @@
       icon(glyph="mountain-group-5-1")
     .section__mountain.section__mountain--5-3.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-5-3")
+    .scrolldown(v-scroll-reveal)
+      .scrolldown__text
+        running-text(text="scroll down")
+      .scrolldown__arrow
+        icon(glyph="double-arrow--bottom", :width="16", :height="16")
 </template>
 
 <script>
