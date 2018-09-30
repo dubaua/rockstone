@@ -1,13 +1,13 @@
 
 <template lang="pug">
   section.section.homescreen
-    .section__mountain.section__mountain--1-2.section__mountain--d-n
+    .section__mountain.section__mountain--1-2.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-1-2")
-    .homescreen__logo
+    .homescreen__logo(v-scroll-reveal="{delay: 750}")
       icon(glyph="logo")
-    .section__mountain.section__mountain--1-1.section__mountain--l-n
+    .section__mountain.section__mountain--1-1.section__mountain--l-n(v-scroll-reveal="{delay: 250}")
       icon(glyph="mountain-group-1-1")
-    .section__mountain.section__mountain--1-3.section__mountain--d-n-n
+    .section__mountain.section__mountain--1-3.section__mountain--d-n-n(v-scroll-reveal="{delay: 500}")
       icon(glyph="mountain-group-1-3")
 </template>
 

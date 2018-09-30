@@ -1,21 +1,26 @@
 <template lang="pug">
   section.section.our-projects
     .section__container
-      h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
-      .our-projects__pagination(v-if="isReady")
+      h1.subtitle.title--display.our-projects__title(v-scroll-reveal) {{ content.common.our_projects_title }}
+      .our-projects__pagination(v-if="isReady", v-scroll-reveal)
         pagination(:config="paginationConfig")
-      mq-layout(v-if="isReady && coverStyle", mq="lg+", :style="coverStyle", :class="coverClass").our-projects__cover
+      mq-layout(
+        v-if="isReady && coverStyle",
+        mq="lg+",
+        :style="coverStyle",
+        :class="coverClass",
+        v-scroll-reveal).our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
-        mq-layout(mq="lg+").our-projects__dotted
+        mq-layout(mq="lg+", v-scroll-reveal).our-projects__dotted
           .dots
-        swiper(:options="ourProjectsSwiperOptions" ref="ourProjectsSwiper")
+        swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", v-scroll-reveal)
           swiper-slide(v-for="(project, index) in content.our_projects")
             project(:project="project", :readmore="content.common.readmore", :id="index")
-        button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--dark.our-projects__prev
+        button(v-scroll-reveal).js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--dark.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--dark.our-projects__next
+        button(v-scroll-reveal).js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--dark.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--4-1.section__mountain--d-n
+    .section__mountain.section__mountain--4-1.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-4-1")
 </template>
 <script>

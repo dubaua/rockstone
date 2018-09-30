@@ -1,9 +1,9 @@
 <template lang="pug">
   section.section.how-to-work-with-us
     .section__container
-      h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
-      .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
-      .how-to-work-with-us__slider
+      h1.title.how-to-work-with-us__title(v-scroll-reveal) {{ content.common.how_to_work_with_us_title }}
+      .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content", v-scroll-reveal)
+      .how-to-work-with-us__slider(v-scroll-reveal)
         swiper(:options="HowToWorkWithUsSwiperOptions")
           swiper-slide(v-for="(way, index) in content.how_to_work_with_us")
             .way
@@ -16,17 +16,17 @@
                 )
               h2.subtitle.way__title {{way.title}}
               div(v-html="way.details").way__details
-        mq-layout(mq="lg+").how-to-work-with-us__dots
+        mq-layout(mq="lg+", v-scroll-reveal).how-to-work-with-us__dots
           .dots
-        button.js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
+        button(v-scroll-reveal).js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
+        button(v-scroll-reveal).js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--5-2.section__mountain--l-n
+    .section__mountain.section__mountain--5-2.section__mountain--l-n(v-scroll-reveal)
       icon(glyph="mountain-group-5-2")
-    .section__mountain.section__mountain--5-1.section__mountain--l-n
+    .section__mountain.section__mountain--5-1.section__mountain--l-n(v-scroll-reveal)
       icon(glyph="mountain-group-5-1")
-    .section__mountain.section__mountain--5-3.section__mountain--d-n
+    .section__mountain.section__mountain--5-3.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-5-3")
 </template>
 

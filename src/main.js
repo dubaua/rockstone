@@ -3,6 +3,7 @@ import App from "./App.vue";
 import Vue2TouchEvents from "vue2-touch-events";
 import VueMq from "vue-mq";
 import VueAwesomeSwiper from "vue-awesome-swiper";
+import VueScrollReveal from "vue-scroll-reveal";
 import "@/components/globals";
 import store from "./store";
 import "swiper/dist/css/swiper.css";
@@ -19,7 +20,14 @@ Vue.use(VueMq, {
     xl: Infinity
   }
 });
-Vue.use(VueAwesomeSwiper /* { default global options } */);
+Vue.use(VueAwesomeSwiper);
+Vue.use(VueScrollReveal, {
+  duration: 1500,
+  easing: "cubic-bezier(0.785, 0.135, 0.15, 0.86)",
+  distance: "32px",
+  viewFactor: 0.3,
+  mobile: false
+});
 
 Vue.config.productionTip = false;
 

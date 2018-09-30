@@ -5,6 +5,10 @@
 @import "_typographic";
 @import "hamburger";
 
+[v-cloak] {
+  display: none;
+}
+
 .page {
   overflow: hidden;
   position: relative;
@@ -395,4 +399,8 @@ a {
     margin-left: $base * -4;
     margin-right: $base * -4;
   }
+}
+
+.scr-h {
+  opacity: 0;
 }

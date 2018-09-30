@@ -7,7 +7,7 @@
       mq-layout(mq="lg+")
         page-state
       a(name="homescreen")
-      homescreen
+      homescreen(:content="currentLanguage")
       a(name="#who-we-are")
       who-we-are(:content="currentLanguage")
       a(name="how-we-work")
@@ -20,7 +20,6 @@
       careers(:content="currentLanguage")
       a(name="contact")
       contact(:content="currentLanguage")
-
       slide-in(
         direction="right",
         :isActive="page.isMenuOpen",

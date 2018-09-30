@@ -1,15 +1,15 @@
 <template lang="pug">
   section.section.careers
     .section__container
-      h1.title.careers__title {{ content.common.careers_title }}
+      h1.title.careers__title(v-scroll-reveal) {{ content.common.careers_title }}
       template(v-if="content.common.careers_cover")
-        mq-layout(mq="lg+", :style="coverStyle").careers__cover
-      .careers__list
+        mq-layout(mq="lg+", :style="coverStyle", v-scroll-reveal).careers__cover
+      .careers__list(v-scroll-reveal)
         .position(v-for="(position, index) in content.careers", @click="openPosition(index)")
           h2.subtitle.position__title {{position.title}}
           .position__city {{position.city}}
           icon(glyph="arrow-right", :width="24", :height="24").position__icon
-      .careers__apply
+      .careers__apply(v-scroll-reveal)
         button.button.button--wide(@click="openFeedback") {{ content.common.apply_button_text }}
 </template>
 
@@ -55,9 +55,20 @@ export default {
     right: 0;
     background-position: center center;
     background-size: cover;
+    box-shadow: 0 100px 0 $color-background;
 
     @include breakpoint("xl") {
       left: 42%;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      right: 0;
+      left: 0;
+      background: linear-gradient(transparent, $color-background--dark);
+      height: 38%;
     }
 
     & img {
