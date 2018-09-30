@@ -2,7 +2,12 @@
 <template lang="pug">
   .menu
     nav.menu__section-list
-      a(v-for="(link, index) in menu", :href="link.anchor", @click.stop="closeMenu").menu__link {{link.text}}
+      a(href="#who_we_are", @click.stop="closeMenu").menu__link {{content.common.who_we_are_title}}
+      a(href="#how_we_work", @click.stop="closeMenu").menu__link {{content.common.how_we_work_title}}
+      a(href="#our_projects", @click.stop="closeMenu").menu__link {{content.common.our_projects_title}}
+      a(href="#how_to_work_with_us", @click.stop="closeMenu").menu__link {{content.common.how_to_work_with_us_title}}
+      a(href="#careers", @click.stop="closeMenu").menu__link {{content.common.careers_title}}
+      a(href="#contact", @click.stop="closeMenu").menu__link {{content.common.contact_title}}
     mq-layout(:mq="['xs', 'sm', 'md']").menu__mobule
       .menu__phone
         a(:href="'tel:'+content.common.phone")
@@ -20,42 +25,6 @@ export default {
   name: 'SideMenu',
   props: {
     content: Object,
-  },
-  data() {
-    return {
-      menu: [
-        {
-          anchor: "#who_we_are",
-          text: this.content.common.who_we_are_title,
-          isReady: false,
-        },
-        {
-          anchor: "#how_we_work",
-          text: this.content.common.how_we_work_title,
-          isReady: false,
-        },
-        {
-          anchor: "#our_projects",
-          text: this.content.common.our_projects_title,
-          isReady: false,
-        },
-        {
-          anchor: "#how_to_work_with_us",
-          text: this.content.common.how_to_work_with_us_title,
-          isReady: false,
-        },
-        {
-          anchor: "#careers",
-          text: this.content.common.careers_title,
-          isReady: false,
-        },
-        {
-          anchor: "#contact",
-          text: this.content.common.contact_title,
-          isReady: false,
-        },
-      ]
-    }
   },
   methods: {
     closeMenu() {

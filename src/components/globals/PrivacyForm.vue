@@ -1,7 +1,6 @@
 <template lang="pug">
   form.privacy-form(@submit.prevent='submit(processed_form, form.url)')
-    .privacy-form__title(v-if="haveTitle")
-      slot(name="title")
+    slot(name="title")
     vue-form-generator(:schema="form.schema" :model="form.model" :options="form.formOptions")
     .privacy-form__agree(v-if="havePrivacy")
       input(type="checkbox", v-model="isAgree", :id="'privacy-'+_uid")
@@ -9,8 +8,9 @@
         slot(name="privacy")
     .privacy-form__button
       slot(name="button")
-        button.button(type='submit') Отправить
-    .privacy-form__success(v-if='isSent') Успех
+        button.button(type="submit", :disabled="!isAgree") Отправить
+    slot(name="success-message", v-if="isSent") Успех
+    slot(name="error-message", v-if="isSent") Неудача
 </template>
 
 
@@ -20,11 +20,10 @@ import VueFormGenerator from "vue-form-generator";
 export default {
   name: "PrivacyForm",
   components: {
-		"vue-form-generator": VueFormGenerator.component
-	},
+    "vue-form-generator": VueFormGenerator.component
+  },
   props: {
     form: Object,
-    privacy: Object,
   },
   data() {
     return {
@@ -35,9 +34,6 @@ export default {
   computed: {
     havePrivacy() {
       return !!this.$slots['privacy'];
-    },
-    haveTitle() {
-      return !!this.$slots['title'];
     },
     processed_form() {
       var data = [];
@@ -92,5 +88,12 @@ export default {
     }
   }
 };
-
 </script>
+
+<style lang="scss">
+.privacy-form {
+  &__button {
+    margin-top: 1em;
+  }
+}
+</style>

@@ -377,7 +377,12 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 700;
+  transition: all $timing-fast;
 
+  &:disabled {
+    color: $color-background--light;
+    border-color: $color-background--light;
+  }
   &:focus {
     outline: none;
   }
