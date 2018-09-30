@@ -2,13 +2,13 @@
   aside.page-state
     button(@click="setLanguage('ru')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'ru'}").page-state__lang RU
     button(@click="setLanguage('en')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'en'}").page-state__lang EN
-    .page-state__stage 01
-    .page-state__stage 02
-    .page-state__stage 03
-    .page-state__stage 04
-    .page-state__stage 05
-    .page-state__stage 06
-    .page-state__stage 07
+    .page-state__stage(v-if="state.homescreen", :class="{'page-state__stage--active': state.homescreen.isInViewport}") 01
+    .page-state__stage(v-if="state.who_we_are", :class="{'page-state__stage--active': state.who_we_are.isInViewport}") 02
+    .page-state__stage(v-if="state.how_we_work", :class="{'page-state__stage--active': state.how_we_work.isInViewport}") 03
+    .page-state__stage(v-if="state.our_projects", :class="{'page-state__stage--active': state.our_projects.isInViewport}") 04
+    .page-state__stage(v-if="state.how_to_work_with_us", :class="{'page-state__stage--active': state.how_to_work_with_us.isInViewport}") 05
+    .page-state__stage(v-if="state.careers", :class="{'page-state__stage--active': state.careers.isInViewport}") 06
+    .page-state__stage(v-if="state.contact", :class="{'page-state__stage--active': state.contact.isInViewport}") 07
     .page-state__music
       player
 </template>
@@ -22,7 +22,7 @@ export default {
     Player,
   },
   props: {
-    content: Object,
+    state: Object,
   },
   methods: {
     setLanguage(languageCode) {
@@ -63,6 +63,21 @@ export default {
     }
   }
   &__stage {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    position: relative;
+
+    &--active:before {
+      content: "";
+      background: $color-text;
+      height: $base * 0.5;
+      width: $base * 0.4;
+      position: absolute;
+      display: block;
+      border-radius: 50%;
+      top: $base * 0.15;
+      left: $base * 0.05;
+    }
   }
   &__music {
     fill: white;

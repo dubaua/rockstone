@@ -2,8 +2,9 @@
   //- button(@click="setLanguage('ru')") RU
   //- button(@click="setLanguage('en')") EN
   nav.navigation
-    mq-layout(mq="lg+").navigation__logo
-      icon(glyph="logo", :width="142", :height="16")
+    mq-layout(mq="lg+")
+      a.navigation__logo(href="#homepage")
+        icon(glyph="logo", :width="142", :height="16")
     button.navigation__hamburger(@click="toggleMenu")
       .hamburger.hamburger--squeeze(:class="{'is-active':page.isMenuOpen}")
         .hamburger-box

@@ -1,5 +1,6 @@
 <template lang="pug">
   section.section.how-we-work
+    a(name="how_we_work")
     .section__container
       h1.title.how-we-work__title(v-scroll-reveal) {{  content.common.how_we_work_title }}
       mq-layout(mq="lg+", v-scroll-reveal).how-we-work__dotted

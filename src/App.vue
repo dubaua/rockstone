@@ -5,26 +5,26 @@
     )
       navigation(:content="currentLanguage")
       mq-layout(mq="lg+")
-        page-state
-      a(name="homescreen")
-      homescreen(:content="currentLanguage")
-      a(name="#who-we-are")
-      who-we-are(:content="currentLanguage")
-      a(name="how-we-work")
-      how-we-work(:content="currentLanguage")
-      a(name="our-projects")
-      our-projects(:content="currentLanguage")
-      a(name="how-to-work-with-us")
-      how-to-work-with-us(:content="currentLanguage")
-      a(name="careers")
-      careers(:content="currentLanguage")
-      a(name="contact")
-      contact(:content="currentLanguage")
+        page-state(:state="scrollState")
+      scroll-container(@change="updateState")
+        scroll-item(id="homescreen")
+          homescreen(:content="currentLanguage")
+        scroll-item(id="who_we_are")
+          who-we-are(:content="currentLanguage")
+        scroll-item(id="how_we_work")
+          how-we-work(:content="currentLanguage")
+        scroll-item(id="our_projects")
+          our-projects(:content="currentLanguage")
+        scroll-item(id="how_to_work_with_us")
+          how-to-work-with-us(:content="currentLanguage")
+        scroll-item(id="careers")
+          careers(:content="currentLanguage")
+        scroll-item(id="contact")
+          contact(:content="currentLanguage")
       slide-in(
         direction="right",
         :isActive="page.isMenuOpen",
         :onClose="closeMenu",
-        isWide,
         noClose,
         )
         side-menu(:content="currentLanguage")
@@ -50,7 +50,7 @@
         h2.subtitle {{currentPosition.title}}
         p {{currentPosition.city}}
         .typographic(v-html="currentPosition.details")
-      overlay
+      //- overlay
       .noise-overlay.noise-bg
 </template>
 
@@ -67,7 +67,9 @@ import HowToWorkWithUs from '@/components/HowToWorkWithUs';
 import Careers from '@/components/Careers';
 import Contact from '@/components/Contact';
 import Feedback from '@/components/Feedback';
+import { ScrollContainer, ScrollItem } from 'vue-scrollmonitor'
 import { mapState, mapActions } from 'vuex';
+
 
 export default {
   name: 'app',
@@ -83,10 +85,13 @@ export default {
     Careers,
     Contact,
     Feedback,
+    ScrollContainer,
+    ScrollItem,
   },
   data() {
     return {
       isLoaded: false,
+      scrollState: {},
       content: {
         ru: {
           common: null,
@@ -169,6 +174,9 @@ export default {
     },
     closePosition() {
       this.setByKey({key: 'isPositionOpen', value: false});
+    },
+    updateState (state) {
+      this.scrollState = state
     },
   },
 }

@@ -1,6 +1,7 @@
 
 <template lang="pug">
   section.section.homescreen
+    a(name="homescreen")
     .section__mountain.section__mountain--1-2.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-1-2")
     .homescreen__logo(v-scroll-reveal="{delay: 750}")
