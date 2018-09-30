@@ -2,7 +2,7 @@
   .project
     h2.title.project__title {{project.title}} {{id}}
     .project__details.typographic(v-html="project.details")
-    .project__readmore(@click="openProject(index)")
+    .project__readmore(@click="openProject(id)")
       | {{readmore}}
     .project__social-links
       project-link(:link="project.vk_link", glyph="vk", :width="40", :height="40")
@@ -39,8 +39,8 @@ export default {
         navigation: {
           prevEl: `.js-project-${this.id}-prev`,
           nextEl: `.js-project-${this.id}-next`,
-          loop: true,
         },
+        loop: true,
       },
     }
   },
