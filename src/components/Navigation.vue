@@ -3,7 +3,7 @@
   //- button(@click="setLanguage('en')") EN
   nav.navigation
     mq-layout(mq="lg+")
-      a.navigation__logo(href="#homepage")
+      a.navigation__logo(href="#homescreen")
         icon(glyph="logo", :width="142", :height="16")
     button.navigation__hamburger(@click="toggleMenu")
       .hamburger.hamburger--squeeze(:class="{'is-active':page.isMenuOpen}")

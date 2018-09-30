@@ -10,7 +10,7 @@
       icon(glyph="mountain-group-1-1")
     .section__mountain.section__mountain--1-3.section__mountain--d-n-n(v-scroll-reveal="{delay: 500}")
       icon(glyph="mountain-group-1-3")
-    .scrolldown(v-scroll-reveal="{delay: 1000}")
+    mq-layout(mq="lg+", v-scroll-reveal="{delay: 1000}").scrolldown
       .scrolldown__dots
       .scrolldown__text
         running-text(text="scroll down")

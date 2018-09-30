@@ -3,6 +3,7 @@
     .page(
       v-touch:swipe.left="closeMenu",
     )
+      .noise-overlay.noise-bg
       navigation(:content="currentLanguage")
       mq-layout(mq="lg+")
         page-state(:state="scrollState")
@@ -26,6 +27,7 @@
         :isActive="page.isMenuOpen",
         :onClose="closeMenu",
         noClose,
+        isWide,
         )
         side-menu(:content="currentLanguage")
       slide-in(
@@ -50,8 +52,6 @@
         h2.subtitle {{currentPosition.title}}
         p {{currentPosition.city}}
         .typographic(v-html="currentPosition.details")
-      //- overlay
-      .noise-overlay.noise-bg
 </template>
 
 <script>

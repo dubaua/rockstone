@@ -23,7 +23,7 @@
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--4-1.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-4-1")
-    .scrolldown.scrolldown--above.scrolldown--accent(v-scroll-reveal)
+    mq-layout(mq="lg+", v-scroll-reveal).scrolldown.scrolldown--above.scrolldown--accent
       .scrolldown__text
         running-text(text="scroll down")
       .scrolldown__arrow

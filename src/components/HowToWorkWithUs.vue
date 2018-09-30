@@ -29,7 +29,7 @@
       icon(glyph="mountain-group-5-1")
     .section__mountain.section__mountain--5-3.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-5-3")
-    .scrolldown(v-scroll-reveal)
+    mq-layout(mq="lg+", v-scroll-reveal).scrolldown
       .scrolldown__text
         running-text(text="scroll down")
       .scrolldown__arrow

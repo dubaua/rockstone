@@ -9,9 +9,37 @@
   display: none;
 }
 
+body {
+  font-size: 14px;
+  font-family: $font-montserrat;
+  overflow-x: hidden;
+
+  @include breakpoint("lg") {
+    font-size: 16px;
+  }
+
+  background-color: $color-background;
+  color: $color-text;
+}
+
 .page {
-  overflow: hidden;
   position: relative;
+  overflow-x: hidden;
+  @include breakpoint("lg") {
+    overflow: inherit;
+  }
+}
+
+// * {
+//   outline: 1px solid red;
+// }
+
+.noise-bg {
+  background: $noise-bg;
+  z-index: 9999;
+  pointer-events: none;
+  @include fixed-overlay;
+  position: absolute;
 }
 
 .section {
@@ -91,6 +119,7 @@
       right: 0;
       left: 26%;
       padding-bottom: 64.897959183673463%;
+      z-index: 0;
     }
     &--2-1 {
       top: 0;
@@ -219,27 +248,6 @@
       }
     }
   }
-}
-
-body {
-  font-size: 14px;
-  font-family: $font-montserrat;
-
-  @include breakpoint("lg") {
-    font-size: 16px;
-  }
-
-  background-color: $color-background;
-  color: $color-text;
-}
-
-.noise-bg {
-  background: $noise-bg;
-  z-index: 9999;
-  pointer-events: none;
-  @include fixed-overlay;
-  position: absolute;
-  height: 1000vh;
 }
 
 .title {
