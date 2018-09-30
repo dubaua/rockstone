@@ -8,8 +8,8 @@
         page-state
       a(name="homescreen")
       homescreen
-      a(name="overview")
-      overview(:content="currentLanguage")
+      a(name="#who-we-are")
+      who-we-are(:content="currentLanguage")
       a(name="how-we-work")
       how-we-work(:content="currentLanguage")
       a(name="our-projects")
@@ -28,7 +28,7 @@
         isWide,
         noClose,
         )
-        | Меню
+        side-menu(:content="currentLanguage")
       slide-in(
         direction="left",
         :isActive="page.isFeedbackOpen",
@@ -59,8 +59,9 @@
 import api from '@/api/';
 import Navigation from '@/components/Navigation';
 import PageState from '@/components/PageState';
+import SideMenu from '@/components/SideMenu';
 import Homescreen from '@/components/Homescreen';
-import Overview from '@/components/Overview';
+import WhoWeAre from '@/components/WhoWeAre';
 import HowWeWork from '@/components/HowWeWork';
 import OurProjects from '@/components/OurProjects';
 import HowToWorkWithUs from '@/components/HowToWorkWithUs';
@@ -74,8 +75,9 @@ export default {
   components: {
     Navigation,
     PageState,
+    SideMenu,
     Homescreen,
-    Overview,
+    WhoWeAre,
     HowWeWork,
     OurProjects,
     HowToWorkWithUs,
