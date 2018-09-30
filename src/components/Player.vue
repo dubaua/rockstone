@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import track from './advokat.mp3';
+import track from './soundtrack.mp3';
 import Cookies from 'js-cookie';
 
 export default {
