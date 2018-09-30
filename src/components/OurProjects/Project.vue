@@ -1,6 +1,6 @@
 <template lang="pug">
   .project
-    h2.title.project__title {{project.title}} {{id}}
+    h2.title.project__title {{project.title}}
     .project__details.typographic(v-html="project.details")
     .project__readmore(@click="openProject(id)")
       | {{readmore}}
