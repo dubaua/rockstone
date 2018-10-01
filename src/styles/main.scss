@@ -316,7 +316,7 @@ a {
   cursor: pointer;
   background-color: $color-background;
 
-  background-color: transparent;
+  background-color: $color-background;
   transition: background $timing-fast;
 
   &__glyph {
