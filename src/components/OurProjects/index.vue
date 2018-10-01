@@ -17,9 +17,9 @@
         swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", v-scroll-reveal)
           swiper-slide(v-for="(project, index) in content.our_projects")
             project(:project="project", :readmore="content.common.readmore", :id="index")
-        button(v-scroll-reveal).js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--dark.our-projects__prev
+        button(v-scroll-reveal).js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button(v-scroll-reveal).js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--dark.our-projects__next
+        button(v-scroll-reveal).js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--4-1.section__mountain--d-n(v-scroll-reveal)
       icon(glyph="mountain-group-4-1")
