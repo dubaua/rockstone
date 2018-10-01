@@ -70,7 +70,6 @@ export default {
   &__phone {
     margin-top: $base * 3;
     font-size: $base * 1.2;
-    font-weight: 700;
 
     a {
       text-decoration: none;
@@ -84,10 +83,10 @@ export default {
 
   &__language {
     color: white;
-    font-size: $base * 1.2;
-    font-weight: 700;
-    padding: 5px 3px;
-    border: 1px solid transparent;
+    padding: 8px 0;
+    text-align: center;
+    width: $base * 2;
+    border: none;
     background: none;
     border-radius: 50%;
     cursor: pointer;
@@ -98,7 +97,9 @@ export default {
     }
 
     &--active {
-      border-color: white;
+      color: $color-background;
+      background: $color-text;
+      font-weight: 700;
     }
   }
 }
