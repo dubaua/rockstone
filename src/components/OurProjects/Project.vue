@@ -74,6 +74,7 @@ export default {
     @include global-padding;
   }
   &__readmore {
+    display: inline-block;
     color: $color-primary;
     padding-bottom: $base;
     padding-top: $base;
