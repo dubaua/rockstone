@@ -8,7 +8,7 @@
       .how-we-work__pagination(v-if="isReady", v-scroll-reveal)
         pagination(:config="paginationConfig")
       .how-we-work__slider(v-scroll-reveal)
-        swiper(:options="howWeWorkSwiperOptions" ref="howWeWorkSwiper")
+        swiper(:options="howWeWorkSwiperOptions", ref="howWeWorkSwiper", @slideChangeTransitionEnd="onSlideChangeEnd")
           swiper-slide(v-for="(principle, index) in content.how_we_work")
             .principle
               .principle__about(data-swiper-parallax="-400", data-swiper-parallax-opacity="0")
@@ -20,6 +20,7 @@
                   back="principles-back",
                   :width="iconSize",
                   :height="iconSize",
+                  :id="index",
                 )
         button.js-how-we-work-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-we-work__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
@@ -32,6 +33,8 @@
 </template>
 
 <script>
+import { EventBus } from "@/utils";
+
 export default {
   name: 'HowWeWork',
   props: {
@@ -78,6 +81,12 @@ export default {
   },
   mounted() {
     this.isReady = true;
+  },
+  methods: {
+    onSlideChangeEnd() {
+      const index = this.howWeWorkSwiperInstance.activeIndex;
+      EventBus.$emit('animateWorkIcon', index);
+    }
   }
 }
 </script>

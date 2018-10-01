@@ -1,5 +1,5 @@
 <template lang="pug">
-  .animated-icon(@mouseover="play")
+  .animated-icon(@click="play")
     .animated-icon__back
       icon(:glyph="back", :width="width", :height="height").animated-icon__glyph
     .animated-icon__front
@@ -7,6 +7,9 @@
 </template>
 
 <script>
+// todo extract animated icon as presentational component
+import { EventBus } from "@/utils";
+
 export default {
   name: 'AnimatedIcon',
   props: {
@@ -14,6 +17,7 @@ export default {
     back: String,
     width: Number,
     height: Number,
+    id: Number,
   },
   data() {
     return {
@@ -30,6 +34,12 @@ export default {
       }
     },
   },
+  mounted () {
+    var self = this;
+    EventBus.$on('animateWorkIcon', function (index) {
+      if (self.id === index) self.play();
+    });
+  }
 };
 </script>
 

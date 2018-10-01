@@ -5,7 +5,7 @@
       h1.title.how-to-work-with-us__title(v-scroll-reveal) {{ content.common.how_to_work_with_us_title }}
       .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content", v-scroll-reveal)
       .how-to-work-with-us__slider(v-scroll-reveal)
-        swiper(:options="HowToWorkWithUsSwiperOptions")
+        swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @slideChangeTransitionEnd="onSlideChangeEnd")
           swiper-slide(v-for="(way, index) in content.how_to_work_with_us")
             .way
               .way__icon
@@ -14,6 +14,7 @@
                   back="work-back",
                   :width="250",
                   :height="250",
+                  :id="index",
                 )
               h2.subtitle.way__title {{way.title}}
               div(v-html="way.details").way__details
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import { EventBus } from "@/utils";
+
 export default {
   name: 'HowToWorkWithUs',
   props: {
@@ -64,9 +67,20 @@ export default {
       isReady: false,
     }
   },
+  computed: {
+    HowToWorkWithUsSwiperInstance() {
+      return this.$refs.HowToWorkWithUsSwiper.swiper;
+    },
+  },
   mounted() {
     this.isReady = true;
-  }
+  },
+  methods: {
+    onSlideChangeEnd() {
+      const index = this.HowToWorkWithUsSwiperInstance.activeIndex;
+      EventBus.$emit('animateWorkIcon', index);
+    }
+  },
 }
 </script>
 
