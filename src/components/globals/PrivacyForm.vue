@@ -9,8 +9,7 @@
     .privacy-form__button
       slot(name="button")
         button.button(type="submit", :disabled="!isAgree") Отправить
-    slot(name="success-message", v-if="isSent") Успех
-    slot(name="error-message", v-if="isSent") Неудача
+    slot(name="success", v-if="isSent") Успех
 </template>
 
 
@@ -52,18 +51,19 @@ export default {
   },
   methods: {
     submit(data, url) {
-      var { counterId, goalId } = this.form.yaMetricConfig; 
+      // var { counterId, goalId } = this.form.yaMetricConfig; 
       var self = this;
       this.post(data, url, function(result) {
         if (result) {
-          self.reachGoal(counterId, goalId);
+          // self.reachGoal(counterId, goalId);
           for (var field in self.form.model) {
             self.form.model[field] = null;
-            self.form.isAgree = false;
+            
           }
-          self.form.isSent = true;
+          self.isAgree = false;
+          self.isSent = true;
           setTimeout(function() {
-            self.form.isSent = false;
+            self.isSent = false;
           }, 3e3);
         }
       });
@@ -79,13 +79,13 @@ export default {
         }
       };
     },
-    reachGoal(counterId, goalId) {
-      try {
-        window[`yaCounter${counterId}`].reachGoal(goalId);
-      } catch(error) {
-        console.error('Как жаль, что вы блокируете рекламу ;( Мы могли бы сделать наш сервис лушче'); // eslint-disable-line
-      }
-    }
+    // reachGoal(counterId, goalId) {
+    //   try {
+    //     window[`yaCounter${counterId}`].reachGoal(goalId);
+    //   } catch(error) {
+    //     console.error('Как жаль, что вы блокируете рекламу ;( Мы могли бы сделать наш сервис лушче'); // eslint-disable-line
+    //   }
+    // }
   }
 };
 </script>
@@ -94,6 +94,12 @@ export default {
 .privacy-form {
   &__button {
     margin-top: 1em;
+  }
+  &__agree {
+    input {
+      vertical-align: top;
+      margin-right: 0.4em;
+    }
   }
 }
 </style>

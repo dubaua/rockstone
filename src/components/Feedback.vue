@@ -4,6 +4,7 @@
     privacy-form(:form="form")
       .feedback__title(slot="title") Связаться с нами
       span(slot="privacy").feedback__privacy Я согласен с условиями пользовательского соглашения
+      .feedback__success(slot="success") Сообщение успешно отправлено
 </template>
 
 <script>
@@ -16,37 +17,70 @@ export default {
     return {
       form: {
         model: {
+          position: "",
           name: "",
           phone: "",
+          email: "",
+          resume: "",
           message: "",
         },
         schema: {
-          fields: [{
-            type: "input",
-            inputType: "text",
-            label: "Имя", // todo make i18n
-            model: "name",
-            required: true,
-            placeholder: "Имя", // todo make i18n
-          },{
-            type: "input",
-            inputType: "text",
-            label: "Телефон", // todo make i18n
-            model: "name",
-            required: true,
-            placeholder: "Телефон", // todo make i18n
-          },{
-            type: "textArea",
-            label: "Сообщение", // todo make i18n
-            model: "bio",
-            placeholder: "Сообщение", // todo make i18n
-            rows: 4,
-          },]
+          fields: [
+            {
+              type: "input",
+              inputType: "text",
+              label: "Желаемая должность", // todo make i18n
+              model: "position",
+              required: true,
+              placeholder: "Желаемая должность", // todo make i18n
+            },
+            {
+              type: "input",
+              inputType: "text",
+              label: "Ваше имя", // todo make i18n
+              model: "name",
+              required: true,
+              placeholder: "Ваше имя", // todo make i18n
+            },
+            {
+              type: "input",
+              inputType: "text",
+              label: "Телефон", // todo make i18n
+              model: "phone",
+              required: true,
+              placeholder: "Телефон", // todo make i18n
+            },
+            {
+              type: "input",
+              inputType: "text",
+              label: "Электронная почта", // todo make i18n
+              model: "email",
+              required: true,
+              placeholder: "Электронная почта", // todo make i18n
+            },
+            {
+              type: "input",
+              inputType: "text",
+              label: "Ссылка на резюме", // todo make i18n
+              model: "resume",
+              required: true,
+              placeholder: "Ссылка на резюме", // todo make i18n
+            },
+            {
+              type: "textArea",
+              label: "Комментарий", // todo make i18n
+              model: "message",
+              placeholder: "Комментарий", // todo make i18n
+              rows: 4,
+            },
+          ]
         },
         formOptions: {
           validateAfterLoad: true,
           validateAfterChanged: true
-        }
+        },
+        url: "/process.php",
+        subject: "Сообщение с сайта Rockstone",
       }
     }
   },
@@ -57,12 +91,15 @@ export default {
 @import "~@/styles/_globals";
 
 .feedback {
+  padding: 1em 0;
   &__title {
-    font-size: $base * 1.2;
     margin-bottom: 1em;
   }
   &__privacy {
     color: $color-background--light;
+  }
+  &__success {
+    margin-top: 1em;
   }
 
   fieldset {

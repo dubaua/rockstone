@@ -23,6 +23,7 @@
     "vue-mq": "^0.2.1",
     "vue-scroll-reveal": "^1.0.11",
     "vue-scrollmonitor": "^0.1.0",
+    "vue-scrollto": "^2.13.0",
     "vue2-touch-events": "^1.0.0",
     "vuex": "^3.0.1"
   },

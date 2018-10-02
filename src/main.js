@@ -4,6 +4,7 @@ import Vue2TouchEvents from "vue2-touch-events";
 import VueMq from "vue-mq";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import VueScrollReveal from "vue-scroll-reveal";
+import VueScrollTo from "vue-scrollto";
 import "@/components/globals";
 import store from "./store";
 import "swiper/dist/css/swiper.css";
@@ -28,6 +29,7 @@ Vue.use(VueScrollReveal, {
   viewFactor: 0.3,
   mobile: false
 });
+Vue.use(VueScrollTo);
 
 Vue.config.productionTip = false;
 
