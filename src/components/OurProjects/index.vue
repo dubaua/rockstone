@@ -47,7 +47,12 @@ export default {
           prevEl: '.js-our-projects-swiper-prev',
           nextEl: '.js-our-projects-swiper-next',
         },
-        allowTouchMove: false,
+        breakpointsInverse: true,
+        breakpoints: {
+          992: {
+            allowTouchMove: false,
+          }
+        }
       },
       isReady: false,
     }
