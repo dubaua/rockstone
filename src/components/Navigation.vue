@@ -13,7 +13,7 @@
       a(:href="'tel:'+content.common.phone")
         | {{content.common.phone_label}}
     mq-layout(mq="lg+").navigation__email
-      a(:href="'mailto:'+content.common.email")
+      span(@click="toggleFeedback")
         icon(glyph="envelope", :width="24", :height="14")
 </template>
 
@@ -35,6 +35,9 @@ export default {
     ...mapActions(['toggleByKey']),
     toggleMenu() {
       this.toggleByKey('isMenuOpen')
+    },
+    toggleFeedback() {
+      this.toggleByKey('isFeedbackOpen')
     },
   },
 }
@@ -97,9 +100,7 @@ export default {
     position: absolute;
     bottom: 28px;
     left: 28px;
-    a {
-      fill: white;
-    }
+    fill: white;
   }
 }
 </style>
