@@ -2,12 +2,12 @@
   section.section.how-we-work
     a(name="how_we_work")
     .section__container
-      h1.title.how-we-work__title(v-scroll-reveal) {{  content.common.how_we_work_title }}
-      mq-layout(mq="lg+", v-scroll-reveal).how-we-work__dotted
+      h1.title.how-we-work__title {{  content.common.how_we_work_title }}
+      mq-layout(mq="lg+").how-we-work__dotted
         .dots
-      .how-we-work__pagination(v-if="isReady", v-scroll-reveal)
+      .how-we-work__pagination(v-if="isReady")
         pagination(:config="paginationConfig")
-      .how-we-work__slider(v-scroll-reveal)
+      .how-we-work__slider
         swiper(:options="howWeWorkSwiperOptions", ref="howWeWorkSwiper", @slideChangeTransitionEnd="onSlideChangeEnd")
           swiper-slide(v-for="(principle, index) in content.how_we_work")
             .principle
@@ -26,9 +26,9 @@
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
         button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--3-2.section__mountain--l-n(v-scroll-reveal)
+    .section__mountain.section__mountain--3-2.section__mountain--l-n
       icon(glyph="mountain-group-3-2")
-    .section__mountain.section__mountain--3-1.section__mountain--l-n(v-scroll-reveal)
+    .section__mountain.section__mountain--3-1.section__mountain--l-n
       icon(glyph="mountain-group-3-1")
 </template>
 

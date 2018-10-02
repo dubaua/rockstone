@@ -3,7 +3,6 @@ import App from "./App.vue";
 import Vue2TouchEvents from "vue2-touch-events";
 import VueMq from "vue-mq";
 import VueAwesomeSwiper from "vue-awesome-swiper";
-import VueScrollReveal from "vue-scroll-reveal";
 import VueScrollTo from "vue-scrollto";
 import "@/components/globals";
 import store from "./store";
@@ -22,13 +21,6 @@ Vue.use(VueMq, {
   }
 });
 Vue.use(VueAwesomeSwiper);
-Vue.use(VueScrollReveal, {
-  duration: 1500,
-  easing: "cubic-bezier(0.785, 0.135, 0.15, 0.86)",
-  distance: "32px",
-  viewFactor: 0.3,
-  mobile: false
-});
 Vue.use(VueScrollTo);
 
 Vue.config.productionTip = false;

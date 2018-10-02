@@ -2,17 +2,17 @@
   section.section.careers
     a(name="careers")
     .section__container
-      h1.title.careers__title(v-scroll-reveal) {{ content.common.careers_title }}
+      h1.title.careers__title {{ content.common.careers_title }}
       template(v-if="content.common.careers_cover")
-        mq-layout(mq="lg+", :style="coverStyle", v-scroll-reveal).careers__cover
-      .careers__list(v-scroll-reveal)
+        mq-layout(mq="lg+", :style="coverStyle").careers__cover
+      .careers__list
         .position(v-for="(position, index) in content.careers", @click="openPosition(index)")
           h2.subtitle.position__title {{position.title}}
           .position__city {{position.city}}
           icon(glyph="arrow-right", :width="24", :height="24").position__icon
-      .careers__apply(v-scroll-reveal)
+      .careers__apply
         button.button.button--wide(@click="openFeedback") {{ content.common.apply_button_text }}
-    mq-layout(mq="lg+", v-scroll-reveal).scrolldown.scrolldown--above.scrolldown--accent
+    mq-layout(mq="lg+").scrolldown.scrolldown--above.scrolldown--accent
       .scrolldown__text
         running-text(text="scroll down")
       .scrolldown__arrow

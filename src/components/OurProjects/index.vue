@@ -2,28 +2,27 @@
   section.section.our-projects
     a(name="our_projects")
     .section__container
-      h1.subtitle.title--display.our-projects__title(v-scroll-reveal) {{ content.common.our_projects_title }}
-      .our-projects__pagination(v-if="isReady", v-scroll-reveal)
+      h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
+      .our-projects__pagination(v-if="isReady")
         pagination(:config="paginationConfig")
       mq-layout(
         v-if="isReady && coverStyle",
         mq="lg+",
         :style="coverStyle",
-        :class="coverClass",
-        v-scroll-reveal).our-projects__cover
+        :class="coverClass").our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
-        mq-layout(mq="lg+", v-scroll-reveal).our-projects__dotted
+        mq-layout(mq="lg+").our-projects__dotted
           .dots
-        swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", v-scroll-reveal)
+        swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper")
           swiper-slide(v-for="(project, index) in content.our_projects")
             project(:project="project", :readmore="content.common.readmore", :id="index")
-        button(v-scroll-reveal).js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
+        button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button(v-scroll-reveal).js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
+        button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--4-1.section__mountain--d-n(v-scroll-reveal)
+    .section__mountain.section__mountain--4-1.section__mountain--d-n
       icon(glyph="mountain-group-4-1")
-    mq-layout(mq="lg+", v-scroll-reveal).scrolldown.scrolldown--above.scrolldown--accent
+    mq-layout(mq="lg+").scrolldown.scrolldown--above.scrolldown--accent
       .scrolldown__text
         running-text(text="scroll down")
       .scrolldown__arrow

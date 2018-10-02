@@ -2,15 +2,15 @@
 <template lang="pug">
   section.section.homescreen
     a(name="homescreen")
-    .section__mountain.section__mountain--1-2.section__mountain--d-n(v-scroll-reveal)
+    .section__mountain.section__mountain--1-2.section__mountain--d-n
       icon(glyph="mountain-group-1-2")
-    .homescreen__logo(v-scroll-reveal="{delay: 750}")
+    .homescreen__logo
       icon(glyph="logo")
-    .section__mountain.section__mountain--1-1.section__mountain--l-n(v-scroll-reveal="{delay: 250}")
+    .section__mountain.section__mountain--1-1.section__mountain--l-n
       icon(glyph="mountain-group-1-1")
-    .section__mountain.section__mountain--1-3.section__mountain--d-n-n(v-scroll-reveal="{delay: 500}")
+    .section__mountain.section__mountain--1-3.section__mountain--d-n-n
       icon(glyph="mountain-group-1-3")
-    mq-layout(mq="lg+", v-scroll-reveal="{delay: 1000}").scrolldown
+    mq-layout(mq="lg+").scrolldown
       .scrolldown__dots
       .scrolldown__text
         running-text(text="scroll down")

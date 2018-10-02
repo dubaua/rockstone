@@ -2,9 +2,9 @@
   section.section.how-to-work-with-us
     a(name="how_to_work_with_us")
     .section__container
-      h1.title.how-to-work-with-us__title(v-scroll-reveal) {{ content.common.how_to_work_with_us_title }}
-      .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content", v-scroll-reveal)
-      .how-to-work-with-us__slider(v-scroll-reveal)
+      h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
+      .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
+      .how-to-work-with-us__slider
         swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @init="animateSubsequent", @slideChangeTransitionEnd="animateSubsequent")
           swiper-slide(v-for="(way, index) in content.how_to_work_with_us")
             .way
@@ -18,19 +18,19 @@
                 )
               h2.subtitle.way__title {{way.title}}
               div(v-html="way.details").way__details
-        mq-layout(mq="lg+", v-scroll-reveal).how-to-work-with-us__dots
+        mq-layout(mq="lg+").how-to-work-with-us__dots
           .dots
-        button(v-scroll-reveal).js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
+        button.js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button(v-scroll-reveal).js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
+        button.js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--5-2.section__mountain--l-n(v-scroll-reveal)
+    .section__mountain.section__mountain--5-2.section__mountain--l-n
       icon(glyph="mountain-group-5-2")
-    .section__mountain.section__mountain--5-1.section__mountain--l-n(v-scroll-reveal)
+    .section__mountain.section__mountain--5-1.section__mountain--l-n
       icon(glyph="mountain-group-5-1")
-    .section__mountain.section__mountain--5-3.section__mountain--d-n(v-scroll-reveal)
+    .section__mountain.section__mountain--5-3.section__mountain--d-n
       icon(glyph="mountain-group-5-3")
-    mq-layout(mq="lg+", v-scroll-reveal).scrolldown
+    mq-layout(mq="lg+").scrolldown
       .scrolldown__text
         running-text(text="scroll down")
       .scrolldown__arrow
