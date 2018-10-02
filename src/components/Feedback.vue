@@ -3,7 +3,7 @@
   div.feedback
     privacy-form(:form="form")
       .feedback__title(slot="title") Связаться с нами
-        span(slot="privacy").feedback__privacy Я согласен на обработку персональных данных
+      span(slot="privacy").feedback__privacy Я согласен на обработку персональных данных
       .feedback__success(slot="success") Сообщение успешно отправлено
 </template>
 
@@ -29,6 +29,7 @@ export default {
             {
               type: "input",
               inputType: "text",
+              inputName: "position",
               label: "Желаемая должность", // todo make i18n
               model: "position",
               required: true,
@@ -37,6 +38,7 @@ export default {
             {
               type: "input",
               inputType: "text",
+              inputName: "name",
               label: "Ваше имя", // todo make i18n
               model: "name",
               required: true,
@@ -45,6 +47,7 @@ export default {
             {
               type: "input",
               inputType: "text",
+              inputName: "phone",
               label: "Телефон", // todo make i18n
               model: "phone",
               required: true,
@@ -53,6 +56,7 @@ export default {
             {
               type: "input",
               inputType: "text",
+              inputName: "email",
               label: "Электронная почта", // todo make i18n
               model: "email",
               required: true,
@@ -61,6 +65,7 @@ export default {
             {
               type: "input",
               inputType: "text",
+              inputName: "resume",
               label: "Ссылка на резюме", // todo make i18n
               model: "resume",
               required: true,
@@ -68,6 +73,7 @@ export default {
             },
             {
               type: "textArea",
+              inputName: "message",
               label: "Комментарий", // todo make i18n
               model: "message",
               placeholder: "Комментарий", // todo make i18n
