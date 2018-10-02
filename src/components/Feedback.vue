@@ -3,7 +3,7 @@
   div.feedback
     privacy-form(:form="form")
       .feedback__title(slot="title") Связаться с нами
-      span(slot="privacy").feedback__privacy Я согласен с условиями пользовательского соглашения
+        span(slot="privacy").feedback__privacy Я согласен на обработку персональных данных
       .feedback__success(slot="success") Сообщение успешно отправлено
 </template>
 
