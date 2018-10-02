@@ -5,7 +5,7 @@
       h1.title.how-to-work-with-us__title(v-scroll-reveal) {{ content.common.how_to_work_with_us_title }}
       .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content", v-scroll-reveal)
       .how-to-work-with-us__slider(v-scroll-reveal)
-        swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @slideChangeTransitionEnd="onSlideChangeEnd")
+        swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @init="animateSubsequent", @slideChangeTransitionEnd="animateSubsequent")
           swiper-slide(v-for="(way, index) in content.how_to_work_with_us")
             .way
               .way__icon
@@ -58,9 +58,11 @@ export default {
         breakpoints: {
           768: {
             slidesPerView: 2,
+            slidesPerGroup: 2,
           },
           1200: {
             slidesPerView: 3,
+            slidesPerGroup: 3,
           }
         }
       },
@@ -76,9 +78,16 @@ export default {
     this.isReady = true;
   },
   methods: {
-    onSlideChangeEnd() {
+    animateSubsequent() {
       const index = this.HowToWorkWithUsSwiperInstance.activeIndex;
-      EventBus.$emit('animateWorkIcon', index);
+      const count = this.HowToWorkWithUsSwiperInstance.params.slidesPerView;
+      for (let i = 0; i < count; i++) {
+        const delay = i * 333;
+        const nextIndex = i + index;
+        setTimeout(() => {
+          EventBus.$emit('animateWorkIcon', nextIndex);
+        }, delay);
+      }
     }
   },
 }
