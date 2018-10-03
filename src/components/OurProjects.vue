@@ -1,6 +1,5 @@
 <template lang="pug">
   section.section.our-projects
-    a(name="our_projects")
     .section__container
       h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
       .our-projects__pagination(v-if="isReady")

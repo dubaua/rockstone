@@ -1,6 +1,5 @@
 <template lang="pug">
   section.section.careers
-    a(name="careers")
     .section__container
       h1.title.careers__title {{ content.common.careers_title }}
       template(v-if="content.common.careers_cover")

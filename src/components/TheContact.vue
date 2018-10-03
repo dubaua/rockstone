@@ -1,7 +1,6 @@
 
 <template lang="pug">
   section.section.contact
-    a(name="contact")
     .section__container
       h1.title.contact__title {{  content.common.contact_title }}
       .spread-block

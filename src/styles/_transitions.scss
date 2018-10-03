@@ -84,3 +84,18 @@ $transitions: (
     }
   }
 }
+
+.soar-enter-active,
+.soar-leave-active {
+  transition: all $timing * 2.5;
+}
+.soar-enter {
+  opacity: 0;
+  transition-timing-function: $easeInCubic;
+  transform: translate(0, $base * 2);
+}
+.soar-leave-to {
+  opacity: 0;
+  transition-timing-function: $easeOutCubic;
+  transform: translate(0, $base * -2);
+}

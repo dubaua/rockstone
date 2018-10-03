@@ -1,27 +1,24 @@
 <template lang="pug">
   #app(v-if="isLoaded")
-    .page(
-      v-touch:swipe.left="closeMenu",
-    )
+    scroll-container(@change="setSectionsState").page
       .noise-overlay.noise-bg
       the-navigation(:content="currentLanguage")
       mq-layout(mq="lg+")
-        page-state(:state="scrollState")
-      scroll-container(@change="updateState")
-        scroll-item(id="homescreen")
-          the-homescreen(:content="currentLanguage")
-        scroll-item(id="who_we_are")
-          who-we-are(:content="currentLanguage")
-        scroll-item(id="how_we_work")
-          how-we-work(:content="currentLanguage")
-        scroll-item(id="our_projects")
-          our-projects(:content="currentLanguage")
-        scroll-item(id="how_to_work_with_us")
-          how-to-work-with-us(:content="currentLanguage")
-        scroll-item(id="careers")
-          the-careers(:content="currentLanguage")
-        scroll-item(id="contact")
-          the-contact(:content="currentLanguage")
+        //- page-state
+      scroll-item(id="homescreen")
+        the-homescreen(id="homescreen")
+      scroll-item(id="whoWeAre")
+        who-we-are(:content="currentLanguage" id="whoWeAre")
+      scroll-item(id="howWeWork")
+        how-we-work(:content="currentLanguage" id="howWeWork")
+      scroll-item(id="ourProjects")
+        our-projects(:content="currentLanguage" id="ourProjects")
+      scroll-item(id="howToWorkWithUs")
+        how-to-work-with-us(:content="currentLanguage" id="howToWorkWithUs")
+      scroll-item(id="careers")
+        the-careers(:content="currentLanguage" id="careers")
+      scroll-item(id="contact")
+        the-contact(:content="currentLanguage" id="contact")
       slide-in(
         direction="right",
         :isActive="page.isMenuOpen",
@@ -68,7 +65,7 @@ import TheCareers from '@/components/TheCareers';
 import TheContact from '@/components/TheContact';
 import TheFeedback from '@/components/TheFeedback';
 import { ScrollContainer, ScrollItem } from 'vue-scrollmonitor'
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'app',
@@ -90,7 +87,6 @@ export default {
   data() {
     return {
       isLoaded: false,
-      scrollState: {},
       content: {
         ru: {
           common: null,
@@ -162,6 +158,7 @@ export default {
   },
   methods: {
     ...mapActions(['setByKey']),
+    ...mapMutations(['setSectionsState']),
     closeMenu() {
       this.setByKey({key: 'isMenuOpen', value: false});
     },
@@ -173,9 +170,6 @@ export default {
     },
     closePosition() {
       this.setByKey({key: 'isPositionOpen', value: false});
-    },
-    updateState (state) {
-      this.scrollState = state
     },
   },
 }

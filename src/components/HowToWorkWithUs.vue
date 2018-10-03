@@ -1,6 +1,5 @@
 <template lang="pug">
   section.section.how-to-work-with-us
-    a(name="how_to_work_with_us")
     .section__container
       h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
       .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")

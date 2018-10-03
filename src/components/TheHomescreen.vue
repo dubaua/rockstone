@@ -1,21 +1,44 @@
 
 <template lang="pug">
-  section.section.homescreen
-    a(name="homescreen")
+section.section.homescreen
+  transition-sequence(
+    :order="0"
+    section="homescreen"
+    :final="4"
+    )
     .section__mountain.section__mountain--1-2.section__mountain--d-n
       icon(glyph="mountain-group-1-2")
+  transition-sequence(
+    :order="3"
+    section="homescreen"
+    :final="4"
+    )
     .homescreen__logo
       icon(glyph="logo")
+  transition-sequence(
+    :order="1"
+    section="homescreen"
+    :final="4"
+    )
     .section__mountain.section__mountain--1-1.section__mountain--l-n
       icon(glyph="mountain-group-1-1")
+  transition-sequence(
+    :order="2"
+    section="homescreen"
+    :final="4"
+    )
     .section__mountain.section__mountain--1-3.section__mountain--d-n-n
       icon(glyph="mountain-group-1-3")
-    mq-layout(mq="lg+").scrolldown
-      .scrolldown__dots
-      .scrolldown__text
-        running-text(text="scroll down")
-      .scrolldown__arrow
-        icon(glyph="double-arrow--bottom", :width="16", :height="16")
+  mq-layout(mq="lg+").scrolldown
+    .scrolldown__dots
+    .scrolldown__text
+      running-text(text="scroll down")
+    .scrolldown__arrow
+      icon(
+        glyph="double-arrow--bottom"
+        :width="16"
+        :height="16"
+        )
 </template>
 
 <script>
