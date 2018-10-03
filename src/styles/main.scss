@@ -115,9 +115,9 @@ body {
       }
     }
     &--1-3 {
-      top: 62%;
       right: 0;
       left: 26%;
+      top: 62%;
       padding-bottom: 318 / 493 * 74%;
       z-index: 0;
     }
@@ -126,27 +126,27 @@ body {
       padding-bottom: 132 / 393 * 100%;
     }
     &--2-2 {
-      top: -10%;
       left: -25%;
       right: -25%;
+      top: -10%;
       padding-bottom: 226 / 718 * 150%;
       @include breakpoint("lg") {
         left: -50%;
         right: -50%;
-        padding-bottom: 226 / 718 * 200%;
         top: -21%;
+        padding-bottom: 226 / 718 * 200%;
       }
     }
     &--2-3 {
-      top: -25%;
       left: -25%;
       right: -25%;
+      top: -25%;
       padding-bottom: 192 / 568 * 150%;
       @include breakpoint("lg") {
         left: -60%;
         right: -40%;
-        padding-bottom: 192 / 568 * 200%;
         top: -50%;
+        padding-bottom: 192 / 568 * 200%;
       }
     }
     &--3-1 {
@@ -164,87 +164,83 @@ body {
       }
     }
     &--4-1 {
-      padding-bottom: 50.98126672613738%;
-      @include breakpoint("sm") {
-        padding-bottom: 33.98751115075825%;
-      }
       top: -10%;
+      padding-bottom: 381 / 1121 * 150%;
+      @include breakpoint("sm") {
+        padding-bottom: 381 / 1121 * 100%;
+      }
     }
     &--5-1 {
       top: 0;
-      padding-bottom: 78.54594112399643%;
+      padding-bottom: 587 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 52.36396074933095%;
+        padding-bottom: 587 / 1121 * 100%;
       }
     }
     &--5-2 {
       top: -2%;
-      padding-bottom: 69.71454058876003%;
+      padding-bottom: 521 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 46.476360392506685%;
+        padding-bottom: 521 / 1121 * 100%;
       }
     }
     &--5-3 {
-      padding-bottom: 57.805530776092766%;
+      padding-bottom: 432 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 38.53702051739518%;
+        padding-bottom: 432 / 1121 * 100%;
       }
       bottom: -5%;
     }
     &--6-1 {
-      top: 0;
       left: 0;
-      right: 52.63157894736842%;
-      padding-bottom: 17.859293%;
+      right: 591 / 1121 * 100%;
+      top: 0;
+      padding-bottom: 223 / 1121 * 100%;
     }
     &--6-2 {
+      left: 174 / 1121 * 100%;
+      right: 131 / 1121 * 100%;
       top: -2%;
-      left: 15.121855486173057%;
-      right: 11.99678858162355%;
-      padding-bottom: 18.568543%;
+      padding-bottom: 262 / 1121 * 100%; // 18.568543%;
     }
     &--6-3 {
-      top: -2%;
-      left: 54.237288%;
+      left: (1121 - 513) / 1121 * 100%;
       right: 0;
-      padding-bottom: 20.468543%;
+      top: -2%;
+      padding-bottom: 230 / 1121 * 100%;
     }
     &--6-4 {
       top: 0;
-      padding-bottom: 71.9892952720785%;
+      padding-bottom: 538 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 47.992863514719%;
+        padding-bottom: 538 / 1121 * 100%;//47.992863514719% ;
       }
     }
     &--6-5 {
       top: -2%;
-      padding-bottom: 65.56645851917929%;
+      padding-bottom: 490 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 43.71097234611953%;
+        padding-bottom: 490 / 1121 * 100%;
       }
     }
     &--7-1 {
       top: -10%;
-      left: -25%;
-      right: -25%;
-      padding-bottom: 47.21448467966574%;
+      padding-bottom: 226 / 685 * 150%;// 47.21448467966574%;
       @include breakpoint("lg") {
         left: -50%;
         right: -50%;
-        padding-bottom: 62.95264623955432%;
         top: -25%;
+        padding-bottom: 226 / 685 * 200%;//62.95264623955432%;
       }
     }
     &--7-2 {
       top: -50%;
-      left: -25%;
-      right: -25%;
-      padding-bottom: 55.5984555984556%;
+      padding-bottom: 210 / 586 * 150%; // 55.5984555984556%;
       @include breakpoint("lg") {
         left: -60%;
         right: -40%;
-        padding-bottom: 74.13127413127414%;
         top: -50%;
+        padding-bottom: 210 / 586 * 200%;//74.13127413127414%;
       }
     }
   }
