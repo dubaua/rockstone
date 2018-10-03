@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'Homescreen',
+  name: 'TheHomescreen',
 }
 </script>
 

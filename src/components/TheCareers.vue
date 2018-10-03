@@ -6,7 +6,10 @@
       template(v-if="content.common.careers_cover")
         mq-layout(mq="lg+", :style="coverStyle").careers__cover
       .careers__list
-        .position(v-for="(position, index) in content.careers", @click="openPosition(index)")
+        .position(
+          v-for="(position, index) in content.careers"
+          :key="position._id"
+          @click="openPosition(index)")
           h2.subtitle.position__title {{position.title}}
           .position__city {{position.city}}
           icon(glyph="arrow-right", :width="24", :height="24").position__icon
@@ -23,7 +26,7 @@
 import { EventBus } from "@/utils";
 
 export default {
-  name: 'Careers',
+  name: 'TheCareers',
   props: {
     content: Object,
   },

@@ -9,7 +9,10 @@
         pagination(:config="paginationConfig")
       .how-we-work__slider
         swiper(:options="howWeWorkSwiperOptions", ref="howWeWorkSwiper", @slideChangeTransitionEnd="onSlideChangeEnd")
-          swiper-slide(v-for="(principle, index) in content.how_we_work")
+          swiper-slide(
+            v-for="(principle, index) in content.how_we_work"
+            :key="principle._id"
+            )
             .principle
               .principle__about(data-swiper-parallax="-400", data-swiper-parallax-opacity="0")
                 h2.subtitle.principle__title {{principle.title}}

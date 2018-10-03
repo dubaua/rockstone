@@ -1,29 +1,40 @@
 <template lang="pug">
-  .rt
-    .rt__l(
-      v-for="(e, i) in withoutSpaces",
-      :class="{'rt__l--s': e.s}",
-      :style="getStyle(i)"
-      ) {{e.l}}
+.running-text
+  .running-text__letter(
+    v-for="(element, index) in withoutSpaces"
+    :key="_uid+'-'+index"
+    :class="{'running-text__letter--shift': element.shift}"
+    :style="getStyle(index)"
+    ) {{element.letter}}
 </template>
 
 <script>
 export default {
   name: 'RunningText',
   props: {
-    text: String,
-    reverse: Boolean,
+    text: {
+      type: String,
+      required: true,
+    },
+    reverse: {
+      type: Boolean,
+      default: false,
+    },
+    delayMultiplier: {
+      type: Number,
+      default: 0.1,
+    },
   },
   computed: {
     withoutSpaces() {
       return this.text.split("")
-        .map((l, i, a) => ({ l, s: a[i+1] === " "}))
-        .filter(e => e.l !== " ");
+        .map((letter, index, word) => ({ letter, shift: word[index+1] === " "}))
+        .filter(element => element.letter !== " ");
     },
   },
   methods: {
-    getStyle(i) {
-      const delay = this.reverse ? this.withoutSpaces.length - i * 0.1 : i * 0.1;
+    getStyle(index) {
+      const delay = this.reverse ? this.withoutSpaces.length - index * this.delayMultiplier : index * this.delayMultiplier;
       return `animation-delay: ${delay}s`;
     }
   },
@@ -31,19 +42,19 @@ export default {
 </script>
 
 <style lang="scss">
-.rt {
+.running-text {
   white-space: nowrap;
-  &__l {
+  &__letter {
     display: inline-block;
-    animation-name: rt_blink;
+    animation-name: running-text_blink;
     animation-iteration-count: infinite;
     animation-duration: 2s;
-    &--s {
+    &--shift {
       margin-right: 0.4em;
     }
   }
 }
-@keyframes rt_blink {
+@keyframes running-text_blink {
   0%,
   5% {
     opacity: 0.3;

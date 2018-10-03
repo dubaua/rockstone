@@ -5,14 +5,16 @@
     .project__readmore(@click="openProject(id)")
       | {{readmore}}
     .project__social-links
-      project-link(:link="project.vk_link", glyph="vk", :width="40", :height="40")
-      project-link(:link="project.fb_link", glyph="fb", :width="40", :height="40")
-      project-link(:link="project.ok_link", glyph="ok", :width="40", :height="40")
-      project-link(:link="project.appstore_link", glyph="app-store", :width="140", :height="40")
-      project-link(:link="project.google_play_link", glyph="google-play", :width="140", :height="40")
+      our-projects-item-link(:link="project.vk_link", glyph="vk", :width="40", :height="40")
+      our-projects-item-link(:link="project.fb_link", glyph="fb", :width="40", :height="40")
+      our-projects-item-link(:link="project.ok_link", glyph="ok", :width="40", :height="40")
+      our-projects-item-link(:link="project.appstore_link", glyph="app-store", :width="140", :height="40")
+      our-projects-item-link(:link="project.google_play_link", glyph="google-play", :width="140", :height="40")
     .project__gallery(v-if="project.gallery.length")
       swiper(:options="projectGallerySwiperOptions")
-        swiper-slide(v-for="photo in project.gallery")
+        swiper-slide(
+          v-for="(photo, index) in project.gallery"
+          :key="project._id+'-photo-'+index")
           img(:src="photo.path").project__shot
       button(:class="'js-project-'+id+'-prev'").slider-button.slider-button--light.project__prev
         icon(glyph="arrow-left", :width="24", :height="24").slider-button__glyph
@@ -21,12 +23,12 @@
 </template>
 
 <script>
-import ProjectLink from './ProjectLink';
+import OurProjectsItemLink from '@/components/OurProjectsItemLink';
 
 export default {
-  name: 'Project',
+  name: 'OurProjectsItem',
   components: {
-    ProjectLink,
+    OurProjectsItemLink,
   },
   props: {
     project: Object,

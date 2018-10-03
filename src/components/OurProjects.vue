@@ -14,8 +14,11 @@
         mq-layout(mq="lg+").our-projects__dotted
           .dots
         swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper")
-          swiper-slide(v-for="(project, index) in content.our_projects")
-            project(:project="project", :readmore="content.common.readmore", :id="index")
+          swiper-slide(
+            v-for="(project, index) in content.our_projects"
+            :key="project._id"
+            )
+            our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
         button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
         button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
@@ -29,12 +32,12 @@
         icon(glyph="double-arrow--bottom", :width="16", :height="16")
 </template>
 <script>
-import Project from './Project';
+import OurProjectsItem from '@/components/OurProjectsItem';
 
 export default {
   name: 'OurProjects',
   components: {
-    Project,
+    OurProjectsItem,
   },
   props: {
     content: Object,

@@ -10,16 +10,16 @@
     .page-state__stage(v-if="state.careers", :class="{'page-state__stage--active': state.careers.isInViewport}") 06
     .page-state__stage(v-if="state.contact", :class="{'page-state__stage--active': state.contact.isInViewport}") 07
     .page-state__music
-      player
+      the-player
 </template>
 
 <script>
-import Player from '@/components/Player';
+import ThePlayer from '@/components/ThePlayer';
 
 export default {
   name: 'PageState',
   components: {
-    Player,
+    ThePlayer,
   },
   props: {
     state: Object,

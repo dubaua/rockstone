@@ -4,12 +4,12 @@
       v-touch:swipe.left="closeMenu",
     )
       .noise-overlay.noise-bg
-      navigation(:content="currentLanguage")
+      the-navigation(:content="currentLanguage")
       mq-layout(mq="lg+")
         page-state(:state="scrollState")
       scroll-container(@change="updateState")
         scroll-item(id="homescreen")
-          homescreen(:content="currentLanguage")
+          the-homescreen(:content="currentLanguage")
         scroll-item(id="who_we_are")
           who-we-are(:content="currentLanguage")
         scroll-item(id="how_we_work")
@@ -19,9 +19,9 @@
         scroll-item(id="how_to_work_with_us")
           how-to-work-with-us(:content="currentLanguage")
         scroll-item(id="careers")
-          careers(:content="currentLanguage")
+          the-careers(:content="currentLanguage")
         scroll-item(id="contact")
-          contact(:content="currentLanguage")
+          the-contact(:content="currentLanguage")
       slide-in(
         direction="right",
         :isActive="page.isMenuOpen",
@@ -35,7 +35,7 @@
         :isActive="page.isFeedbackOpen",
         :onClose="closeFeedback",
         )
-        feedback(:content="currentLanguage")
+        the-feedback(:content="currentLanguage")
       slide-in(
         direction="left",
         :isActive="page.isProjectOpen",
@@ -56,35 +56,34 @@
 
 <script>
 import api from '@/api/';
-import Navigation from '@/components/Navigation';
+import TheNavigation from '@/components/TheNavigation';
 import PageState from '@/components/PageState';
 import SideMenu from '@/components/SideMenu';
-import Homescreen from '@/components/Homescreen';
+import TheHomescreen from '@/components/TheHomescreen';
 import WhoWeAre from '@/components/WhoWeAre';
 import HowWeWork from '@/components/HowWeWork';
 import OurProjects from '@/components/OurProjects';
 import HowToWorkWithUs from '@/components/HowToWorkWithUs';
-import Careers from '@/components/Careers';
-import Contact from '@/components/Contact';
-import Feedback from '@/components/Feedback';
+import TheCareers from '@/components/TheCareers';
+import TheContact from '@/components/TheContact';
+import TheFeedback from '@/components/TheFeedback';
 import { ScrollContainer, ScrollItem } from 'vue-scrollmonitor'
 import { mapState, mapActions } from 'vuex';
-
 
 export default {
   name: 'app',
   components: {
-    Navigation,
+    TheNavigation,
     PageState,
     SideMenu,
-    Homescreen,
+    TheHomescreen,
     WhoWeAre,
     HowWeWork,
     OurProjects,
     HowToWorkWithUs,
-    Careers,
-    Contact,
-    Feedback,
+    TheCareers,
+    TheContact,
+    TheFeedback,
     ScrollContainer,
     ScrollItem,
   },

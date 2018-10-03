@@ -2,7 +2,10 @@
 <template lang="pug">
   div.player(:class="{'player--active': isPlaying}", @click="toggle")
     audio(ref="audio", loop)
-    .player__bar(v-for="i in 8", :class="'player__bar--'+i")
+    .player__bar(
+      v-for="i in 8"
+      :key="'player__bar--'+i"
+      :class="'player__bar--'+i")
 </template>
 
 <script>
@@ -10,7 +13,7 @@ import track from './soundtrack.mp3';
 import Cookies from 'js-cookie';
 
 export default {
-  name: 'Player',
+  name: 'ThePlayer',
   props: {
     content: Object,
   },

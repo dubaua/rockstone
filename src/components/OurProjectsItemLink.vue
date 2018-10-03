@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'ProjectLink',
+  name: 'OurProjectsItemLink',
   props: {
     link: String,
     glyph: String,
@@ -32,7 +32,7 @@ export default {
       default:
         return h( 'a', {
             class: {
-              "project-link": true,
+              'project-link': true,
             },
             attrs: {
               href: props.link,

@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'Feedback',
+  name: 'TheFeedback',
   props: {
     content: Object,
   },

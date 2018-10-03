@@ -6,7 +6,9 @@
       .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
       .how-to-work-with-us__slider
         swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @init="animateSubsequent", @slideChangeTransitionEnd="animateSubsequent")
-          swiper-slide(v-for="(way, index) in content.how_to_work_with_us")
+          swiper-slide(
+            v-for="(way, index) in content.how_to_work_with_us"
+            :key="way._id")
             .way
               .way__icon
                 animated-icon(

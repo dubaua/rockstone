@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'Contact',
+  name: 'TheContact',
   props: {
     content: Object,
   },
