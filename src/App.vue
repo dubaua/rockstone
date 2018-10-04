@@ -13,12 +13,12 @@
         how-we-work(:content="currentLanguage" id="howWeWork")
       scroll-item(id="ourProjects")
         our-projects(:content="currentLanguage" id="ourProjects")
-      scroll-item(id="howToWorkWithUs")
-        how-to-work-with-us(:content="currentLanguage" id="howToWorkWithUs")
-      scroll-item(id="careers")
-        the-careers(:content="currentLanguage" id="careers")
-      scroll-item(id="contact")
-        the-contact(:content="currentLanguage" id="contact")
+      //- scroll-item(id="howToWorkWithUs")
+      //-   how-to-work-with-us(:content="currentLanguage" id="howToWorkWithUs")
+      //- scroll-item(id="careers")
+      //-   the-careers(:content="currentLanguage" id="careers")
+      //- scroll-item(id="contact")
+      //-   the-contact(:content="currentLanguage" id="contact")
       slide-in(
         direction="right",
         :isActive="page.isMenuOpen",

@@ -1,29 +1,37 @@
 <template lang="pug">
   section.section.our-projects
     .section__container
-      h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
-      .our-projects__pagination(v-if="isReady")
-        pagination(:config="paginationConfig")
-      mq-layout(
-        v-if="isReady && coverStyle",
-        mq="lg+",
-        :style="coverStyle",
-        :class="coverClass").our-projects__cover
+      transition-sequence(v-bind="getTransitionConfig(1, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
+        h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
+      transition-sequence(v-bind="getTransitionConfig(4, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')" :isBlocking="!isSwiperReady") 
+        .our-projects__pagination(v-if="isSwiperReady")
+          pagination(:config="paginationConfig")
+      transition-sequence(v-bind="getTransitionConfig(5, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')")
+        mq-layout(
+          v-if="isSwiperReady",
+          mq="lg+",
+          :style="coverStyle",
+          :class="coverClass").our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
-        mq-layout(mq="lg+").our-projects__dotted
-          .dots
-        swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper")
-          swiper-slide(
-            v-for="(project, index) in content.our_projects"
-            :key="project._id"
-            )
-            our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
-        button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
-          icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
-          icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--4-1.section__mountain--d-n
-      icon(glyph="mountain-group-4-1")
+        transition-sequence(v-bind="getTransitionConfig(3, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
+          mq-layout(mq="lg+").our-projects__dotted
+            .dots
+        transition-sequence(v-bind="getTransitionConfig(2, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
+          swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", @ready="onSwiperInit('ourProjects')")
+            swiper-slide(
+              v-for="(project, index) in content.our_projects"
+              :key="project._id"
+              )
+              our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
+        transition-sequence(v-bind="getTransitionConfig(3, 5, 'ourProjects')") 
+          button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
+            icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
+        transition-sequence(v-bind="getTransitionConfig(3, 5, 'ourProjects')") 
+          button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
+            icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
+    transition-sequence(v-bind="getTransitionConfig(0, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
+      .section__mountain.section__mountain--4-1.section__mountain--d-n
+        icon(glyph="mountain-group-4-1")
     mq-layout(mq="lg+").scrolldown.scrolldown--above.scrolldown--accent
       .scrolldown__text
         running-text(text="scroll down")
@@ -32,6 +40,7 @@
 </template>
 <script>
 import OurProjectsItem from '@/components/OurProjectsItem';
+import { getTransitionConfig } from '@/store/modules/sections';
 
 export default {
   name: 'OurProjects',
@@ -55,7 +64,6 @@ export default {
           }
         }
       },
-      isReady: false,
     }
   },
   computed: {
@@ -85,10 +93,19 @@ export default {
     },
     fromLg() {
       return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
-    }
+    },
+    isSwiperReady() {
+      return this.$store.state.sections.ourProjects.isSwiperReady;
+    },
   },
-  mounted() {
-    this.isReady = true;
+  methods: {
+    getTransitionConfig,
+    showNext(key) {
+      this.$store.commit('nextStep', { key })
+    },
+    onSwiperInit(key) {
+      this.$store.commit('swiperReady', { key })
+    }
   },
 }
 </script>

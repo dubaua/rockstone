@@ -1,7 +1,7 @@
 
 <template lang="pug">
   transition(:name="transitionName", @enter="onEnter")
-    template(v-if="isStepReached")
+    template(v-if="_isVisible")
       slot
 </template>
 
@@ -9,19 +9,13 @@
 export default {
   name: 'TransitionSequence',
   props: {
-    order: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    section: {
-      type: String,
+    isVisible: {
+      type: Boolean,
       required: true,
     },
-    final: {
-      type: Number,
-      required: true,
-      default: 0,
+    isBlocked: {
+      type: Boolean,
+      default: false,
     },
     delay: {
       type: Number,
@@ -33,19 +27,13 @@ export default {
     },
   },
   computed: {
-    isReady() {
-      return this.$store.state.sections[this.section].animationStep >= this.final;
-    },
-    isStepReached() {
-      return this.isReady
-          || (this.$store.state.sections[this.section].isInViewport
-          && this.$store.state.sections[this.section].animationStep >= this.order);
+    _isVisible() {
+      return !this.isBlocked && this.isVisible;
     },
   },
   methods: {
     onEnter() {
-      if (!this.isReady)
-        setTimeout(() => this.$store.commit('nextStep', {key: this.section}), this.delay);
+      setTimeout(() => {this.$emit('transitionAnimated')}, this.delay);
     }
   },
 }

@@ -2,41 +2,50 @@
   section.section.how-we-work
     a(name="how_we_work")
     .section__container
-      h1.title.how-we-work__title {{  content.common.how_we_work_title }}
-      mq-layout(mq="lg+").how-we-work__dotted
-        .dots
-      .how-we-work__pagination(v-if="isReady")
-        pagination(:config="paginationConfig")
+      transition-sequence(v-bind="getTransitionConfig(2, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
+        h1.title.how-we-work__title {{  content.common.how_we_work_title }}
+      transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
+        mq-layout(mq="lg+").how-we-work__dotted
+          .dots
+      transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')" :isBlocked="!isSwiperReady")
+        .how-we-work__pagination(v-if="isSwiperReady")
+          pagination(:config="paginationConfig")
       .how-we-work__slider
-        swiper(:options="howWeWorkSwiperOptions", ref="howWeWorkSwiper", @slideChangeTransitionEnd="onSlideChangeEnd")
-          swiper-slide(
-            v-for="(principle, index) in content.how_we_work"
-            :key="principle._id"
-            )
-            .principle
-              .principle__about(data-swiper-parallax="-400", data-swiper-parallax-opacity="0")
-                h2.subtitle.principle__title {{principle.title}}
-                .principle__details.typographic(v-html="principle.details")
-              .principle__icon(data-swiper-parallax="-800", data-swiper-parallax-opacity="0")
-                animated-icon(
-                  :front="'principles-'+(index+1)",
-                  back="principles-back",
-                  :width="iconSize",
-                  :height="iconSize",
-                  :id="index",
-                )
-        button.js-how-we-work-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-we-work__prev
-          icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
-          icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--3-2.section__mountain--l-n
-      icon(glyph="mountain-group-3-2")
-    .section__mountain.section__mountain--3-1.section__mountain--l-n
-      icon(glyph="mountain-group-3-1")
+        transition-sequence(v-bind="getTransitionConfig(4, 4, 'howWeWork')")
+          swiper(:options="howWeWorkSwiperOptions", ref="howWeWorkSwiper", @ready="onSwiperInit('howWeWork')" @slideChangeTransitionEnd="onSlideChangeEnd")
+            swiper-slide(
+              v-for="(principle, index) in content.how_we_work"
+              :key="principle._id"
+              )
+              .principle
+                .principle__about(data-swiper-parallax="-400", data-swiper-parallax-opacity="0")
+                  h2.subtitle.principle__title {{principle.title}}
+                  .principle__details.typographic(v-html="principle.details")
+                .principle__icon(data-swiper-parallax="-800", data-swiper-parallax-opacity="0")
+                  animated-icon(
+                    :front="'principles-'+(index+1)",
+                    back="principles-back",
+                    :width="iconSize",
+                    :height="iconSize",
+                    :id="index",
+                  )
+        transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')")
+          button.js-how-we-work-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-we-work__prev
+            icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
+        transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')")
+          button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
+            icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
+    transition-sequence(v-bind="getTransitionConfig(0, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
+      .section__mountain.section__mountain--3-2.section__mountain--l-n
+        icon(glyph="mountain-group-3-2")
+    transition-sequence(v-bind="getTransitionConfig(1, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
+      .section__mountain.section__mountain--3-1.section__mountain--l-n
+        icon(glyph="mountain-group-3-1")
 </template>
 
 <script>
 import { EventBus } from "@/utils";
+import { getTransitionConfig } from '@/store/modules/sections';
 
 export default {
   name: 'HowWeWork',
@@ -80,15 +89,22 @@ export default {
     },
     fromLg() {
       return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
+    },
+    isSwiperReady() {
+      return this.$store.state.sections.howWeWork.isSwiperReady;
     }
   },
-  mounted() {
-    this.isReady = true;
-  },
   methods: {
+    getTransitionConfig,
     onSlideChangeEnd() {
       const index = this.howWeWorkSwiperInstance.activeIndex;
       EventBus.$emit('animateWorkIcon', index);
+    },
+    showNext(key) {
+      this.$store.commit('nextStep', { key })
+    },
+    onSwiperInit(key) {
+      this.$store.commit('swiperReady', { key })
     }
   }
 }
