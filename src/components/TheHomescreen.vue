@@ -26,12 +26,14 @@ section.section.homescreen
 </template>
 
 <script>
-import { getTransitionConfig } from '@/store/modules/sections';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'TheHomescreen',
+  computed: {
+    ...mapGetters(['getTransitionConfig']),
+  },
   methods: {
-    getTransitionConfig,
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },

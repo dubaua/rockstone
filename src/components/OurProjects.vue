@@ -17,7 +17,7 @@
           mq-layout(mq="lg+").our-projects__dotted
             .dots
         transition-sequence(v-bind="getTransitionConfig(2, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
-          swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", @ready="onSwiperInit('ourProjects')")
+          swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", @ready="onSwiperInit('ourProjects')" @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
               v-for="(project, index) in content.our_projects"
               :key="project._id"
@@ -40,7 +40,7 @@
 </template>
 <script>
 import OurProjectsItem from '@/components/OurProjectsItem';
-import { getTransitionConfig } from '@/store/modules/sections';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'OurProjects',
@@ -67,18 +67,22 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getTransitionConfig']),
     ourProjectsSwiperInstance() {
       return this.$refs.ourProjectsSwiper.swiper;
     },
     paginationConfig() {
       return {
-        current: this.ourProjectsSwiperInstance.activeIndex + 1,
+        current: this.currentProjectIndex + 1,
         divider: this.content.common.fraction_divider,
         total: this.content.our_projects.length,
       }
     },
+    currentProjectIndex() {
+      return this.$store.state.sections.ourProjects.currentProjectIndex;
+    },
     currentProject() {
-      return this.content.our_projects[this.ourProjectsSwiperInstance.activeIndex];
+      return this.content.our_projects[this.currentProjectIndex];
     },
     coverUrl() {
       return this.currentProject.cover 
@@ -99,12 +103,15 @@ export default {
     },
   },
   methods: {
-    getTransitionConfig,
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },
     onSwiperInit(key) {
       this.$store.commit('swiperReady', { key })
+    },
+    onSlideChangeEnd() {
+      const index = this.ourProjectsSwiperInstance.activeIndex;
+      this.$store.commit('setCurrentProject', { index })
     }
   },
 }

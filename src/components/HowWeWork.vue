@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import { EventBus } from "@/utils";
-import { getTransitionConfig } from '@/store/modules/sections';
+import { EventBus } from '@/utils';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'HowWeWork',
@@ -67,6 +67,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getTransitionConfig']),
     howWeWorkSwiperInstance() {
       return this.$refs.howWeWorkSwiper.swiper;
     },
@@ -92,10 +93,9 @@ export default {
     },
     isSwiperReady() {
       return this.$store.state.sections.howWeWork.isSwiperReady;
-    }
+    },
   },
   methods: {
-    getTransitionConfig,
     onSlideChangeEnd() {
       const index = this.howWeWorkSwiperInstance.activeIndex;
       EventBus.$emit('animateWorkIcon', index);

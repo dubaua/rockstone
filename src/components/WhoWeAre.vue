@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getTransitionConfig } from '@/store/modules/sections';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'WhoWeAre',
@@ -35,8 +35,10 @@ export default {
       animationStep: 0,
     }
   },
+  computed: {
+    ...mapGetters(['getTransitionConfig']),
+  },
   methods: {
-    getTransitionConfig,
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },

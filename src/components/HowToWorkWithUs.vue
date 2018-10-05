@@ -1,36 +1,42 @@
 <template lang="pug">
   section.section.how-to-work-with-us
     .section__container
-      h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
-      .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
-      .how-to-work-with-us__slider
-        swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @init="animateSubsequent", @slideChangeTransitionEnd="animateSubsequent")
-          swiper-slide(
-            v-for="(way, index) in content.how_to_work_with_us"
-            :key="way._id")
-            .way
-              .way__icon
-                animated-icon(
-                  :front="'work-'+(index+1)",
-                  back="work-back",
-                  :width="250",
-                  :height="250",
-                  :id="index",
-                )
-              h2.subtitle.way__title {{way.title}}
-              div(v-html="way.details").way__details
-        mq-layout(mq="lg+").how-to-work-with-us__dots
-          .dots
-        button.js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
-          icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
-          icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--5-2.section__mountain--l-n
-      icon(glyph="mountain-group-5-2")
-    .section__mountain.section__mountain--5-1.section__mountain--l-n
-      icon(glyph="mountain-group-5-1")
-    .section__mountain.section__mountain--5-3.section__mountain--d-n
-      icon(glyph="mountain-group-5-3")
+      transition-sequence(v-bind="getTransitionConfig(3, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
+        h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
+      transition-sequence(v-bind="getTransitionConfig(4, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
+        .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
+      transition-sequence(v-bind="getTransitionConfig(5, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
+        .how-to-work-with-us__slider
+          swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @init="onInit", @slideChangeTransitionEnd="onSlideChangeTransitionEnd")
+            swiper-slide(
+              v-for="(way, index) in content.how_to_work_with_us"
+              :key="way._id")
+              .way
+                .way__icon
+                  animated-icon(
+                    :front="'work-'+(index+1)",
+                    back="work-back",
+                    :width="250",
+                    :height="250",
+                    :id="index",
+                  )
+                h2.subtitle.way__title {{way.title}}
+                div(v-html="way.details").way__details
+          mq-layout(mq="lg+").how-to-work-with-us__dots
+            .dots
+          button.js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
+            icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
+          button.js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
+            icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
+    transition-sequence(v-bind="getTransitionConfig(0, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
+      .section__mountain.section__mountain--5-2.section__mountain--l-n
+        icon(glyph="mountain-group-5-2")
+    transition-sequence(v-bind="getTransitionConfig(1, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
+      .section__mountain.section__mountain--5-1.section__mountain--l-n
+        icon(glyph="mountain-group-5-1")
+    transition-sequence(v-bind="getTransitionConfig(2, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
+      .section__mountain.section__mountain--5-3.section__mountain--d-n
+        icon(glyph="mountain-group-5-3")
     mq-layout(mq="lg+").scrolldown
       .scrolldown__text
         running-text(text="scroll down")
@@ -40,6 +46,7 @@
 
 <script>
 import { EventBus } from "@/utils";
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'HowToWorkWithUs',
@@ -67,18 +74,24 @@ export default {
           }
         }
       },
-      isReady: false,
     }
   },
   computed: {
+    ...mapGetters(['getTransitionConfig']),
     HowToWorkWithUsSwiperInstance() {
       return this.$refs.HowToWorkWithUsSwiper.swiper;
     },
   },
-  mounted() {
-    this.isReady = true;
-  },
   methods: {
+    onInit() {
+      this.animateSubsequent();
+    },
+    onSlideChangeTransitionEnd() {
+      this.animateSubsequent();
+    },
+    showNext(key) {
+      this.$store.commit('nextStep', { key })
+    },
     animateSubsequent() {
       const index = this.HowToWorkWithUsSwiperInstance.activeIndex;
       const count = this.HowToWorkWithUsSwiperInstance.params.slidesPerView;
@@ -89,7 +102,7 @@ export default {
           EventBus.$emit('animateWorkIcon', nextIndex);
         }, delay);
       }
-    }
+    },
   },
 }
 </script>

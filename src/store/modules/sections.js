@@ -21,7 +21,7 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
   },
   ourProjects: {
     isAboveViewport: false,
@@ -29,7 +29,8 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
+    currentProjectIndex: 0,
   },
   howToWorkWithUs: {
     isAboveViewport: false,
@@ -57,6 +58,18 @@ const state = {
   }
 };
 
+const getters = {
+  getTransitionConfig: state => (order, final, sectionKey) => ({
+    isVisible:
+      state[sectionKey].animationStep >= final ||
+      (state[sectionKey].animationStep >= order &&
+        state[sectionKey].isInViewport),
+    delay: 333,
+    transitionName: "soar",
+    sectionKey
+  })
+}
+
 const mutations = {
   setSectionsState(state, payload) {
     Object.keys(state).forEach(key => {
@@ -71,20 +84,14 @@ const mutations = {
   },
   swiperReady(state, payload) {
     state[payload.key].isSwiperReady = true;
-  }
+  },
+  setCurrentProject(state, payload) {
+    state.ourProjects.currentProjectIndex = payload.index;
+  },
 };
 
 export default {
   state,
+  getters,
   mutations
 };
-
-export const getTransitionConfig = (order, final, sectionKey) => ({
-  isVisible:
-    state[sectionKey].animationStep >= final ||
-    (state[sectionKey].animationStep >= order &&
-      state[sectionKey].isInViewport),
-  delay: 333,
-  transitionName: "soar",
-  sectionKey
-});
