@@ -13,20 +13,20 @@
           :style="coverStyle",
           :class="coverClass").our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
-        transition-sequence(v-bind="getTransitionConfig(3, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
+        transition-sequence(v-bind="getTransitionConfig(2, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
           mq-layout(mq="lg+").our-projects__dotted
             .dots
-        transition-sequence(v-bind="getTransitionConfig(2, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
+        transition-sequence(v-bind="getTransitionConfig(3, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
           swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", @ready="onSwiperInit('ourProjects')" @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
               v-for="(project, index) in content.our_projects"
               :key="project._id"
               )
               our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
-        transition-sequence(v-bind="getTransitionConfig(3, 5, 'ourProjects')") 
+        transition-sequence(v-bind="getTransitionConfig(2, 5, 'ourProjects')") 
           button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
             icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        transition-sequence(v-bind="getTransitionConfig(3, 5, 'ourProjects')") 
+        transition-sequence(v-bind="getTransitionConfig(2, 5, 'ourProjects')") 
           button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
             icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     transition-sequence(v-bind="getTransitionConfig(0, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
