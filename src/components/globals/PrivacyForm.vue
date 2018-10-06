@@ -7,8 +7,8 @@
       label(:for="'privacy-'+_uid")
         slot(name="privacy")
     .privacy-form__button
-      slot(name="button")
-        button.button(type="submit", :disabled="!isAgree") Отправить
+      button.button(type="submit", :disabled="!isAgree") 
+        slot(name="button") Отправить
     slot(name="success", v-if="isSent") Успех
 </template>
 

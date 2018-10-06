@@ -2,9 +2,10 @@
 <template lang="pug">
   div.feedback
     privacy-form(:form="form")
-      .feedback__title(slot="title") Связаться с нами
-      span(slot="privacy").feedback__privacy Я согласен на обработку персональных данных
-      .feedback__success(slot="success") Сообщение успешно отправлено
+      .feedback__title(slot="title") {{ content.common.feedback_form.title }}
+      span(slot="privacy").feedback__privacy {{ content.common.feedback_form.agreement }}
+      .feedback__success(slot="success") {{ content.common.feedback_form.success }}
+      span(slot="button") {{ content.common.feedback_form.send }}
 </template>
 
 <script>
@@ -13,15 +14,15 @@ export default {
   props: {
     content: Object,
   },
-  data() {
-    return {
-      form: {
+  computed: {
+    form() {
+      return {
         model: {
           position: "",
           name: "",
           phone: "",
           email: "",
-          resume: "",
+          // resume: "",
           message: "",
         },
         schema: {
@@ -30,53 +31,53 @@ export default {
               type: "input",
               inputType: "text",
               inputName: "position",
-              label: "Желаемая должность", // todo make i18n
+              label: this.content.common.feedback_form.position,
               model: "position",
               required: true,
-              placeholder: "Желаемая должность", // todo make i18n
+              placeholder: this.content.common.feedback_form.position,
             },
             {
               type: "input",
               inputType: "text",
               inputName: "name",
-              label: "Ваше имя", // todo make i18n
+              label: this.content.common.feedback_form.name,
               model: "name",
               required: true,
-              placeholder: "Ваше имя", // todo make i18n
+              placeholder: this.content.common.feedback_form.name,
             },
             {
               type: "input",
               inputType: "text",
               inputName: "phone",
-              label: "Телефон", // todo make i18n
+              label: this.content.common.feedback_form.phone,
               model: "phone",
               required: true,
-              placeholder: "Телефон", // todo make i18n
+              placeholder: this.content.common.feedback_form.phone,
             },
             {
               type: "input",
               inputType: "text",
               inputName: "email",
-              label: "Электронная почта", // todo make i18n
+              label: this.content.common.feedback_form.email,
               model: "email",
               required: true,
-              placeholder: "Электронная почта", // todo make i18n
+              placeholder: this.content.common.feedback_form.email,
             },
-            {
-              type: "input",
-              inputType: "text",
-              inputName: "resume",
-              label: "Ссылка на резюме", // todo make i18n
-              model: "resume",
-              required: true,
-              placeholder: "Ссылка на резюме", // todo make i18n
-            },
+            // {
+            //   type: "input",
+            //   inputType: "text",
+            //   inputName: "resume",
+            //   label: this.content.common.feedback_form.resume,
+            //   model: "resume",
+            //   required: true,
+            //   placeholder: this.content.common.feedback_form.resume,
+            // },
             {
               type: "textArea",
               inputName: "message",
-              label: "Комментарий", // todo make i18n
+              label: this.content.common.feedback_form.message,
               model: "message",
-              placeholder: "Комментарий", // todo make i18n
+              placeholder: this.content.common.feedback_form.message,
               rows: 4,
             },
           ]
@@ -86,10 +87,10 @@ export default {
           validateAfterChanged: true
         },
         url: "/process.php",
-        subject: "Сообщение с сайта Rockstone",
+        subject: this.content.common.feedback_form.subject,
       }
     }
-  },
+  }
 }
 </script>
 
