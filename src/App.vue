@@ -31,12 +31,6 @@
           side-menu(:content="currentLanguage")
         slide-in(
           direction="left",
-          :isActive="page.isFeedbackOpen",
-          :onClose="closeFeedback",
-          )
-          the-feedback(:content="currentLanguage")
-        slide-in(
-          direction="left",
           :isActive="page.isProjectOpen",
           :onClose="closeProject",
           )
@@ -51,6 +45,12 @@
           h2.subtitle {{currentPosition.title}}
           p {{currentPosition.city}}
           .typographic(v-html="currentPosition.details")
+        slide-in(
+          direction="left",
+          :isActive="page.isFeedbackOpen",
+          :onClose="closeFeedback",
+          )
+          the-feedback(:content="currentLanguage")
 </template>
 
 <script>
