@@ -2,9 +2,11 @@
   aside.page-state
     button(@click="setLanguage('ru')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'ru'}").page-state__lang RU
     button(@click="setLanguage('en')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'en'}").page-state__lang EN
-    .page-state__stage(
+    a.page-state__stage(
       v-for="(section, key, index) in sections"
       :class="{'page-state__stage--active': section.isInViewport}"
+      href="#"
+      v-scroll-to="'#' + key"
     ) {{ '0' + (index + 1 )}}
     .page-state__music
       the-player
@@ -65,6 +67,7 @@ export default {
     font-weight: 700;
     letter-spacing: 0.05em;
     position: relative;
+    text-decoration: none;
 
     &--active:before {
       content: "";
