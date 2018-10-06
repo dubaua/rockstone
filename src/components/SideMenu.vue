@@ -2,12 +2,12 @@
 <template lang="pug">
   .menu
     nav.menu__section-list
-      a(href="#who_we_are", @click.stop="closeMenu").menu__link {{content.common.who_we_are_title}}
-      a(href="#how_we_work", @click.stop="closeMenu").menu__link {{content.common.how_we_work_title}}
-      a(href="#our_projects", @click.stop="closeMenu").menu__link {{content.common.our_projects_title}}
-      a(href="#how_to_work_with_us", @click.stop="closeMenu").menu__link {{content.common.how_to_work_with_us_title}}
-      a(href="#careers", @click.stop="closeMenu").menu__link {{content.common.careers_title}}
-      a(href="#contact", @click.stop="closeMenu").menu__link {{content.common.contact_title}}
+      a(href="#" v-scroll-to="'#whoWeAre'" @click.stop="closeMenu").menu__link {{content.common.who_we_are_title}}
+      a(href="#" v-scroll-to="'#howWeWork'" @click.stop="closeMenu").menu__link {{content.common.how_we_work_title}}
+      a(href="#" v-scroll-to="'#ourProjects'" @click.stop="closeMenu").menu__link {{content.common.our_projects_title}}
+      a(href="#" v-scroll-to="'#howToWorkWithUs'" @click.stop="closeMenu").menu__link {{content.common.how_to_work_with_us_title}}
+      a(href="#" v-scroll-to="'#careers'" @click.stop="closeMenu").menu__link {{content.common.careers_title}}
+      a(href="#" v-scroll-to="'#contact'" @click.stop="closeMenu").menu__link {{content.common.contact_title}}
     mq-layout(:mq="['xs', 'sm', 'md']").menu__mobule
       .menu__phone
         a(:href="'tel:'+content.common.phone")

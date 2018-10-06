@@ -10,7 +10,9 @@
     )
       button.slide-in__close(v-if="!noClose", @click="onClose")
         icon(glyph="close", :width="11", :height="11").slide-in__close-icon
-      swiper(:options="slideInSwiperOptions" ref="slideInSwiper")
+      .slide-in__content(v-if="noScroll")
+        slot
+      swiper(v-else :options="slideInSwiperOptions" ref="slideInSwiper")
         swiper-slide
           .slide-in__content
             slot
@@ -36,6 +38,7 @@ export default {
     onClose: Function,
     isWide: Boolean,
     noClose: Boolean,
+    noScroll: Boolean,
   },
   data() {
     return {

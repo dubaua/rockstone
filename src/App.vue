@@ -25,6 +25,7 @@
           :isActive="page.isMenuOpen",
           :onClose="closeMenu",
           noClose,
+          noScroll,
           isWide,
           )
           side-menu(:content="currentLanguage")
