@@ -1,17 +1,17 @@
 
 <template lang="pug">
 section.section.homescreen
-  transition-sequence(v-bind="getTransitionConfig(0, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
-    .section__mountain.section__mountain--1-2.section__mountain--d-n
+  parallax-scene(:depth="0.8").section__mountain.section__mountain--1-2.section__mountain--d-n
+    transition-sequence(v-bind="getTransitionConfig(0, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
       icon(glyph="mountain-group-1-2")
-  transition-sequence(v-bind="getTransitionConfig(3, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
-    .homescreen__logo
+  parallax-scene(:depth="0.6").homescreen__logo
+    transition-sequence(v-bind="getTransitionConfig(3, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
       icon(glyph="logo")
-  transition-sequence(v-bind="getTransitionConfig(1, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
-    .section__mountain.section__mountain--1-1.section__mountain--l-n
+  parallax-scene(:depth="0.4").section__mountain.section__mountain--1-1.section__mountain--l-n
+    transition-sequence(v-bind="getTransitionConfig(1, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
       icon(glyph="mountain-group-1-1")
-  transition-sequence(v-bind="getTransitionConfig(2, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
-    .section__mountain.section__mountain--1-3.section__mountain--d-n-n
+  parallax-scene(:depth="0.15").section__mountain.section__mountain--1-3.section__mountain--d-n-n
+    transition-sequence(v-bind="getTransitionConfig(2, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
       icon(glyph="mountain-group-1-3")
   mq-layout(mq="lg+").scrolldown
     .scrolldown__dots

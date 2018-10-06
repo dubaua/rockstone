@@ -64,8 +64,8 @@ body {
     right: -25%;
     z-index: -1;
     @include breakpoint("sm") {
-      left: 0;
-      right: 0;
+      left: -5%;
+      right: -5%;
     }
 
     svg {
@@ -104,26 +104,26 @@ body {
       top: 51%;
       padding-bottom: 388 / 1084 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 388 /1084 * 100%;
+        padding-bottom: 388 /1084 * 110%;
       }
     }
     &--1-2 {
       top: 48%;
       padding-bottom: 368 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 368 / 1121 * 100%;
+        padding-bottom: 368 / 1121 * 110%;
       }
     }
     &--1-3 {
-      right: 0;
+      right: -5%;
       left: 26%;
       top: 62%;
-      padding-bottom: 318 / 493 * 74%;
+      padding-bottom: 318 / 493 * 79%;
       z-index: 0;
     }
     &--2-1 {
       top: 0;
-      padding-bottom: 132 / 393 * 100%;
+      padding-bottom: 132 / 393 * 110%;
     }
     &--2-2 {
       left: -25%;
@@ -153,49 +153,49 @@ body {
       top: 0;
       padding-bottom: 552 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 552 / 1121 * 100%;
+        padding-bottom: 552 / 1121 * 110%;
       }
     }
     &--3-2 {
       top: 9%;
       padding-bottom: 465 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 465 / 1121 * 100%;
+        padding-bottom: 465 / 1121 * 110%;
       }
     }
     &--4-1 {
       top: -10%;
       padding-bottom: 381 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 381 / 1121 * 100%;
+        padding-bottom: 381 / 1121 * 110%;
       }
     }
     &--5-1 {
       top: 0;
       padding-bottom: 587 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 587 / 1121 * 100%;
+        padding-bottom: 587 / 1121 * 110%;
       }
     }
     &--5-2 {
       top: -2%;
       padding-bottom: 521 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 521 / 1121 * 100%;
+        padding-bottom: 521 / 1121 * 110%;
       }
     }
     &--5-3 {
       padding-bottom: 432 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 432 / 1121 * 100%;
+        padding-bottom: 432 / 1121 * 110%;
       }
       bottom: -5%;
     }
     &--6-1 {
-      left: 0;
+      left: -5%;
       right: 591 / 1121 * 100%;
       top: 0;
-      padding-bottom: 223 / 1121 * 100%;
+      padding-bottom: 223 / 1121 * 105%;
     }
     &--6-2 {
       left: 174 / 1121 * 100%;
@@ -205,22 +205,22 @@ body {
     }
     &--6-3 {
       left: (1121 - 513) / 1121 * 100%;
-      right: 0;
+      right: -5%;
       top: -2%;
-      padding-bottom: 230 / 1121 * 100%;
+      padding-bottom: 230 / 1121 * 105%;
     }
     &--6-4 {
       top: 0;
       padding-bottom: 538 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 538 / 1121 * 100%; //47.992863514719% ;
+        padding-bottom: 538 / 1121 * 110%; //47.992863514719% ;
       }
     }
     &--6-5 {
       top: -2%;
       padding-bottom: 490 / 1121 * 150%;
       @include breakpoint("sm") {
-        padding-bottom: 490 / 1121 * 100%;
+        padding-bottom: 490 / 1121 * 110%;
       }
     }
     &--7-1 {

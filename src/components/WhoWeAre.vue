@@ -10,15 +10,15 @@
         transition-sequence(v-bind="getTransitionConfig(3, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
           .spread-block__col.spread-block__col--middle.who-we-are__content
             .typographic(v-html="content.common.who_we_are_block_2")
-            .section__mountain.section__mountain--2-2.section__mountain--l-n
+            parallax-scene(:depth="0.6").section__mountain.section__mountain--2-2.section__mountain--l-n
               icon(glyph="mountain-group-2-2")
         transition-sequence(v-bind="getTransitionConfig(4, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
           .spread-block__col.spread-block__col--right.who-we-are__content
             .typographic(v-html="content.common.who_we_are_block_3")
-            .section__mountain.section__mountain--2-3.section__mountain--l-n
+            parallax-scene(:depth="0.4").section__mountain.section__mountain--2-3.section__mountain--l-n
               icon(glyph="mountain-group-2-3")
-    transition-sequence(v-bind="getTransitionConfig(0, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
-      .section__mountain.section__mountain--2-1.section__mountain--d-n
+    parallax-scene(:depth="0.8").section__mountain.section__mountain--2-1.section__mountain--d-n
+      transition-sequence(v-bind="getTransitionConfig(0, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
         icon(glyph="mountain-group-2-1")
 </template>
 

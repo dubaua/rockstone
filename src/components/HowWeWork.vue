@@ -7,10 +7,10 @@
       transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         mq-layout(mq="lg+").how-we-work__dotted
           .dots
-      transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')" :isBlocked="!isSwiperReady")
-        .how-we-work__pagination(v-if="isSwiperReady")
-          pagination(:config="paginationConfig")
       .how-we-work__slider
+        transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')" :isBlocked="!isSwiperReady")
+          .how-we-work__pagination(v-if="isSwiperReady")
+            pagination(:config="paginationConfig")
         transition-sequence(v-bind="getTransitionConfig(4, 4, 'howWeWork')")
           swiper(:options="howWeWorkSwiperOptions", ref="howWeWorkSwiper", @ready="onSwiperInit('howWeWork')" @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
@@ -35,11 +35,11 @@
         transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')")
           button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
             icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    transition-sequence(v-bind="getTransitionConfig(0, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
-      .section__mountain.section__mountain--3-2.section__mountain--l-n
+    parallax-scene(:depth="0.8").section__mountain.section__mountain--3-2.section__mountain--l-n
+      transition-sequence(v-bind="getTransitionConfig(0, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         icon(glyph="mountain-group-3-2")
-    transition-sequence(v-bind="getTransitionConfig(1, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
-      .section__mountain.section__mountain--3-1.section__mountain--l-n
+    parallax-scene(:depth="0.6").section__mountain.section__mountain--3-1.section__mountain--l-n
+      transition-sequence(v-bind="getTransitionConfig(1, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         icon(glyph="mountain-group-3-1")
 </template>
 
@@ -115,13 +115,12 @@ export default {
 
 .how-we-work {
   &.section {
-    min-height: 50vh;
+    min-height: 88vh;
   }
   @include breakpoint("lg") {
     padding-top: 25vh !important;
   }
   &__title,
-  &__pagination,
   &__slider {
     position: relative;
     z-index: 1;
@@ -129,7 +128,9 @@ export default {
   }
   &__pagination {
     @include breakpoint("lg") {
-      top: 33px;
+      top: 13px;
+      padding-left: 0;
+      position: absolute;
     }
   }
   &__slider {
@@ -147,7 +148,7 @@ export default {
       top: 42px;
     }
     @include breakpoint("lg") {
-      top: -45px;
+      top: -25px;
     }
   }
   &__next {
@@ -158,7 +159,7 @@ export default {
       top: 42px;
     }
     @include breakpoint("lg") {
-      top: -45px;
+      top: -25px;
     }
   }
   &__dotted {

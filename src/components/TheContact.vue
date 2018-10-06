@@ -2,24 +2,31 @@
 <template lang="pug">
   section.section.contact
     .section__container
-      h1.title.contact__title {{  content.common.contact_title }}
+      transition-sequence(v-bind="getTransitionConfig(3, 6, 'contact')" @transitionAnimated="showNext('contact')")
+        h1.title.contact__title {{  content.common.contact_title }}
       .spread-block
-        .spread-block__col.spread-block__col--left.contact__content
-          .typographic(v-html="content.common.contact_content")
-        .spread-block__col.spread-block__col--middle.contact__content
-          .typographic(v-html="content.common.contact_chlb")
-          .section__mountain.section__mountain--7-1.section__mountain--l-n
-            icon(glyph="mountain-group-7-1")
-        .spread-block__col.spread-block__col--right.contact__content
-          .typographic(v-html="content.common.contact_spb")
-          .section__mountain.section__mountain--7-2.section__mountain--l-n
-            icon(glyph="mountain-group-7-2")
-    mq-layout(mq="lg+").section__mountain.section__mountain--6-3.section__mountain--l-n-n
-      icon(glyph="mountain-group-6-3")
-    mq-layout(mq="lg+").section__mountain.section__mountain--6-2.section__mountain--l-n
-      icon(glyph="mountain-group-6-2")
-    mq-layout(mq="lg+").section__mountain.section__mountain--6-1.section__mountain--l-n-n
-      icon(glyph="mountain-group-6-1")
+        transition-sequence(v-bind="getTransitionConfig(4, 6, 'contact')" @transitionAnimated="showNext('contact')")
+          .spread-block__col.spread-block__col--left.contact__content
+            .typographic(v-html="content.common.contact_content")
+        transition-sequence(v-bind="getTransitionConfig(5, 6, 'contact')" @transitionAnimated="showNext('contact')")
+          .spread-block__col.spread-block__col--middle.contact__content
+            .typographic(v-html="content.common.contact_chlb")
+            parallax-scene(:depth="0.6").section__mountain.section__mountain--7-1.section__mountain--l-n
+              icon(glyph="mountain-group-7-1")
+        transition-sequence(v-bind="getTransitionConfig(6, 6, 'contact')" @transitionAnimated="showNext('contact')")
+          .spread-block__col.spread-block__col--right.contact__content
+            .typographic(v-html="content.common.contact_spb")
+            parallax-scene(:depth="0.4").section__mountain.section__mountain--7-2.section__mountain--l-n
+              icon(glyph="mountain-group-7-2")
+    parallax-scene(:depth="0.9", v-if="!isMobile").section__mountain.section__mountain--6-3.section__mountain--l-n-n
+      transition-sequence(v-bind="getTransitionConfig(0, 6, 'contact')" @transitionAnimated="showNext('contact')")
+        icon(glyph="mountain-group-6-3")
+    parallax-scene(:depth="0.8", v-if="!isMobile").section__mountain.section__mountain--6-2.section__mountain--l-n
+      transition-sequence(v-bind="getTransitionConfig(1, 6, 'contact')" @transitionAnimated="showNext('contact')")
+        icon(glyph="mountain-group-6-2")
+    parallax-scene(:depth="0.7", v-if="!isMobile").section__mountain.section__mountain--6-1.section__mountain--l-n-n
+      transition-sequence(v-bind="getTransitionConfig(2, 6, 'contact')" @transitionAnimated="showNext('contact')")
+        icon(glyph="mountain-group-6-1")
     mq-layout(:mq="['xs', 'sm', 'md']").section__mountain.section__mountain--6-5.section__mountain--d-n
       icon(glyph="mountain-group-6-5")
     mq-layout(:mq="['xs', 'sm', 'md']").section__mountain.section__mountain--6-4.section__mountain--l-n
@@ -32,11 +39,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'TheContact',
   props: {
     content: Object,
   },
+  computed: {
+    ...mapGetters(['getTransitionConfig']),
+    isMobile() {
+      return this.$mq === 'xs' || this.$mq === 'sm' || this.$mq === 'md';
+    },
+  },
+  methods: {
+    showNext(key) {
+      this.$store.commit('nextStep', { key })
+    },
+  }
 }
 </script>
 

@@ -29,8 +29,8 @@
         transition-sequence(v-bind="getTransitionConfig(2, 5, 'ourProjects')") 
           button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
             icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    transition-sequence(v-bind="getTransitionConfig(0, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
-      .section__mountain.section__mountain--4-1.section__mountain--d-n
+    parallax-scene.section__mountain.section__mountain--4-1.section__mountain--d-n
+      transition-sequence(v-bind="getTransitionConfig(0, 5, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
         icon(glyph="mountain-group-4-1")
     mq-layout(mq="lg+").scrolldown.scrolldown--above.scrolldown--accent
       .scrolldown__text

@@ -1,6 +1,4 @@
 <template lang="pug">
-  //- button(@click="setLanguage('ru')") RU
-  //- button(@click="setLanguage('en')") EN
   nav.navigation
     mq-layout(mq="lg+")
       a.navigation__logo(href="#homescreen")

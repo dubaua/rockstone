@@ -2,13 +2,10 @@
   aside.page-state
     button(@click="setLanguage('ru')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'ru'}").page-state__lang RU
     button(@click="setLanguage('en')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'en'}").page-state__lang EN
-    .page-state__stage(v-if="state.homescreen", :class="{'page-state__stage--active': state.homescreen.isInViewport}") 01
-    .page-state__stage(v-if="state.who_we_are", :class="{'page-state__stage--active': state.who_we_are.isInViewport}") 02
-    .page-state__stage(v-if="state.how_we_work", :class="{'page-state__stage--active': state.how_we_work.isInViewport}") 03
-    .page-state__stage(v-if="state.our_projects", :class="{'page-state__stage--active': state.our_projects.isInViewport}") 04
-    .page-state__stage(v-if="state.how_to_work_with_us", :class="{'page-state__stage--active': state.how_to_work_with_us.isInViewport}") 05
-    .page-state__stage(v-if="state.careers", :class="{'page-state__stage--active': state.careers.isInViewport}") 06
-    .page-state__stage(v-if="state.contact", :class="{'page-state__stage--active': state.contact.isInViewport}") 07
+    .page-state__stage(
+      v-for="(section, key, index) in sections"
+      :class="{'page-state__stage--active': section.isInViewport}"
+    ) {{ '0' + (index + 1 )}}
     .page-state__music
       the-player
 </template>
@@ -21,8 +18,10 @@ export default {
   components: {
     ThePlayer,
   },
-  props: {
-    state: Object,
+  computed: {
+    sections() {
+      return this.$store.state.sections;
+    }
   },
   methods: {
     setLanguage(languageCode) {
