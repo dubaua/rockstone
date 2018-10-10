@@ -1,6 +1,11 @@
 
 <template lang="pug">
-  form.feedback
+  form.feedback.js-feedback(
+    action="https://formcarry.com/s/0gMSzwE8Cy0"
+    method="POST"
+    accept-charset="UTF-8"
+    enctype="multipart/form-data"
+  )
     .feedback__title {{ content.common.feedback_form.title }}
     .feedback__field
       label.feedback__label(for="feedback_position") {{content.common.feedback_form.position}}
@@ -29,6 +34,8 @@
 </template>
 
 <script>
+import { addScript } from "@/utils";
+
 export default {
   name: 'TheFeedback',
   props: {
@@ -38,10 +45,45 @@ export default {
     return {
       isAgree: false,
       isSent: false,
+      isJQueryLoaded: false,
     }
   },
-  computed: {
-  }
+  mounted() {
+    if (!this.isJQueryLoaded) {
+      this.isJQueryLoaded = true;
+      addScript({
+        src: "https://code.jquery.com/jquery-3.3.1.min.js",
+        integrity: "sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=",
+        crossorigin: "anonymous",
+        callback: this.bindForm,
+      });
+    }
+  },
+  methods: {
+    bindForm() {
+      const $ = window.$;
+      $(".js-feedback").submit(function(e){
+          e.preventDefault();
+          var href = $(this).attr("action");
+          $.ajax({
+              type: "POST",
+              url: href,
+              data: new FormData(this),
+              dataType: "json",
+              crossDomain: true,
+              processData: false,
+              contentType: false,
+              success: function(response){
+                  if(response.status == "success"){
+                      alert("We received your submission, thank you!");
+                  }else{
+                      alert("An error occured.");
+                  }
+              }
+          });
+      });
+    }
+  },
 }
 </script>
 

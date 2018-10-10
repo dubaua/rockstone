@@ -48,6 +48,7 @@
         direction="left",
         :isActive="page.isFeedbackOpen",
         :onClose="closeFeedback",
+        noScroll,
         )
         the-feedback(:content="currentLanguage")
 </template>

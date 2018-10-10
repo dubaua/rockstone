@@ -1,7 +1,7 @@
-import Vue from 'vue';
+import Vue from "vue";
 
 export const numberWithSpaces = number =>
-  number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
 export const declOfNum = (n, titles) =>
   titles[ // eslint-disable-next-line no-nested-ternary
@@ -17,10 +17,13 @@ export const upperCasefirst = string =>
 
 export const EventBus = new Vue();
 
-export function addScript({src, integrity, crossorigin}) {
-  const scriptElement = document.createElement('script');
-  scriptElement.setAttribute('src', src);
-  scriptElement.setAttribute('integrity', integrity);
-  scriptElement.setAttribute('crossorigin', crossorigin);
+export function addScript({ src, integrity, crossorigin, callback }) {
+  const scriptElement = document.createElement("script");
+  scriptElement.onload = function() {
+    if (callback) callback();
+  };
+  scriptElement.setAttribute("src", src);
+  scriptElement.setAttribute("integrity", integrity);
+  scriptElement.setAttribute("crossorigin", crossorigin);
   document.body.appendChild(scriptElement);
 }
