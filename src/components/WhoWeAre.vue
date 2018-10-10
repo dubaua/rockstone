@@ -1,24 +1,26 @@
 <template lang="pug">
   section.section.who-we-are
     .section__container
-      transition-sequence(v-bind="getTransitionConfig(1, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
+      transition-sequence(v-bind="getTransitionConfig(1, 6, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
         h1.title.who-we-are__title {{  content.common.who_we_are_title }}
       .spread-block
-        transition-sequence(v-bind="getTransitionConfig(2, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
+        transition-sequence(v-bind="getTransitionConfig(2, 6, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
           .spread-block__col.spread-block__col--left.who-we-are__content
             .typographic(v-html="content.common.who_we_are_block_1")
-        transition-sequence(v-bind="getTransitionConfig(3, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
-          .spread-block__col.spread-block__col--middle.who-we-are__content
+        .spread-block__col.spread-block__col--middle.who-we-are__content
+          transition-sequence(v-bind="getTransitionConfig(3, 6, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
             .typographic(v-html="content.common.who_we_are_block_2")
-            .section__mountain.section__mountain--2-2.section__mountain--l-n
+          parallax-scene(offset-y="1px").section__mountain.section__mountain--2-2.section__mountain--l-n
+            transition-sequence(v-bind="getTransitionConfig(4, 6, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
               icon(glyph="mountain-group-2-2")
-        transition-sequence(v-bind="getTransitionConfig(4, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
-          .spread-block__col.spread-block__col--right.who-we-are__content
+        .spread-block__col.spread-block__col--right.who-we-are__content
+          transition-sequence(v-bind="getTransitionConfig(5, 6, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
             .typographic(v-html="content.common.who_we_are_block_3")
-            .section__mountain.section__mountain--2-3.section__mountain--l-n
+          parallax-scene(offset-y="1px").section__mountain.section__mountain--2-3.section__mountain--l-n
+            transition-sequence(v-bind="getTransitionConfig(6, 6, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
               icon(glyph="mountain-group-2-3")
-    .section__mountain.section__mountain--2-1.section__mountain--d-n
-      transition-sequence(v-bind="getTransitionConfig(0, 4, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
+    parallax-scene(offset-y="1px").section__mountain.section__mountain--2-1.section__mountain--d-n
+      transition-sequence(v-bind="getTransitionConfig(0, 6, 'whoWeAre')" @transitionAnimated="showNext('whoWeAre')")
         icon(glyph="mountain-group-2-1")
 </template>
 
