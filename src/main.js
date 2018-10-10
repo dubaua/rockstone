@@ -21,7 +21,10 @@ Vue.use(VueMq, {
   }
 });
 Vue.use(VueAwesomeSwiper);
-Vue.use(VueScrollTo);
+Vue.use(VueScrollTo, {
+  duration: 1000,
+  easing: "easeOut"
+});
 
 Vue.config.productionTip = false;
 

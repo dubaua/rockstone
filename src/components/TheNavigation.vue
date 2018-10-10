@@ -1,7 +1,7 @@
 <template lang="pug">
   nav.navigation
     mq-layout(mq="lg+")
-      a.navigation__logo(href="#" v-scroll-to="'#homescreen'")
+      a.navigation__logo(href="#homescreen" @click.stop="$scrollTo('#homescreen')")
         icon(glyph="logo", :width="142", :height="16")
     button.navigation__hamburger(@click="toggleMenu")
       .hamburger.hamburger--squeeze(:class="{'is-active':page.isMenuOpen}")
