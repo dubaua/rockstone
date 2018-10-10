@@ -158,7 +158,7 @@ export default {
     })
     window.addEventListener('scroll', function() {
       if(window.scrollY === 0) {
-        self.$store.commit('resetTransitions');
+        self.$store.dispatch('resetTransitions');
       }
     })
   },

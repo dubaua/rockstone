@@ -88,18 +88,25 @@ const mutations = {
   setCurrentProject(state, payload) {
     state.ourProjects.currentProjectIndex = payload.index;
   },
-  resetTransitions(state) {
+  resetTransitions(state, payload) {
     Object.keys(state).forEach(key => {
-      state[key].animationStep = -1;
-      setTimeout(() => {
-        state[key].animationStep = 0;
-      }, 50);
+      state[key].animationStep = payload.step;
     });
+  }
+};
+
+const actions = {
+  resetTransitions({ commit }) {
+    commit("resetTransitions", { step: -1 });
+    setTimeout(() => {
+      commit("resetTransitions", { step: 0 });
+    }, 50);
   }
 };
 
 export default {
   state,
   getters,
-  mutations
+  mutations,
+  actions
 };
