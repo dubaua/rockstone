@@ -156,6 +156,14 @@ export default {
       self.content.en.our_projects = our_projects_en;
       self.isLoaded = true;
     })
+    window.addEventListener('scroll', function() {
+      if(window.scrollY === 0) {
+        self.$store.commit('resetTransitions');
+      }
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll');
   },
   methods: {
     ...mapActions(['setByKey']),

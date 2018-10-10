@@ -21,7 +21,7 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false,
+    isSwiperReady: false
   },
   ourProjects: {
     isAboveViewport: false,
@@ -30,7 +30,7 @@ const state = {
     isInViewport: false,
     animationStep: 0,
     isSwiperReady: false,
-    currentProjectIndex: 0,
+    currentProjectIndex: 0
   },
   howToWorkWithUs: {
     isAboveViewport: false,
@@ -68,7 +68,7 @@ const getters = {
     transitionName: "soar",
     sectionKey
   })
-}
+};
 
 const mutations = {
   setSectionsState(state, payload) {
@@ -88,6 +88,14 @@ const mutations = {
   setCurrentProject(state, payload) {
     state.ourProjects.currentProjectIndex = payload.index;
   },
+  resetTransitions(state) {
+    Object.keys(state).forEach(key => {
+      state[key].animationStep = -1;
+      setTimeout(() => {
+        state[key].animationStep = 0;
+      }, 50);
+    });
+  }
 };
 
 export default {
