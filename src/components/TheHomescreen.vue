@@ -1,6 +1,6 @@
 
 <template lang="pug">
-section.section.homescreen
+parallax-container.section.homescreen
   parallax-scene(:depth="0.8").section__mountain.section__mountain--1-2.section__mountain--d-n
     transition-sequence(v-bind="getTransitionConfig(0, 3, 'homescreen')" @transitionAnimated="showNext('homescreen')")
       icon(glyph="mountain-group-1-2")

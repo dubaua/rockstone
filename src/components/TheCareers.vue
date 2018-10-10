@@ -4,7 +4,7 @@
       transition-sequence(v-bind="getTransitionConfig(0, 3, 'careers')" @transitionAnimated="showNext('careers')")
         h1.title.careers__title {{ content.common.careers_title }}
       transition-sequence(v-bind="getTransitionConfig(1, 3, 'careers')" @transitionAnimated="showNext('careers')")
-        mq-layout(mq="lg+", :style="coverStyle").careers__cover
+        .careers__cover(:style="coverStyle")
       transition-sequence(v-bind="getTransitionConfig(2, 3, 'careers')" @transitionAnimated="showNext('careers')")
         .careers__list
           .position(
@@ -63,33 +63,35 @@ export default {
     @include global-padding;
   }
   &__cover {
-    position: absolute;
-    bottom: -10vw;
-    top: 0;
-    left: 50%;
-    z-index: -1;
-    right: 0;
-    background-position: center center;
-    background-size: cover;
-    box-shadow: 0 100px 0 $color-background;
-
-    @include breakpoint("xl") {
-      left: 42%;
-    }
-
-    &:before {
-      content: "";
+    @include breakpoint('lg') {
       position: absolute;
-      bottom: -1px;
+      bottom: -10vw;
+      top: 0;
+      left: 50%;
+      z-index: -1;
       right: 0;
-      left: 0;
-      background: linear-gradient(transparent, $color-background--dark);
-      height: 38%;
-    }
+      background-position: center center;
+      background-size: cover;
+      box-shadow: 0 100px 0 $color-background;
 
-    & img {
-      width: auto;
-      max-height: 100%;
+      @include breakpoint("xl") {
+        left: 42%;
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        right: 0;
+        left: 0;
+        background: linear-gradient(transparent, $color-background--dark);
+        height: 38%;
+      }
+
+      & img {
+        width: auto;
+        max-height: 100%;
+      }
     }
   }
 

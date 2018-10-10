@@ -32,7 +32,7 @@
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
         button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    parallax-scene.section__mountain.section__mountain--4-1.section__mountain--d-n
+    .section__mountain.section__mountain--4-1.section__mountain--d-n
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
         icon(glyph="mountain-group-4-1")
     mq-layout(mq="lg+").scrolldown.scrolldown--above.scrolldown--accent

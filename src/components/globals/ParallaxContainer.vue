@@ -23,7 +23,7 @@ export default {
     }
   },
   render(h) {
-    return h('div', {
+    return h('section', {
       class: {
         'parallax-container': true,
       },
