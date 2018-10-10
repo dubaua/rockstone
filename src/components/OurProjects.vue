@@ -28,9 +28,9 @@
               :key="project._id"
               )
               our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
-        button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button.our-projects__prev
+        button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--light.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button.our-projects__next
+        button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--light.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     .section__mountain.section__mountain--4-1.section__mountain--d-n
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
