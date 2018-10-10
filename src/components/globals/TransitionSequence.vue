@@ -23,9 +23,6 @@ export default {
     _isVisible() {
       return !this.isBlocked && this.isVisible;
     },
-    _isMobile() {
-      return this.$mq === 'xs' || this.$mq === 'sm' || this.$mq === 'md';
-    },
   },
   methods: {
     onEnter() {
@@ -33,10 +30,6 @@ export default {
     }
   },
   render(h) {
-    if (this._isMobile)
-      // return this.$slots.default
-      return h('div', {}, [this.$slots.default])
-
     return h('transition', {
       props: {
         name: this.transitionName

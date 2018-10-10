@@ -11,26 +11,22 @@
         transition-sequence(v-bind="getTransitionConfig(5, 6, 'contact')" @transitionAnimated="showNext('contact')")
           .spread-block__col.spread-block__col--middle.contact__content
             .typographic(v-html="content.common.contact_chlb")
-            parallax-scene(:depth="0.6").section__mountain.section__mountain--7-1.section__mountain--l-n
+            .section__mountain.section__mountain--7-1.section__mountain--l-n
               icon(glyph="mountain-group-7-1")
         transition-sequence(v-bind="getTransitionConfig(6, 6, 'contact')" @transitionAnimated="showNext('contact')")
           .spread-block__col.spread-block__col--right.contact__content
             .typographic(v-html="content.common.contact_spb")
-            parallax-scene(:depth="0.4").section__mountain.section__mountain--7-2.section__mountain--l-n
+            .section__mountain.section__mountain--7-2.section__mountain--l-n
               icon(glyph="mountain-group-7-2")
-    parallax-scene(:depth="0.9", v-if="!isMobile").section__mountain.section__mountain--6-3.section__mountain--l-n-n
+    .section__mountain.section__mountain--6-3.section__mountain--l-n-n
       transition-sequence(v-bind="getTransitionConfig(0, 6, 'contact')" @transitionAnimated="showNext('contact')")
         icon(glyph="mountain-group-6-3")
-    parallax-scene(:depth="0.8", v-if="!isMobile").section__mountain.section__mountain--6-2.section__mountain--l-n
+    .section__mountain.section__mountain--6-2.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(1, 6, 'contact')" @transitionAnimated="showNext('contact')")
         icon(glyph="mountain-group-6-2")
-    parallax-scene(:depth="0.7", v-if="!isMobile").section__mountain.section__mountain--6-1.section__mountain--l-n-n
+    .section__mountain.section__mountain--6-1.section__mountain--l-n-n
       transition-sequence(v-bind="getTransitionConfig(2, 6, 'contact')" @transitionAnimated="showNext('contact')")
         icon(glyph="mountain-group-6-1")
-    mq-layout(:mq="['xs', 'sm', 'md']").section__mountain.section__mountain--6-5.section__mountain--d-n
-      icon(glyph="mountain-group-6-5")
-    mq-layout(:mq="['xs', 'sm', 'md']").section__mountain.section__mountain--6-4.section__mountain--l-n
-      icon(glyph="mountain-group-6-4")
     mq-layout(mq="lg+").scrolldown.scrolldown--above.scrolldown--accent
       .scrolldown__text
         running-text(text="go back", reverse)

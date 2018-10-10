@@ -5,7 +5,7 @@
       transition-sequence(v-bind="getTransitionConfig(2, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         h1.title.how-we-work__title {{  content.common.how_we_work_title }}
       transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
-        mq-layout(mq="lg+").how-we-work__dotted
+        .how-we-work__dotted
           .dots
       .how-we-work__slider
         transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')" :isBlocked="!isSwiperReady")
@@ -35,10 +35,10 @@
         transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')")
           button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
             icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    parallax-scene(:depth="0.8").section__mountain.section__mountain--3-2.section__mountain--l-n
+    .section__mountain.section__mountain--3-2.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         icon(glyph="mountain-group-3-2")
-    parallax-scene(:depth="0.6").section__mountain.section__mountain--3-1.section__mountain--l-n
+    .section__mountain.section__mountain--3-1.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(1, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         icon(glyph="mountain-group-3-1")
 </template>

@@ -4,6 +4,9 @@
     button(@click="setLanguage('en')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'en'}").page-state__lang EN
     a.page-state__stage(
       v-for="(section, key, index) in sections"
+      v-scroll-to="'#'+key"
+      href="#"
+      :key="key"
       :class="{'page-state__stage--active': section.isInViewport}"
       href="#"
       v-scroll-to="'#' + key"
@@ -67,7 +70,9 @@ export default {
     font-weight: 700;
     letter-spacing: 0.05em;
     position: relative;
+    cursor: pointer;
     text-decoration: none;
+    color: $color-text;
 
     &--active:before {
       content: "";

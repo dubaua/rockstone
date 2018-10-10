@@ -1,56 +1,55 @@
 <template lang="pug">
   #app(v-if="isLoaded")
-    parallax-container
-      scroll-container(@change="setSectionsState").page
-        .noise-overlay.noise-bg
-        the-navigation(:content="currentLanguage")
-        mq-layout(mq="lg+")
-          page-state
-        scroll-item(id="homescreen")
-          the-homescreen(id="homescreen")
-        scroll-item(id="whoWeAre")
-          who-we-are(:content="currentLanguage" id="whoWeAre")
-        scroll-item(id="howWeWork")
-          how-we-work(:content="currentLanguage" id="howWeWork")
-        scroll-item(id="ourProjects")
-          our-projects(:content="currentLanguage" id="ourProjects")
-        scroll-item(id="howToWorkWithUs")
-          how-to-work-with-us(:content="currentLanguage" id="howToWorkWithUs")
-        scroll-item(id="careers")
-          the-careers(:content="currentLanguage" id="careers")
-        scroll-item(id="contact")
-          the-contact(:content="currentLanguage" id="contact")
-        slide-in(
-          direction="right",
-          :isActive="page.isMenuOpen",
-          :onClose="closeMenu",
-          noClose,
-          noScroll,
-          isWide,
-          )
-          side-menu(:content="currentLanguage")
-        slide-in(
-          direction="left",
-          :isActive="page.isProjectOpen",
-          :onClose="closeProject",
-          )
-          h2.subtitle {{currentProject.title}}
-          p {{currentProject.city}}
-          .typographic(v-html="currentProject.more")
-        slide-in(
-          direction="left",
-          :isActive="page.isPositionOpen",
-          :onClose="closePosition",
-          )
-          h2.subtitle {{currentPosition.title}}
-          p {{currentPosition.city}}
-          .typographic(v-html="currentPosition.details")
-        slide-in(
-          direction="left",
-          :isActive="page.isFeedbackOpen",
-          :onClose="closeFeedback",
-          )
-          the-feedback(:content="currentLanguage")
+    scroll-container(@change="setSectionsState").page
+      .noise-overlay.noise-bg
+      the-navigation(:content="currentLanguage")
+      mq-layout(mq="lg+")
+        page-state
+      scroll-item(id="homescreen")
+        the-homescreen(id="homescreen")
+      scroll-item(id="whoWeAre")
+        who-we-are(:content="currentLanguage" id="whoWeAre")
+      scroll-item(id="howWeWork")
+        how-we-work(:content="currentLanguage" id="howWeWork")
+      scroll-item(id="ourProjects")
+        our-projects(:content="currentLanguage" id="ourProjects")
+      scroll-item(id="howToWorkWithUs")
+        how-to-work-with-us(:content="currentLanguage" id="howToWorkWithUs")
+      scroll-item(id="careers")
+        the-careers(:content="currentLanguage" id="careers")
+      scroll-item(id="contact")
+        the-contact(:content="currentLanguage" id="contact")
+      slide-in(
+        direction="right",
+        :isActive="page.isMenuOpen",
+        :onClose="closeMenu",
+        noClose,
+        noScroll,
+        isWide,
+        )
+        side-menu(:content="currentLanguage")
+      slide-in(
+        direction="left",
+        :isActive="page.isProjectOpen",
+        :onClose="closeProject",
+        )
+        h2.subtitle {{currentProject.title}}
+        p {{currentProject.city}}
+        .typographic(v-html="currentProject.more")
+      slide-in(
+        direction="left",
+        :isActive="page.isPositionOpen",
+        :onClose="closePosition",
+        )
+        h2.subtitle {{currentPosition.title}}
+        p {{currentPosition.city}}
+        .typographic(v-html="currentPosition.details")
+      slide-in(
+        direction="left",
+        :isActive="page.isFeedbackOpen",
+        :onClose="closeFeedback",
+        )
+        the-feedback(:content="currentLanguage")
 </template>
 
 <script>
