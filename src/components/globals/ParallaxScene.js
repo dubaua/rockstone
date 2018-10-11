@@ -115,15 +115,15 @@ export default {
         );
     },
 
-    translateX(offset) {
+    translateX(mouseX) {
       const center = this.clientWidth / 2;
-      this.modifierX = (offset - center) / center;
+      this.modifierX = (mouseX - center) / center;
     },
 
-    translateY(offset) {
-      const elCenter = this.element.offsetTop + this.element.offsetHeight / 2;
-      const scrollCenter = offset + this.clientHeight / 2;
-      const modifierY = (scrollCenter - elCenter) / elCenter;
+    translateY(scrollY) {
+      const appear = this.element.offsetTop + this.element.offsetHeight / 2;
+      const center = this.clientHeight / 2;
+      const modifierY = (scrollY - appear + center) / center;
       this.modifierY = modifierY;
     },
 
@@ -143,6 +143,9 @@ export default {
       window.addEventListener("scroll", this.onScroll);
       window.addEventListener("resize", this.updateWidthHeight);
       this.updateWidthHeight();
+      // TODO: calc initial values on load
+      this.translateX(0);
+      this.translateY(0);
     });
   },
 
