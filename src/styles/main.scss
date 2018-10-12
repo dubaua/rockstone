@@ -226,6 +226,9 @@ body {
     &--7-1 {
       top: -10%;
       padding-bottom: 226 / 685 * 150%; // 47.21448467966574%;
+      @include breakpoint("sm") {
+        top: -20%;
+      }
       @include breakpoint("lg") {
         left: -50%;
         right: -50%;
@@ -234,8 +237,11 @@ body {
       }
     }
     &--7-2 {
-      top: -50%;
+      top: -10%;
       padding-bottom: 210 / 586 * 150%; // 55.5984555984556%;
+      @include breakpoint("sm") {
+        top: -20%;
+      }
       @include breakpoint("lg") {
         left: -60%;
         right: -40%;
