@@ -58,6 +58,21 @@ const containsNumberAndMaybeCssUnits = value => {
   return true;
 };
 
+// get offset relative to document root not taking css transforms
+const getDocumentOffsetTop = element => {
+  let _top = 0;
+  let _element = element;
+
+  // Loop through the DOM tree
+  // and add it's parent's offset to get page offset
+  do {
+    _top += _element.offsetTop || 0;
+    _element = _element.offsetParent;
+  } while (_element);
+
+  return _top;
+}
+
 export default {
   name: COMPONENT_NAME,
 
@@ -74,25 +89,29 @@ export default {
 
   data() {
     return {
-      element: null,
-      clientWidth: 0,
-      clientHeight: 0,
+      elementAppearY: 0,
+      screenCenterX: 0,
+      screenCenterY: 0,
       modifierX: 0,
       modifierY: 0,
       lastMouseX: 0,
-      lastScrollY: 0,
+      lastScrollY: 0
     };
   },
 
   computed: {
     getTranslateX() {
-      if (!this.offsetX) return 0;
+      if (!this.offsetX) {
+        return 0;
+      }
       const { offset, units } = getConfig(this.offsetX);
       return `${this.modifierX * offset}${units}`;
     },
 
     getTranslateY() {
-      if (!this.offsetY) return 0;
+      if (!this.offsetY) {
+        return 0;
+      }
       const { offset, units } = getConfig(this.offsetY);
       return `${this.modifierY * offset}${units}`;
     },
@@ -104,70 +123,71 @@ export default {
 
   methods: {
     onMousemove(e) {
-      if (this.offsetX)
-        this.lastMouseX = e.pageX;
-        this.$options._translateXRequest = window.requestAnimationFrame(() =>
-          this.translateX()
-        );
+      this.lastMouseX = e.pageX;
+      this.$options._translateXRequest = window.requestAnimationFrame(this.updateModifierX);
     },
 
     onScroll() {
-      if (this.offsetY)
-        this.lastScrollY = window.scrollY;
-        this.$options._translateYRequest = window.requestAnimationFrame(() =>
-          this.translateY()
-        );
+      this.lastScrollY = window.scrollY;
+      this.$options._translateYRequest = window.requestAnimationFrame(this.updateModifierY);
     },
 
-    translateX() { // TODO clarify naming
-      const screenCenterX = this.clientWidth / 2;
-      this.modifierX = (this.lastMouseX - screenCenterX) / screenCenterX;
+    updateModifierX() {
+      this.modifierX = (this.lastMouseX - this.screenCenterX) / this.screenCenterX;
     },
 
-    translateY() {
-      const elementAppear = this.element.offsetTop + this.element.offsetHeight / 2;
-      const screenCenterY = this.clientHeight / 2;
-      this.modifierY = (this.lastScrollY - elementAppear + screenCenterY) / screenCenterY;
+    updateModifierY() {
+      this.modifierY = (this.lastScrollY - this.elementAppearY + this.screenCenterY) / this.screenCenterY;
     },
 
     update() {
-      this.clientWidth =
-        window.innerWidth || document.documentElement.clientWidth;
+      const element = this.$el;
 
-      this.clientHeight =
-        window.innerHeight || document.documentElement.clientHeight;
+      this.elementAppearY =
+        getDocumentOffsetTop(element) + element.offsetHeight / 2;
 
-      if (this.offsetX) this.translateX();
+      this.screenCenterX = window.innerWidth / 2
+        || document.documentElement.clientWidth / 2;
 
-      if (this.offsetY) this.translateY();
+      this.screenCenterY = window.innerHeight / 2
+        || document.documentElement.clientHeight / 2;
+
+      this.updateModifierX();
+
+      this.updateModifierY();
     },
 
     destroy() {
-      if (this.offsetX)
-        window.removeEventListener("mousemove", this.onMousemove);
-
-      if (this.offsetY)
-        window.removeEventListener("scroll", this.onScroll);
-
-      if (this.offsetX || this.offsetY)
+      if (this.offsetX || this.offsetY) {
         window.removeEventListener("resize", this.onResize);
+      }
+
+      if (this.offsetX) {
+        window.removeEventListener("mousemove", this.onMousemove);
+      }
+
+      if (this.offsetY) {
+        window.removeEventListener("scroll", this.onScroll);
+      }
 
       window.cancelAnimationFrame(this.$options._translateXRequest);
       window.cancelAnimationFrame(this.$options._translateYRequest);
     },
 
     init() {
-      if (this.offsetX || this.offsetY)
-        this.element = this.$el;
-        window.addEventListener("resize", this.update);
+      if (this.offsetX || this.offsetY) {
         this.update();
+        window.addEventListener("resize", this.update);
+      }
 
-      if (this.offsetX)
+      if (this.offsetX) {
         window.addEventListener("mousemove", this.onMousemove);
+      }
 
-      if (this.offsetY)
+      if (this.offsetY) {
         window.addEventListener("scroll", this.onScroll);
-    },
+      }
+    }
   },
 
   created() {
