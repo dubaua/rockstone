@@ -65,7 +65,8 @@ export default {
           992: {
             allowTouchMove: false,
           }
-        }
+        },
+        loop: true,
       },
     }
   },
@@ -107,7 +108,7 @@ export default {
       this.$store.commit('swiperReady', { key })
     },
     onSlideChangeEnd() {
-      const index = this.ourProjectsSwiperInstance.activeIndex;
+      const index = this.ourProjectsSwiperInstance.realIndex;
       this.$store.commit('setCurrentProject', { index })
     }
   },
