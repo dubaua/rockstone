@@ -3,7 +3,8 @@ import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
 
 // Require in a base component context, include subdirectories = true
-const requireComponent = require.context(".", true, /\.vue$/);
+// TODO don't register global index.js as component
+const requireComponent = require.context(".", true, /\.(vue|js)$/);
 
 requireComponent.keys().forEach(fileName => {
   // Get component config
