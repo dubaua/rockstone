@@ -78,7 +78,9 @@ export default {
       clientWidth: 0,
       clientHeight: 0,
       modifierX: 0,
-      modifierY: 0
+      modifierY: 0,
+      lastMouseX: 0,
+      lastScrollY: 0,
     };
   },
 
@@ -103,58 +105,77 @@ export default {
   methods: {
     onMousemove(e) {
       if (this.offsetX)
+        this.lastMouseX = e.pageX;
         this.$options._translateXRequest = window.requestAnimationFrame(() =>
-          this.translateX(e.pageX)
+          this.translateX()
         );
     },
 
     onScroll() {
       if (this.offsetY)
+        this.lastScrollY = window.scrollY;
         this.$options._translateYRequest = window.requestAnimationFrame(() =>
-          this.translateY(window.scrollY)
+          this.translateY()
         );
     },
 
-    translateX(mouseX) {
-      const center = this.clientWidth / 2;
-      this.modifierX = (mouseX - center) / center;
+    translateX() { // TODO clarify naming
+      const screenCenterX = this.clientWidth / 2;
+      this.modifierX = (this.lastMouseX - screenCenterX) / screenCenterX;
     },
 
-    translateY(scrollY) {
-      const appear = this.element.offsetTop + this.element.offsetHeight / 2;
-      const center = this.clientHeight / 2;
-      const modifierY = (scrollY - appear + center) / center;
-      this.modifierY = modifierY;
+    translateY() {
+      const elementAppear = this.element.offsetTop + this.element.offsetHeight / 2;
+      const screenCenterY = this.clientHeight / 2;
+      this.modifierY = (this.lastScrollY - elementAppear + screenCenterY) / screenCenterY;
     },
 
-    updateWidthHeight() {
+    update() {
       this.clientWidth =
         window.innerWidth || document.documentElement.clientWidth;
 
       this.clientHeight =
         window.innerHeight || document.documentElement.clientHeight;
-    }
+
+      if (this.offsetX) this.translateX();
+
+      if (this.offsetY) this.translateY();
+    },
+
+    destroy() {
+      if (this.offsetX)
+        window.removeEventListener("mousemove", this.onMousemove);
+
+      if (this.offsetY)
+        window.removeEventListener("scroll", this.onScroll);
+
+      if (this.offsetX || this.offsetY)
+        window.removeEventListener("resize", this.onResize);
+
+      window.cancelAnimationFrame(this.$options._translateXRequest);
+      window.cancelAnimationFrame(this.$options._translateYRequest);
+    },
+
+    init() {
+      if (this.offsetX || this.offsetY)
+        this.element = this.$el;
+        window.addEventListener("resize", this.update);
+        this.update();
+
+      if (this.offsetX)
+        window.addEventListener("mousemove", this.onMousemove);
+
+      if (this.offsetY)
+        window.addEventListener("scroll", this.onScroll);
+    },
   },
 
   created() {
-    this.$nextTick(() => {
-      this.element = this.$el;
-      window.addEventListener("mousemove", this.onMousemove);
-      window.addEventListener("scroll", this.onScroll);
-      window.addEventListener("resize", this.updateWidthHeight);
-      this.updateWidthHeight();
-      // TODO: calc initial values on load
-      this.translateX(0);
-      this.translateY(0);
-    });
+    this.$nextTick(this.init);
   },
 
   beforeDestroy() {
-    window.removeEventListener("mousemove", this.onMousemove);
-    window.removeEventListener("scroll", this.onScroll);
-    window.removeEventListener("resize", this.onResize);
-    window.cancelAnimationFrame(this.$options._translateXRequest);
-    window.cancelAnimationFrame(this.$options._translateYRequest);
+    this.destroy();
   },
 
   render(h) {
