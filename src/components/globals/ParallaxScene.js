@@ -5,11 +5,17 @@ const ALLOWED_UNITS = ["px", "%", "vh", "vw", "em", "rem"];
 // parse given string to offset and css units
 const getConfig = cssString => {
   try {
+    // check for negative number
+    const inversed = cssString.charAt(0) === "-";
+
+    const _cssString = inversed ? cssString.slice(1) : cssString;
+
     // match returns initial string as first element
-    const [, offset, units] = cssString.match(NUMBER_AND_OPTIONAL_REST_REGEX);
+    const [, offset, units] = _cssString.match(NUMBER_AND_OPTIONAL_REST_REGEX);
     return {
       offset: parseFloat(offset, 10),
-      units: units ? units : "px" // fallback to pixels if no units given
+      units: units ? units : "px", // fallback to pixels if no units given
+      sign: inversed ? -1 : 1
     };
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -71,7 +77,7 @@ const getDocumentOffsetTop = element => {
   } while (_element);
 
   return _top;
-}
+};
 
 export default {
   name: COMPONENT_NAME,
@@ -104,16 +110,16 @@ export default {
       if (!this.offsetX) {
         return 0;
       }
-      const { offset, units } = getConfig(this.offsetX);
-      return `${this.modifierX * offset}${units}`;
+      const { offset, units, sign } = getConfig(this.offsetX);
+      return `${sign * this.modifierX * offset}${units}`;
     },
 
     getTranslateY() {
       if (!this.offsetY) {
         return 0;
       }
-      const { offset, units } = getConfig(this.offsetY);
-      return `${this.modifierY * offset}${units}`;
+      const { offset, units, sign } = getConfig(this.offsetY);
+      return `${sign * this.modifierY * offset}${units}`;
     },
 
     getStyle() {
@@ -124,20 +130,27 @@ export default {
   methods: {
     onMousemove(e) {
       this.lastMouseX = e.pageX;
-      this.$options._translateXRequest = window.requestAnimationFrame(this.updateModifierX);
+      this.$options._translateXRequest = window.requestAnimationFrame(
+        this.updateModifierX
+      );
     },
 
     onScroll() {
       this.lastScrollY = window.scrollY;
-      this.$options._translateYRequest = window.requestAnimationFrame(this.updateModifierY);
+      this.$options._translateYRequest = window.requestAnimationFrame(
+        this.updateModifierY
+      );
     },
 
     updateModifierX() {
-      this.modifierX = (this.lastMouseX - this.screenCenterX) / this.screenCenterX;
+      this.modifierX =
+        (this.lastMouseX - this.screenCenterX) / this.screenCenterX;
     },
 
     updateModifierY() {
-      this.modifierY = (this.lastScrollY - this.elementAppearY + this.screenCenterY) / this.screenCenterY;
+      this.modifierY =
+        (this.lastScrollY - this.elementAppearY + this.screenCenterY) /
+        this.screenCenterY;
     },
 
     update() {
@@ -146,11 +159,11 @@ export default {
       this.elementAppearY =
         getDocumentOffsetTop(element) + element.offsetHeight / 2;
 
-      this.screenCenterX = window.innerWidth / 2
-        || document.documentElement.clientWidth / 2;
+      this.screenCenterX =
+        window.innerWidth / 2 || document.documentElement.clientWidth / 2;
 
-      this.screenCenterY = window.innerHeight / 2
-        || document.documentElement.clientHeight / 2;
+      this.screenCenterY =
+        window.innerHeight / 2 || document.documentElement.clientHeight / 2;
 
       this.updateModifierX();
 
