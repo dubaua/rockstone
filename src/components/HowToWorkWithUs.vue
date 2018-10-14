@@ -28,13 +28,13 @@
             icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
           button.js-how-to-work-with-us-swiper-next.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__next
             icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--5-2.section__mountain--l-n
+    parallax-scene(offset-y="-6%").section__mountain.section__mountain--5-2.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(0, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         icon(glyph="mountain-group-5-2")
-    .section__mountain.section__mountain--5-1.section__mountain--l-n
+    parallax-scene(offset-y="-12%").section__mountain.section__mountain--5-1.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(1, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         icon(glyph="mountain-group-5-1")
-    .section__mountain.section__mountain--5-3.section__mountain--d-n
+    parallax-scene(offset-y="-20%").section__mountain.section__mountain--5-3.section__mountain--d-n
       transition-sequence(v-bind="getTransitionConfig(2, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         icon(glyph="mountain-group-5-3")
     mq-layout(mq="lg+").scrolldown

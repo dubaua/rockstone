@@ -35,10 +35,10 @@
         transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')")
           button.js-how-we-work-swiper-next.slider-button.slider-button--round.slider-button--dark.how-we-work__next
             icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
-    .section__mountain.section__mountain--3-2.section__mountain--l-n
+    parallax-scene(offset-y="-6%").section__mountain.section__mountain--3-2.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         icon(glyph="mountain-group-3-2")
-    .section__mountain.section__mountain--3-1.section__mountain--l-n
+    parallax-scene(offset-y="-12%").section__mountain.section__mountain--3-1.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(1, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         icon(glyph="mountain-group-3-1")
 </template>

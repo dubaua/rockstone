@@ -122,42 +122,50 @@ body {
       z-index: 0;
     }
     &--2-1 {
-      top: 0;
+      top: 3%;
       padding-bottom: 132 / 393 * 110%;
     }
     &--2-2 {
       left: -25%;
       right: -25%;
-      top: -10%;
+      top: 15%;
       padding-bottom: 226 / 718 * 150%;
+      @include breakpoint("md") {
+        top: 0;
+      }
       @include breakpoint("lg") {
         left: -50%;
         right: -50%;
-        top: -21%;
         padding-bottom: 226 / 718 * 200%;
       }
     }
     &--2-3 {
       left: -25%;
       right: -25%;
-      top: -25%;
+      top: 20%;
       padding-bottom: 192 / 568 * 150%;
+      @include breakpoint("md") {
+        top: 0;
+      }
       @include breakpoint("lg") {
         left: -60%;
         right: -40%;
-        top: -50%;
+        top: 0%;
         padding-bottom: 192 / 568 * 200%;
       }
     }
     &--3-1 {
-      top: 0;
+      top: 2%;
       padding-bottom: 552 / 1121 * 150%;
       @include breakpoint("sm") {
         padding-bottom: 552 / 1121 * 110%;
       }
+      @include breakpoint("lg") {
+        top: -10%;
+      }
     }
     &--3-2 {
-      top: 9%;
+      top: 4%;
       padding-bottom: 465 / 1121 * 150%;
       @include breakpoint("sm") {
         padding-bottom: 465 / 1121 * 110%;
@@ -169,16 +177,19 @@ body {
       @include breakpoint("sm") {
         padding-bottom: 381 / 1121 * 110%;
       }
+      @include breakpoint("lg") {
+        top: -20%;
+      }
     }
     &--5-1 {
-      top: 0;
+      top: -3%;
       padding-bottom: 587 / 1121 * 150%;
       @include breakpoint("sm") {
         padding-bottom: 587 / 1121 * 110%;
       }
     }
     &--5-2 {
-      top: -2%;
+      top: -5%;
       padding-bottom: 521 / 1121 * 150%;
       @include breakpoint("sm") {
         padding-bottom: 521 / 1121 * 110%;
@@ -224,28 +235,28 @@ body {
       }
     }
     &--7-1 {
-      top: -10%;
+      top: 0%;
       padding-bottom: 226 / 685 * 150%; // 47.21448467966574%;
       @include breakpoint("sm") {
-        top: -20%;
+        top: -10%;
       }
       @include breakpoint("lg") {
         left: -50%;
         right: -50%;
-        top: -25%;
+        top: -15%;
         padding-bottom: 226 / 685 * 200%; //62.95264623955432%;
       }
     }
     &--7-2 {
-      top: -10%;
+      top: -5%;
       padding-bottom: 210 / 586 * 150%; // 55.5984555984556%;
       @include breakpoint("sm") {
-        top: -20%;
+        top: -5%;
       }
       @include breakpoint("lg") {
         left: -60%;
         right: -40%;
-        top: -50%;
+        top: -35%;
         padding-bottom: 210 / 586 * 200%; //74.13127413127414%;
       }
     }
