@@ -1,89 +1,96 @@
 
 <template lang="pug">
-  form.feedback.js-feedback(
-    action="https://formcarry.com/s/0gMSzwE8Cy0"
-    method="POST"
-    accept-charset="UTF-8"
-    enctype="multipart/form-data"
-  )
-    .feedback__title {{ content.common.feedback_form.title }}
-    .feedback__field
-      label.feedback__label(for="feedback_position") {{content.common.feedback_form.position}}
-      input.feedback__input(name="feedback_position" id="feedback_position" type="text" :placeholder="content.common.feedback_form.position")
-    .feedback__field
-      label.feedback__label(for="feedback_name") {{content.common.feedback_form.name}}
-      input.feedback__input(name="feedback_name" id="feedback_name" type="text" :placeholder="content.common.feedback_form.name")
-    .feedback__field
-      label.feedback__label(for="feedback_phone") {{content.common.feedback_form.phone}}
-      input.feedback__input(name="feedback_phone" id="feedback_phone" type="text" :placeholder="content.common.feedback_form.phone")
-    .feedback__field
-      label.feedback__label(for="feedback_email") {{content.common.feedback_form.email}}
-      input.feedback__input(name="feedback_email" id="feedback_email" type="email" :placeholder="content.common.feedback_form.email")
-    .feedback__field
-      label.feedback__label(for="feedback_resume") {{content.common.feedback_form.resume}}
-      input(name="feedback_resume" id="feedback_resume" type="file" :placeholder="content.common.feedback_form.resume")
-    .feedback__field
-      label.feedback__label(for="feedback_message") {{content.common.feedback_form.message}}
-      textarea.feedback__input(name="feedback_message" id="feedback_message" :placeholder="content.common.feedback_form.message")
-    .feedback__field
-      input.feedback__input(name="feedback_agreement" id="feedback_agreement" type="checkbox" v-model="isAgree")
-      label.feedback__label.feedback__label--inline(for="feedback_agreement") {{ content.common.feedback_form.agreement }}
-    input(type="hidden" name="_gotcha")
-    button.button(type="submit" :disabled="!isAgree") {{ content.common.feedback_form.send }}
-    .feedback__success {{ content.common.feedback_form.success }}
+  div.feedback
+    privacy-form(:form="form")
+      .feedback__title(slot="title") {{ content.common.feedback_form.title }}
+      span(slot="privacy").feedback__privacy {{ content.common.feedback_form.agreement }}
+      .feedback__success(slot="success") {{ content.common.feedback_form.success }}
+      span(slot="button") {{ content.common.feedback_form.send }}
 </template>
 
 <script>
-import { addScript } from "@/utils";
-
 export default {
   name: 'TheFeedback',
   props: {
     content: Object,
   },
-  data() {
-    return {
-      isAgree: false,
-      isSent: false,
-      isJQueryLoaded: false,
+  computed: {
+    form() {
+      return {
+        model: {
+          position: "",
+          name: "",
+          phone: "",
+          email: "",
+          resume: "",
+          message: "",
+        },
+        schema: {
+          fields: [
+            {
+              type: "input",
+              inputType: "text",
+              inputName: "position",
+              label: this.content.common.feedback_form.position,
+              model: "position",
+              required: true,
+              placeholder: this.content.common.feedback_form.position,
+            },
+            {
+              type: "input",
+              inputType: "text",
+              inputName: "name",
+              label: this.content.common.feedback_form.name,
+              model: "name",
+              required: true,
+              placeholder: this.content.common.feedback_form.name,
+            },
+            {
+              type: "input",
+              inputType: "text",
+              inputName: "phone",
+              label: this.content.common.feedback_form.phone,
+              model: "phone",
+              required: true,
+              placeholder: this.content.common.feedback_form.phone,
+            },
+            {
+              type: "input",
+              inputType: "text",
+              inputName: "email",
+              label: this.content.common.feedback_form.email,
+              model: "email",
+              required: true,
+              placeholder: this.content.common.feedback_form.email,
+            },
+            {
+              type: "input",
+              inputType: "text",
+              inputName: "resume",
+              label: this.content.common.feedback_form.resume,
+              model: "resume",
+              required: false,
+              placeholder: this.content.common.feedback_form.resume,
+            },
+            {
+              type: "textArea",
+              inputName: "message",
+              label: this.content.common.feedback_form.message,
+              model: "message",
+              placeholder: this.content.common.feedback_form.message,
+              rows: 4,
+            },
+          ]
+        },
+        formOptions: {
+          validateAfterLoad: true,
+          validateAfterChanged: true
+        },
+        url: "/process.php",
+        subject: this.content.common.feedback_form.subject,
+      }
     }
-  },
-  mounted() {
-    if (!this.isJQueryLoaded) {
-      this.isJQueryLoaded = true;
-      addScript({
-        src: "https://code.jquery.com/jquery-3.3.1.min.js",
-        integrity: "sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=",
-        crossorigin: "anonymous",
-        callback: this.bindForm,
-      });
-    }
-  },
-  methods: {
-    bindForm() {
-      const $ = window.$;
-      $(".js-feedback").submit(function(e){
-          e.preventDefault();
-          var href = $(this).attr("action");
-          $.ajax({
-              type: "POST",
-              url: href,
-              data: new FormData(this),
-              dataType: "json",
-              crossDomain: true,
-              processData: false,
-              contentType: false,
-              success: function(response){
-                  if(response.status == "success"){
-                      alert("We received your submission, thank you!");
-                  }else{
-                      alert("An error occured.");
-                  }
-              }
-          });
-      });
-    }
-  },
+  }
 }
 </script>
 
@@ -91,11 +98,7 @@ export default {
 @import "~@/styles/_globals";
 
 .feedback {
-  padding: 1em 0;
   &__title {
-    margin-bottom: 1em;
-  }
-  &__field {
     margin-bottom: 1em;
   }
   &__privacy {
@@ -104,21 +107,14 @@ export default {
   &__success {
     margin-top: 1em;
   }
-  &__label {
-    display: none;
-    &--inline {
-      display: inline-block;
-      margin-left: 0.4em;
-    }
-  }
 
   fieldset {
     border: 0;
     padding: 0;
     margin: 0;
   }
-
-  &__input {
+  input,
+  textarea {
     background: none;
     border: none;
     padding: 0.5em 0;
@@ -160,6 +156,12 @@ export default {
   textarea {
     width: 100%;
     box-sizing: border-box;
+  }
+  .form-group {
+    margin-bottom: 1em;
+    label {
+      display: none;
+    }
   }
 }
 </style>
