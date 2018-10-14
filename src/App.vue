@@ -156,15 +156,17 @@ export default {
       self.content.ru.our_projects = our_projects_ru;
       self.content.en.our_projects = our_projects_en;
       self.isLoaded = true;
-    })
-    window.addEventListener('scroll', function() {
-      if(window.scrollY === 0) {
-        self.$store.dispatch('resetTransitions');
-      }
+    });
+
+    window.addEventListener('scroll', this.resetTransitions);
+
+    this.$nextTick(()=> {
+      const hash = window.location.hash;
+      this.tryScrollToAnchor(hash);
     })
   },
   beforeDestroy() {
-    window.removeEventListener('scroll');
+    window.removeEventListener('scroll', this.resetTransitions);
   },
   methods: {
     ...mapActions(['setByKey']),
@@ -181,6 +183,23 @@ export default {
     closePosition() {
       this.setByKey({key: 'isPositionOpen', value: false});
     },
+    tryScrollToAnchor(anchor) {
+      const scrollToTimerInterval = 1500;
+      const self = this;
+      let scrollToTimerId = setTimeout(function tick() {
+        self.$scrollTo(anchor, 0, {
+          onDone() {
+            clearTimeout(scrollToTimerId);
+          }
+        })
+        scrollToTimerId = setTimeout(tick, scrollToTimerInterval);
+      }, scrollToTimerInterval);
+    },
+    resetTransitions() {
+      if (window.scrollY === 0) {
+        this.$store.dispatch('resetTransitions');
+      }
+    }
   },
 }
 </script>
