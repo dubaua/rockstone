@@ -20,15 +20,6 @@
       scroll-item(id="contact")
         the-contact(:content="currentLanguage" id="contact")
       slide-in(
-        direction="right",
-        :isActive="page.isMenuOpen",
-        :onClose="closeMenu",
-        noClose,
-        noScroll,
-        isWide,
-        )
-        side-menu(:content="currentLanguage")
-      slide-in(
         direction="left",
         :isActive="page.isProjectOpen",
         :onClose="closeProject",
@@ -51,6 +42,15 @@
         noScroll,
         )
         the-feedback(:content="currentLanguage")
+      slide-in(
+        direction="right",
+        :isActive="page.isMenuOpen",
+        :onClose="closeMenu",
+        noClose,
+        noScroll,
+        isWide,
+        )
+        side-menu(:content="currentLanguage")
 </template>
 
 <script>
