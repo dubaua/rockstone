@@ -139,7 +139,10 @@ export default {
   }
 
   &__content {
-    padding: $base * 2 $base * 3 $base * 2 $base * 2;
+    padding: 0 $base * 3 0 $base * 2;
+    @include breakpoint("lg") {
+      padding: $base * 2 $base * 3 $base * 2 $base * 2;
+    }
   }
 }
 </style>
