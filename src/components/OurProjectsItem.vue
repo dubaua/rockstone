@@ -1,7 +1,7 @@
 <template lang="pug">
   .project
-    h2.title.project__title {{projectTitle}}
-    .project__details.typographic(v-html="projectDetails")
+    h2.title.project__title {{project.title}}
+    .project__details.typographic(v-html="project.details")
     .project__readmore(@click="openProject(id)")
       | {{readmore}}
     .project__social-links
@@ -45,17 +45,6 @@ export default {
         loop: true,
       },
     }
-  },
-  computed: {
-    langCode() {
-      return this.$store.state.page.currentLanguageCode;
-    },
-    projectTitle() {
-      return this.project[`title_${this.langCode}`];
-    },
-    projectDetails() {
-      return this.project[`details_${this.langCode}`];
-    },
   },
   methods: {
     openProject(index) {

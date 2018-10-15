@@ -3,11 +3,11 @@
     .our-projects__cover-placeholder(
       v-for="(project, index) in content.our_projects"
       :key="project._id"
-      :style="getCoverStyleByIndex(index)",
+      :style="getCover(index).style",
     )
     .section__container
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
-        h1.subtitle.title--display.our-projects__title {{ currentLanguage.common.our_projects_title }}
+        h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
       transition-sequence(v-bind="getTransitionConfig(3, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')" :isBlocking="!isSwiperReady") 
         .our-projects__pagination(v-if="isSwiperReady")
           pagination(:config="paginationConfig")
@@ -15,8 +15,8 @@
         mq-layout(
           v-if="isSwiperReady",
           mq="lg+",
-          :style="getCoverStyle",
-          :class="getCoverClassName").our-projects__cover
+          :style="getCover(currentProjectIndex).style",
+          :class="getCover(currentProjectIndex).className").our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
         transition-sequence(v-bind="getTransitionConfig(1, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
           mq-layout(mq="lg+").our-projects__dotted
@@ -27,7 +27,7 @@
               v-for="(project, index) in content.our_projects"
               :key="project._id"
               )
-              our-projects-item(:project="project", :readmore="currentLanguage.common.readmore", :id="index")
+              our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
         button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--light.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
         button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--light.our-projects__next
@@ -72,37 +72,35 @@ export default {
   },
   computed: {
     ...mapGetters(['getTransitionConfig']),
-    currentLanguage() {
-      return this.content[this.$store.state.page.currentLanguageCode];
-    },
     ourProjectsSwiperInstance() {
       return this.$refs.ourProjectsSwiper.swiper;
     },
     paginationConfig() {
       return {
         current: this.currentProjectIndex + 1,
-        divider: this.currentLanguage.common.fraction_divider,
+        divider: this.content.common.fraction_divider,
         total: this.content.our_projects.length,
       }
     },
     currentProjectIndex() {
       return this.$store.state.sections.ourProjects.currentProjectIndex;
     },
-    getCoverClassName() {
-      const align = this.content.our_projects[this.currentProjectIndex].cover_align;
-      return `our-projects__cover--${align}`;
-    },
-    getCoverStyle() {
-      const url = this.content.our_projects[this.currentProjectIndex].cover 
-        ? this.content.our_projects[this.currentProjectIndex].cover.path
-        : null;
-      return `background-image: url(${url})`;
+    fromLg() {
+      return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
     },
     isSwiperReady() {
       return this.$store.state.sections.ourProjects.isSwiperReady;
     },
   },
   methods: {
+    getCover(index) {
+      const url = this.content.our_projects[index].cover ? this.content.our_projects[index].cover.path : null;
+      const align = this.content.our_projects[index].cover_align;
+      return {
+        style: `background-image: url(${url})`,
+        className: `our-projects__cover--${align}`,
+      };
+    },
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },
@@ -112,13 +110,7 @@ export default {
     onSlideChangeEnd() {
       const index = this.ourProjectsSwiperInstance.realIndex;
       this.$store.commit('setCurrentProject', { index })
-    },
-    getCoverStyleByIndex(index) {
-      const url = this.content.our_projects[index].cover 
-        ? this.content.our_projects[index].cover.path
-        : null;
-      return `background-image: url(${url})`;
-    },
+    }
   },
 }
 </script>
