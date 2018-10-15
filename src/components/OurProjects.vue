@@ -59,6 +59,7 @@ export default {
         navigation: {
           prevEl: '.js-our-projects-swiper-prev',
           nextEl: '.js-our-projects-swiper-next',
+          disabledClass: 'slider-button--disabled',
         },
         breakpointsInverse: true,
         breakpoints: {

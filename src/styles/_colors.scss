@@ -7,3 +7,6 @@ $color-text: white;
 $color-background: #0b2637;
 $color-background--light: #194058;
 $color-background--dark: #071a26;
+
+$color-unactive: desaturate($color-background, 25);
+$color-unactive--light: lighten(desaturate($color-background, 25), 10);

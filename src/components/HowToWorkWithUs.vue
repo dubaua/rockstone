@@ -59,6 +59,7 @@ export default {
         navigation: {
           prevEl: '.js-how-to-work-with-us-swiper-prev',
           nextEl: '.js-how-to-work-with-us-swiper-next',
+          disabledClass: 'slider-button--disabled',
         },
         speed: 450,
         slidesPerView: 1,

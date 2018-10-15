@@ -60,6 +60,7 @@ export default {
         navigation: {
           prevEl: '.js-how-we-work-swiper-prev',
           nextEl: '.js-how-we-work-swiper-next',
+          disabledClass: 'slider-button--disabled',
         },
         parallax: true,
       },

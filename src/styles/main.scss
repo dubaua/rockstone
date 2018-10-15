@@ -360,6 +360,20 @@ a {
   &:focus {
     outline: none;
   }
+
+  &--disabled {
+    cursor: not-allowed;
+    background-color: $color-unactive;
+    #{$block}__glyph {
+      fill: $color-unactive--light;
+    }
+    &:hover {
+      background-color: $color-unactive;
+      #{$block}__glyph {
+        fill: $color-unactive--light;
+      }
+    }
+  }
 }
 
 .gradient__l-n {
