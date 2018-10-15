@@ -73,10 +73,13 @@ export default {
     },
     paginationConfig() {
       return {
-        current: this.howWeWorkSwiperInstance.activeIndex + 1,
+        current: this.currentIndex + 1,
         divider: this.content.common.fraction_divider,
         total: this.content.how_we_work.length,
       }
+    },
+    currentIndex() {
+      return this.$store.state.sections.howWeWork.currentSlideIndex;
     },
     iconSize() {
       const _config = {
@@ -98,6 +101,7 @@ export default {
   methods: {
     onSlideChangeEnd() {
       const index = this.howWeWorkSwiperInstance.activeIndex;
+      this.$store.commit('setCurrentProject', { index });
       EventBus.$emit('animateWorkIcon', index);
     },
     showNext(key) {
@@ -136,6 +140,10 @@ export default {
   &__slider {
     position: relative;
     z-index: 0;
+    min-height: 460px;
+    @include breakpoint("lg") {
+      min-height: 0;
+    }
     .swiper-container {
       overflow: visible;
     }

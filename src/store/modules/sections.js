@@ -21,7 +21,8 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
+    currentSlideIndex: 0
   },
   ourProjects: {
     isAboveViewport: false,
@@ -87,6 +88,9 @@ const mutations = {
   },
   setCurrentProject(state, payload) {
     state.ourProjects.currentProjectIndex = payload.index;
+  },
+  setHowWeWorkSlideProject(state, payload) {
+    state.howWeWork.currentSlideIndex = payload.index;
   },
   resetTransitions(state, payload) {
     Object.keys(state).forEach(key => {
