@@ -102,7 +102,7 @@ export default {
     margin-bottom: 1em;
   }
   &__privacy {
-    color: $color-background--light;
+    color: desaturate(lighten($color: $color-background, $amount: 50), 10);
   }
   &__success {
     margin-top: 1em;
@@ -123,16 +123,16 @@ export default {
     color: $color-text;
   }
   ::-webkit-input-placeholder {
-    color: $color-background--light;
+    color: desaturate(lighten($color: $color-background, $amount: 50), 10);
   }
   ::-moz-placeholder {
-    color: $color-background--light;
+    color: desaturate(lighten($color: $color-background, $amount: 50), 10);
   }
   :-ms-input-placeholder {
-    color: $color-background--light;
+    color: desaturate(lighten($color: $color-background, $amount: 50), 10);
   }
   :-moz-placeholder {
-    color: $color-background--light;
+    color: desaturate(lighten($color: $color-background, $amount: 50), 10);
   }
   textarea {
     resize: vertical;
