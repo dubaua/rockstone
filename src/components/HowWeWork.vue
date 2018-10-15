@@ -73,12 +73,12 @@ export default {
     },
     paginationConfig() {
       return {
-        current: this.currentIndex + 1,
+        current: this.currentSlideIndex + 1,
         divider: this.content.common.fraction_divider,
         total: this.content.how_we_work.length,
       }
     },
-    currentIndex() {
+    currentSlideIndex() {
       return this.$store.state.sections.howWeWork.currentSlideIndex;
     },
     iconSize() {
@@ -101,7 +101,7 @@ export default {
   methods: {
     onSlideChangeEnd() {
       const index = this.howWeWorkSwiperInstance.activeIndex;
-      this.$store.commit('setCurrentProject', { index });
+      this.$store.commit('setHowWeWorkSlideProject', { index });
       EventBus.$emit('animateWorkIcon', index);
     },
     showNext(key) {
