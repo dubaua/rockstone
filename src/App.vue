@@ -12,7 +12,7 @@
       scroll-item(id="howWeWork")
         how-we-work(:content="currentLanguage" id="howWeWork")
       scroll-item(id="ourProjects")
-        our-projects(:content="currentLanguage" id="ourProjects")
+        our-projects(:content="content" id="ourProjects")
       scroll-item(id="howToWorkWithUs")
         how-to-work-with-us(:content="currentLanguage" id="howToWorkWithUs")
       scroll-item(id="careers")
@@ -24,9 +24,8 @@
         :isActive="page.isProjectOpen",
         :onClose="closeProject",
         )
-        h2.subtitle {{currentProject.title}}
-        p {{currentProject.city}}
-        .typographic(v-html="currentProject.more")
+        h2.subtitle {{currentProjectTitle}}
+        .typographic(v-html="currentProjectMore")
       slide-in(
         direction="left",
         :isActive="page.isPositionOpen",
@@ -90,19 +89,18 @@ export default {
     return {
       isLoaded: false,
       content: {
+        our_projects: null,
         ru: {
           common: null,
           careers: null,
           how_to_work_with_us: null,
           how_we_work: null,
-          our_projects: null,
         },
         en: {
           common: null,
           careers: null,
           how_to_work_with_us: null,
           how_we_work: null,
-          our_projects: null,
         },
       },
     }
@@ -116,7 +114,13 @@ export default {
       return this.currentLanguage.careers[this.page.currentPosition];
     },
     currentProject() {
-      return this.currentLanguage.our_projects[this.page.currentProject];
+      return this.content.our_projects[this.page.currentProject];
+    },
+    currentProjectTitle() {
+      return this.currentProject[`title_${this.page.currentLanguageCode}`];
+    },
+    currentProjectMore() {
+      return this.currentProject[`more_${this.page.currentLanguageCode}`];
     },
   },
   mounted: function () {
@@ -131,7 +135,6 @@ export default {
       api.getCollectionByKey('how_we_work_ru'),
       api.getCollectionByKey('how_we_work_en'),
       api.getCollectionByKey('our_projects_ru'),
-      api.getCollectionByKey('our_projects_en'),
     ]).then(result => {
       var [
           common_ru,
@@ -143,7 +146,6 @@ export default {
           how_we_work_ru,
           how_we_work_en,
           our_projects_ru,
-          our_projects_en,
         ] = result;
       self.content.ru.common = common_ru;
       self.content.en.common = common_en;
@@ -153,8 +155,7 @@ export default {
       self.content.en.how_to_work_with_us = how_to_work_with_us_en;
       self.content.ru.how_we_work = how_we_work_ru;
       self.content.en.how_we_work = how_we_work_en;
-      self.content.ru.our_projects = our_projects_ru;
-      self.content.en.our_projects = our_projects_en;
+      self.content.our_projects = our_projects_ru;
       self.isLoaded = true;
     });
 
