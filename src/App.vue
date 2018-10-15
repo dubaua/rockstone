@@ -1,6 +1,6 @@
 <template lang="pug">
   #app(v-if="isLoaded")
-    scroll-container(@change="setSectionsState").page
+    scroll-container(@change="onScrollChange").page
       .noise-overlay.noise-bg
       the-navigation(:content="currentLanguage")
       mq-layout(mq="lg+")
@@ -158,15 +158,17 @@ export default {
       self.isLoaded = true;
     });
 
-    window.addEventListener('scroll', this.resetTransitions);
+    window.addEventListener('scroll', this.onScroll);
 
     this.$nextTick(()=> {
       const hash = window.location.hash;
-      this.tryScrollToAnchor(hash);
+      if (hash) {
+        this.tryScrollToAnchor(hash);
+      }
     })
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.resetTransitions);
+    window.removeEventListener('scroll', this.onScroll);
   },
   methods: {
     ...mapActions(['setByKey']),
@@ -195,11 +197,14 @@ export default {
         scrollToTimerId = setTimeout(tick, scrollToTimerInterval);
       }, scrollToTimerInterval);
     },
-    resetTransitions() {
+    onScroll() {
       if (window.scrollY === 0) {
         this.$store.dispatch('resetTransitions');
       }
-    }
+    },
+    onScrollChange(payload) {
+      this.$store.commit('setSectionsState', payload);
+    },
   },
 }
 </script>
