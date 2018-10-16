@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "disable-scroll": "^0.4.0",
+    "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
     "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",

@@ -68,6 +68,7 @@ import TheContact from '@/components/TheContact';
 import TheFeedback from '@/components/TheFeedback';
 import { ScrollContainer, ScrollItem } from '@/components/vue-scrollmonitor'
 import { mapState, mapActions, mapMutations } from 'vuex';
+import $ from 'jquery';
 
 export default {
   name: 'app',
@@ -164,8 +165,73 @@ export default {
     this.$nextTick(()=> {
       const hash = window.location.hash;
       if (hash) {
-        this.tryScrollToAnchor(hash);
+        const scrollToTimerInterval = 1500;
+        let scrollToTimerId = setTimeout(function tick() {
+          const currentSectionNode = document.getElementById(hash.replace(/^#/, ''));
+          $('html,body').animate({
+            scrollTop: currentSectionNode.offsetTop
+          }, 1000, function() {
+            clearTimeout(scrollToTimerId);
+            if (currentSectionNode) {
+              currentSectionNode.removeAttribute('id');
+            }
+            window.location.hash = hash;
+            if (currentSectionNode) {
+              currentSectionNode.setAttribute('id', hash);
+            }
+          });
+          scrollToTimerId = setTimeout(tick, scrollToTimerInterval);
+        }, scrollToTimerInterval);
       }
+
+      let delay = false;
+
+      $(document).on('mousewheel DOMMouseScroll', function(event) {
+        event.preventDefault();
+        if (delay) return;
+
+        delay = true;
+        const scrollTimerId = setTimeout(function() {
+          delay = false;
+          clearTimeout(scrollTimerId);
+        }, 200);
+
+        const wd = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+
+        const a = $(
+          '#homescreen, #whoWeAre, #howWeWork, #ourProjects, #howToWorkWithUs, #careers, #contact'
+        );
+        let i;
+        if (wd < 0) {
+          for (i = 0; i < a.length; i++) {
+            const t = a[i].getClientRects()[0].top;
+            if (t >= 40) break;
+          }
+        } else {
+          for (i = a.length - 1; i >= 0; i--) {
+            const t = a[i].getClientRects()[0].top;
+            if (t < -20) break;
+          }
+        }
+
+        if (i >= 0 && i < a.length) {
+          $('html,body').animate({
+            scrollTop: a[i].offsetTop
+          }, 1000, function() {
+            const currentSection = a[i].getAttribute('id');
+            const currentSectionNode = document.getElementById(currentSection);
+            if (currentSectionNode) {
+              currentSectionNode.removeAttribute('id');
+            }
+            window.location.hash = currentSection;
+            if (currentSectionNode) {
+              currentSectionNode.setAttribute('id', currentSection);
+            }
+            delay = false;
+            clearTimeout(scrollTimerId);
+          });
+        }
+      });
     })
   },
   beforeDestroy() {
@@ -186,37 +252,12 @@ export default {
     closePosition() {
       this.setByKey({key: 'isPositionOpen', value: false});
     },
-    tryScrollToAnchor(anchor) {
-      const scrollToTimerInterval = 1500;
-      const self = this;
-      let scrollToTimerId = setTimeout(function tick() {
-        self.$scrollTo(anchor, 0, {
-          onDone() {
-            clearTimeout(scrollToTimerId);
-          }
-        })
-        scrollToTimerId = setTimeout(tick, scrollToTimerInterval);
-      }, scrollToTimerInterval);
-    },
     onScroll() {
       if (window.scrollY === 0) {
         this.$store.dispatch('resetTransitions');
       }
     },
     onScrollChange(payload) {
-      const sections = Object.keys(payload).reverse();
-      const currentSection = sections.find(section => payload[section].isInViewport);
-      if (this.currentSection !== currentSection) {
-        this.currentSection = currentSection;
-        const currentSectionNode = document.getElementById(currentSection);
-        if (currentSectionNode) {
-      currentSectionNode.removeAttribute('id');
-        }
-        window.location.hash = currentSection;
-        if (currentSectionNode) {
-          currentSectionNode.setAttribute('id', currentSection);
-        }
-      }
       this.$store.commit('setSectionsState', payload);
     },
   },
