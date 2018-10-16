@@ -203,6 +203,12 @@ export default {
       }
     },
     onScrollChange(payload) {
+      const sections = Object.keys(payload).reverse();
+      const hash = sections.find(section => payload[section].isInViewport);
+      const currentSectionNode = document.getElementById(hash)
+      currentSectionNode.removeAttribute('id');
+      window.location.hash = hash;
+      currentSectionNode.setAttribute('id', hash);
       this.$store.commit('setSectionsState', payload);
     },
   },
