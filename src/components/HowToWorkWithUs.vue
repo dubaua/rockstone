@@ -7,7 +7,7 @@
         .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
       transition-sequence(v-bind="getTransitionConfig(5, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         .how-to-work-with-us__slider
-          swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @init="onInit", @slideChangeTransitionEnd="onSlideChangeTransitionEnd")
+          swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @ready="onInit", @slideChangeTransitionEnd="onSlideChangeTransitionEnd")
             swiper-slide(
               v-for="(way, index) in content.how_to_work_with_us"
               :key="way._id")
