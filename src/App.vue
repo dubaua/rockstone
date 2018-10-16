@@ -88,6 +88,7 @@ export default {
   },
   data() {
     return {
+      currentSection: '',
       isLoaded: false,
       content: {
         ru: {
@@ -204,11 +205,18 @@ export default {
     },
     onScrollChange(payload) {
       const sections = Object.keys(payload).reverse();
-      const hash = sections.find(section => payload[section].isInViewport);
-      const currentSectionNode = document.getElementById(hash)
+      const currentSection = sections.find(section => payload[section].isInViewport);
+      if (this.currentSection !== currentSection) {
+        this.currentSection = currentSection;
+        const currentSectionNode = document.getElementById(currentSection);
+        if (currentSectionNode) {
       currentSectionNode.removeAttribute('id');
-      window.location.hash = hash;
-      currentSectionNode.setAttribute('id', hash);
+        }
+        window.location.hash = currentSection;
+        if (currentSectionNode) {
+          currentSectionNode.setAttribute('id', currentSection);
+        }
+      }
       this.$store.commit('setSectionsState', payload);
     },
   },
