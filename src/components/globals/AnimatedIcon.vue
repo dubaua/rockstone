@@ -1,5 +1,5 @@
 <template lang="pug">
-  .animated-icon(@click="play")
+  .animated-icon(@click="play" @mouseenter="play")
     .animated-icon__back
       icon(:glyph="back", :width="width", :height="height").animated-icon__glyph
     .animated-icon__front
