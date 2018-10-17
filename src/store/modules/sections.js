@@ -1,5 +1,7 @@
 const state = {
   homescreen: {
+    prev: null,
+    next: 'whoWeAre',
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -8,6 +10,8 @@ const state = {
     isSwiperReady: false
   },
   whoWeAre: {
+    prev: 'homescreen',
+    next: 'howWeWork',
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -16,6 +20,8 @@ const state = {
     isSwiperReady: false
   },
   howWeWork: {
+    prev: 'whoWeAre',
+    next: 'ourProjects',
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -25,6 +31,8 @@ const state = {
     currentSlideIndex: 0
   },
   ourProjects: {
+    prev: 'howWeWork',
+    next: 'howToWorkWithUs',
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -34,6 +42,8 @@ const state = {
     currentProjectIndex: 0
   },
   howToWorkWithUs: {
+    prev: 'ourProjects',
+    next: 'careers',
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -42,6 +52,8 @@ const state = {
     isSwiperReady: false
   },
   careers: {
+    prev: 'howToWorkWithUs',
+    next: 'contact',
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -50,6 +62,8 @@ const state = {
     isSwiperReady: false
   },
   contact: {
+    prev: 'careers',
+    next: null,
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
