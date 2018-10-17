@@ -89,7 +89,8 @@ export default {
   },
   data() {
     return {
-      currentSection: '',
+      currentSectionId: '',
+      isScrolling: false,
       isLoaded: false,
       content: {
         ru: {
@@ -164,73 +165,29 @@ export default {
 
     this.$nextTick(()=> {
       const hash = window.location.hash;
-      if (hash) {
-        const scrollToTimerInterval = 1500;
-        let scrollToTimerId = setTimeout(function tick() {
-          const currentSectionNode = document.getElementById(hash.replace(/^#/, ''));
-          $('html,body').animate({
-            scrollTop: currentSectionNode.offsetTop
-          }, 1000, function() {
-            clearTimeout(scrollToTimerId);
-            if (currentSectionNode) {
-              currentSectionNode.removeAttribute('id');
-            }
-            window.location.hash = hash;
-            if (currentSectionNode) {
-              currentSectionNode.setAttribute('id', hash);
-            }
-          });
-          scrollToTimerId = setTimeout(tick, scrollToTimerInterval);
-        }, scrollToTimerInterval);
-      }
+      const scrollToTimerInterval = 1500;
 
-      let delay = false;
+      let scrollToTimerId = setTimeout(function tick() {
+        const initialSectionId = hash ? hash.replace(/^#/, '') : 'homescreen';
+        self.animatedScrollTo(initialSectionId, function() {
+          clearTimeout(scrollToTimerId);
+        })
+        scrollToTimerId = setTimeout(tick, scrollToTimerInterval);
+      }, scrollToTimerInterval);
+      
 
-      $(document).on('mousewheel DOMMouseScroll', function(event) {
-        event.preventDefault();
-        if (delay) return;
+      $(document).on('mousewheel DOMMouseScroll', function (event) {
+        if (self.isScrolling) return;
 
-        delay = true;
-        const scrollTimerId = setTimeout(function() {
-          delay = false;
-          clearTimeout(scrollTimerId);
-        }, 200);
+        const wheelDirection = event.originalEvent.wheelDelta || -event.originalEvent.detail;
 
-        const wd = event.originalEvent.wheelDelta || -event.originalEvent.detail;
-
-        const a = $(
-          '#homescreen, #whoWeAre, #howWeWork, #ourProjects, #howToWorkWithUs, #careers, #contact'
-        );
-        let i;
-        if (wd < 0) {
-          for (i = 0; i < a.length; i++) {
-            const t = a[i].getClientRects()[0].top;
-            if (t >= 40) break;
-          }
+        if (wheelDirection < 0) {
+          self.animatedScrollTo(self.$store.state.sections[self.currentSectionId].next);
         } else {
-          for (i = a.length - 1; i >= 0; i--) {
-            const t = a[i].getClientRects()[0].top;
-            if (t < -20) break;
-          }
+          self.animatedScrollTo(self.$store.state.sections[self.currentSectionId].prev);
         }
 
-        if (i >= 0 && i < a.length) {
-          $('html,body').animate({
-            scrollTop: a[i].offsetTop
-          }, 1000, function() {
-            const currentSection = a[i].getAttribute('id');
-            const currentSectionNode = document.getElementById(currentSection);
-            if (currentSectionNode) {
-              currentSectionNode.removeAttribute('id');
-            }
-            window.location.hash = currentSection;
-            if (currentSectionNode) {
-              currentSectionNode.setAttribute('id', currentSection);
-            }
-            delay = false;
-            clearTimeout(scrollTimerId);
-          });
-        }
+        event.preventDefault();
       });
     })
   },
@@ -260,6 +217,41 @@ export default {
     onScrollChange(payload) {
       this.$store.commit('setSectionsState', payload);
     },
+    animatedScrollTo(sectionId, callback) {
+      if (!sectionId) return;
+
+      const self = this;
+
+      self.isScrolling = true;
+
+      const currentSectionNode = document.getElementById(sectionId);
+
+      $('html,body').animate(
+        {
+          scrollTop: currentSectionNode.offsetTop
+        },
+        1000,
+        // 'easeInOut',
+        function () {
+          if (currentSectionNode) {
+            currentSectionNode.removeAttribute('id');
+          }
+
+          self.currentSectionId = sectionId;
+          window.location.hash = sectionId;
+
+          if (currentSectionNode) {
+            currentSectionNode.setAttribute('id', sectionId);
+          }
+
+          self.isScrolling = false;
+          
+          if (callback) {
+            callback();
+          }
+        }
+      );
+    }
   },
 }
 </script>
