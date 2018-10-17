@@ -102,14 +102,18 @@ export default {
   methods: {
     onSlideChangeEnd() {
       const index = this.howWeWorkSwiperInstance.activeIndex;
+      this.animateIcon(index);
       this.$store.commit('setHowWeWorkSlideProject', { index });
-      EventBus.$emit('animateWorkIcon', index);
     },
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },
     onSwiperInit(key) {
+      this.animateIcon(0);
       this.$store.commit('swiperReady', { key })
+    },
+    animateIcon(index) {
+      EventBus.$emit('animateWorkIcon', index);
     }
   }
 }
