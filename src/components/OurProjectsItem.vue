@@ -69,8 +69,10 @@ export default {
   &__details {
     @include global-padding;
     @include breakpoint("lg") {
-      max-width: 360px;
+      max-width: 380px;
     }
+    text-shadow: 1px 1px 3px transparentize($color-background--dark, 0.4),
+      3px 3px 5px transparentize($color-background--dark, 0.75);
   }
   &__social-links {
     @include global-padding;
@@ -97,6 +99,9 @@ export default {
       max-width: 480px;
       margin-left: $base * 4;
     }
+    @include breakpoint("lg-height") {
+      max-width: 380px;
+    }
   }
   &__prev {
     position: absolute;
@@ -119,6 +124,9 @@ export default {
   &__social-links {
     display: flex;
     margin-top: $base;
+    @include breakpoint("lg-height") {
+      margin: 0;
+    }
   }
 }
 </style>

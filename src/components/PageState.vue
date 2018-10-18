@@ -1,7 +1,7 @@
 <template lang="pug">
   aside.page-state
     button(@click="setLanguage('ru')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'ru'}").page-state__lang RU
-    button(@click="setLanguage('en')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'en'}").page-state__lang EN
+    button(@click="setLanguage('en')", :class="{'page-state__lang--active': $store.state.page.currentLanguageCode === 'en'}").page-state__lang.page-state__lang--en EN
     a.page-state__stage(
       v-for="(section, key, index) in sections"
       :key="key"
@@ -65,6 +65,9 @@ export default {
     }
     &--active {
       border-color: white;
+    }
+    &--en {
+      margin-top: -50px;
     }
   }
   &__stage {

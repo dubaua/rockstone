@@ -41,6 +41,11 @@
     parallax-scene(offset-y="-12%").section__mountain.section__mountain--3-1.section__mountain--l-n
       transition-sequence(v-bind="getTransitionConfig(1, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         icon(glyph="mountain-group-3-1")
+    mq-layout(mq="lg+").scrolldown
+      .scrolldown__text
+        running-text(text="scroll down")
+      .scrolldown__arrow
+        icon(glyph="double-arrow--bottom", :width="16", :height="16")
 </template>
 
 <script>
@@ -125,9 +130,13 @@ export default {
 .how-we-work {
   &.section {
     min-height: 88vh;
-  }
-  @include breakpoint("lg") {
-    padding-top: 25vh !important;
+    @include breakpoint("lg") {
+      padding-top: 25vh !important;
+    }
+    @include breakpoint("lg-height") {
+      min-height: 100vh;
+      padding-top: 37vh !important;
+    }
   }
   &__title,
   &__slider {
@@ -195,7 +204,7 @@ export default {
     @include breakpoint("lg") {
       margin-left: 64px;
     }
-    max-width: 250px;
+    max-width: 300px;
   }
   &__details {
     position: relative;

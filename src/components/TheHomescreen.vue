@@ -49,7 +49,7 @@ export default {
   z-index: 0;
   &__logo {
     position: absolute;
-    top: 38%;
+    top: 36%;
     left: 10%;
     right: 10%;
     fill: white;

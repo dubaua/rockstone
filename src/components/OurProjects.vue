@@ -119,6 +119,11 @@ export default {
 @import "~@/styles/_globals";
 
 .our-projects {
+  @include breakpoint("lg-height") {
+    &.section {
+      padding-bottom: 0;
+    }
+  }
   &__title {
     @include global-padding;
     margin-bottom: 0 !important;

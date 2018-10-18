@@ -6,4 +6,11 @@
   * + * {
     margin-top: 1em;
   }
+
+  p {
+    line-height: 1.25;
+    @include breakpoint("lg-height") {
+      font-size: 13px;
+    }
+  }
 }

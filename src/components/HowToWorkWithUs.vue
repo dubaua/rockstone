@@ -4,7 +4,7 @@
       transition-sequence(v-bind="getTransitionConfig(3, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
       transition-sequence(v-bind="getTransitionConfig(4, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
-        .how-to-work-with-us__details(v-html="content.common.how_to_work_with_us_content")
+        .how-to-work-with-us__details.typographic(v-html="content.common.how_to_work_with_us_content")
       transition-sequence(v-bind="getTransitionConfig(5, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         .how-to-work-with-us__slider
           swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @ready="onInit", @slideChangeTransitionEnd="onSlideChangeTransitionEnd")
@@ -21,7 +21,7 @@
                     :id="index",
                   )
                 h2.subtitle.way__title {{way.title}}
-                div(v-html="way.details").way__details
+                div(v-html="way.details").way__details.typographic
           mq-layout(mq="lg+").how-to-work-with-us__dots
             .dots
           button.js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
@@ -168,6 +168,12 @@ export default {
   }
   &__icon {
     margin-bottom: $base;
+  }
+  @include breakpoint("lg-height") {
+    &__icon {
+      width: 175px;
+      height: 175px;
+    }
   }
 }
 </style>
