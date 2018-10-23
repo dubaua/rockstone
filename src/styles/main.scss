@@ -310,14 +310,14 @@ body {
       margin-right: auto;
       padding-top: $base * 6;
       @include breakpoint("lg") {
-        margin-top: -50px;
+        margin-top: -25px;
       }
     }
     &--right {
       margin-left: auto;
       padding-top: $base * 6;
       @include breakpoint("lg") {
-        margin-top: -50px;
+        margin-top: -25px;
       }
     }
   }
