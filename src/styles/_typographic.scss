@@ -1,4 +1,8 @@
 .typographic {
+  @include breakpoint("lg-height") {
+    font-size: 13px;
+  }
+
   * {
     margin: 0;
   }
@@ -9,8 +13,5 @@
 
   p {
     line-height: 1.25;
-    @include breakpoint("lg-height") {
-      font-size: 13px;
-    }
   }
 }
