@@ -66,6 +66,8 @@ body {
     left: -25%;
     right: -25%;
     z-index: -1;
+    pointer-events: none;
+
     @include breakpoint("sm") {
       left: -5%;
       right: -5%;

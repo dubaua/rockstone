@@ -22,7 +22,7 @@
       @content;
     }
   } @else if $point == "lg-height" {
-    @media (max-height: 768px) {
+    @media (max-height: 768px) and (min-width: 992px) {
       @content;
     }
   }
