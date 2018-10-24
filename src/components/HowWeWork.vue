@@ -204,6 +204,8 @@ export default {
     @include breakpoint("lg") {
       margin-left: 64px;
     }
+    position: relative;
+    z-index: 1;
     max-width: 300px;
   }
   &__details {
