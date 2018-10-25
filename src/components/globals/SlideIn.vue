@@ -1,13 +1,13 @@
 <template lang="pug">
   transition(:name="transitionName" @after-leave="dispatchNext")
-    aside.slide-in(
+    aside(
       v-if="isActive",
       v-touch:swipe.top="direction === 'down' && onClose ? onClose : null",
       v-touch:swipe.left="direction === 'right' && onClose ? onClose : null",
       v-touch:swipe.right="direction === 'left' && onClose ? onClose : null",
       v-touch:swipe.bottom="direction === 'up' && onClose ? onClose : null",
       :class="[{'slide-in--wide': isWide}, directionMod]"
-    )
+    ).slide-in.js-prevent-scroll
       button.slide-in__close(v-if="!noClose", @click="onClose")
         icon(glyph="close", :width="11", :height="11").slide-in__close-icon
       .slide-in__content(v-if="noScroll")

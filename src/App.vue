@@ -178,6 +178,8 @@ export default {
 
       $(document).on('mousewheel DOMMouseScroll', function (event) {
         if (self.isScrolling) return;
+        
+        if ($(event.target).closest('.js-prevent-scroll').length) return;
 
         const wheelDirection = event.originalEvent.wheelDelta || -event.originalEvent.detail;
 
