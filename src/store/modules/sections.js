@@ -7,7 +7,8 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
+    currentSlideIndex: 0
   },
   whoWeAre: {
     prev: "homescreen",
@@ -17,7 +18,8 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
+    currentSlideIndex: 0
   },
   howWeWork: {
     prev: "whoWeAre",
@@ -60,7 +62,8 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
+    currentSlideIndex: 0
   },
   contact: {
     prev: "careers",
@@ -70,7 +73,8 @@ const state = {
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
+    currentSlideIndex: 0
   }
 };
 
@@ -98,24 +102,26 @@ const mutations = {
   nextStep(state, payload) {
     state[payload.key].animationStep++;
   },
-  swiperReady(state, payload) {
-    state[payload.key].isSwiperReady = true;
+  setSwiperState(state, payload) {
+    state[payload.key].isSwiperReady = payload.value;
   },
   setCurrentSlideIndex(state, payload) {
     state[payload.key].currentSlideIndex = payload.index;
   },
-  resetTransitions(state, payload) {
+  resetPage(state, payload) {
     Object.keys(state).forEach(key => {
       state[key].animationStep = payload.step;
+      state[key].isSwiperReady = false;
+      state[key].currentSlideIndex = 0;
     });
   }
 };
 
 const actions = {
-  resetTransitions({ commit }) {
-    commit("resetTransitions", { step: -1 });
+  resetPage({ commit }) {
+    commit("resetPage", { step: -1 });
     setTimeout(() => {
-      commit("resetTransitions", { step: 0 });
+      commit("resetPage", { step: 0 });
     }, 50);
   }
 };

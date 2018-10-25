@@ -213,7 +213,7 @@ export default {
     },
     onScroll() {
       if (window.scrollY === 0) {
-        this.$store.dispatch('resetTransitions');
+        this.$store.dispatch('resetPage');
       }
     },
     onScrollChange(payload) {

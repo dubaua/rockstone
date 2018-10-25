@@ -12,7 +12,11 @@
           .how-we-work__pagination(v-if="isSwiperReady")
             pagination(:config="paginationConfig")
         transition-sequence(v-bind="getTransitionConfig(4, 4, 'howWeWork')")
-          swiper(:options="howWeWorkSwiperOptions", ref="howWeWorkSwiper", @ready="onSwiperInit('howWeWork')" @slideChangeTransitionEnd="onSlideChangeEnd")
+          swiper(
+            :options="howWeWorkSwiperOptions"
+            ref="howWeWorkSwiper"
+            @ready="onSwiperInit"
+            @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
               v-for="(principle, index) in content.how_we_work"
               :key="principle._id"
@@ -74,18 +78,12 @@ export default {
   },
   computed: {
     ...mapGetters(['getTransitionConfig']),
-    howWeWorkSwiperInstance() {
-      return this.$refs.howWeWorkSwiper.swiper;
-    },
     paginationConfig() {
       return {
-        current: this.currentSlideIndex + 1,
+        current: this.$store.state.sections.howWeWork.currentSlideIndex + 1,
         divider: this.content.common.fraction_divider,
         total: this.content.how_we_work.length,
       }
-    },
-    currentSlideIndex() {
-      return this.$store.state.sections.howWeWork.currentSlideIndex;
     },
     iconSize() {
       const _config = {
@@ -105,21 +103,21 @@ export default {
     },
   },
   methods: {
+    onSwiperInit() {
+      this.animateIcon(0);
+      this.$store.commit('setSwiperState', { key: 'howWeWork', value: true })
+    },
     onSlideChangeEnd() {
-      const index = this.howWeWorkSwiperInstance.activeIndex;
-      this.animateIcon(index);
+      const index = this.$refs.howWeWorkSwiper.swiper.activeIndex;
       this.$store.commit('setCurrentSlideIndex', { key: 'howWeWork', index });
+      this.animateIcon(index);
+    },
+    animateIcon(index) {
+      EventBus.$emit('animateWorkIcon', index);
     },
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },
-    onSwiperInit(key) {
-      this.animateIcon(0);
-      this.$store.commit('swiperReady', { key })
-    },
-    animateIcon(index) {
-      EventBus.$emit('animateWorkIcon', index);
-    }
   }
 }
 </script>

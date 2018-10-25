@@ -22,7 +22,11 @@
           mq-layout(mq="lg+").our-projects__dotted
             .dots
         transition-sequence(v-bind="getTransitionConfig(2, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
-          swiper(:options="ourProjectsSwiperOptions", ref="ourProjectsSwiper", @ready="onSwiperInit('ourProjects')" @slideChangeTransitionEnd="onSlideChangeEnd")
+          swiper(
+            :options="ourProjectsSwiperOptions"
+            ref="ourProjectsSwiper"
+            @ready="onSwiperInit"
+            @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
               v-for="(project, index) in content.our_projects"
               :key="project._id"
@@ -72,9 +76,6 @@ export default {
   },
   computed: {
     ...mapGetters(['getTransitionConfig']),
-    ourProjectsSwiperInstance() {
-      return this.$refs.ourProjectsSwiper.swiper;
-    },
     paginationConfig() {
       return {
         current: this.currentSlideIndex + 1,
@@ -93,6 +94,16 @@ export default {
     },
   },
   methods: {
+    onSwiperInit() {
+      this.$store.commit('setSwiperState', { key: 'ourProjects', value: true })
+    },
+    onSlideChangeEnd() {
+      const index = this.$refs.ourProjectsSwiper.swiper.activeIndex;
+      this.$store.commit('setCurrentSlideIndex', { key: 'ourProjects', index })
+    },
+    showNext(key) {
+      this.$store.commit('nextStep', { key })
+    },
     getCover(index) {
       const url = this.content.our_projects[index].cover ? this.content.our_projects[index].cover.path : null;
       const align = this.content.our_projects[index].cover_align;
@@ -101,16 +112,6 @@ export default {
         className: `our-projects__cover--${align}`,
       };
     },
-    showNext(key) {
-      this.$store.commit('nextStep', { key })
-    },
-    onSwiperInit(key) {
-      this.$store.commit('swiperReady', { key })
-    },
-    onSlideChangeEnd() {
-      const index = this.ourProjectsSwiperInstance.activeIndex;
-      this.$store.commit('setCurrentSlideIndex', { key: 'ourProjects', index })
-    }
   },
 }
 </script>

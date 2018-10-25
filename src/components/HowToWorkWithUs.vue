@@ -10,8 +10,8 @@
           swiper(
             :options="HowToWorkWithUsSwiperOptions"
             ref="HowToWorkWithUsSwiper"
-            @ready="onInit"
-            @slideChangeTransitionEnd="onSlideChangeTransitionEnd")
+            @ready="onSwiperInit"
+            @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
               v-for="(way, index) in content.how_to_work_with_us"
               :key="way._id")
@@ -83,27 +83,21 @@ export default {
   },
   computed: {
     ...mapGetters(['getTransitionConfig']),
-    HowToWorkWithUsSwiperInstance() {
-      return this.$refs.HowToWorkWithUsSwiper.swiper;
-    },
-    currentSlideIndex() {
-      return this.$store.state.sections.howToWorkWithUs.currentSlideIndex;
-    },
   },
   methods: {
-    onInit() {
-      this.animateSubsequent();
+    onSwiperInit() {
+      this.$store.commit('setSwiperState', { key: 'howToWorkWithUs', value: false })
+      this.animateSubsequent(0);
     },
-    onSlideChangeTransitionEnd() {
-      const index = this.HowToWorkWithUsSwiperInstance.activeIndex;
+    onSlideChangeEnd() {
+      const index = this.$refs.HowToWorkWithUsSwiper.swiper.activeIndex;
       this.$store.commit('setCurrentSlideIndex', { key: 'howToWorkWithUs', index });
-      this.animateSubsequent();
+      this.animateSubsequent(index);
     },
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },
-    animateSubsequent() {
-      const index = this.currentSlideIndex;
+    animateSubsequent(index) {
       let count;
       switch (this.$mq) {
         case 'xs':
