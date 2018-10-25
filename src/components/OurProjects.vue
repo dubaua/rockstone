@@ -15,8 +15,8 @@
         mq-layout(
           v-if="isSwiperReady",
           mq="lg+",
-          :style="getCover(currentProjectIndex).style",
-          :class="getCover(currentProjectIndex).className").our-projects__cover
+          :style="getCover(currentSlideIndex).style",
+          :class="getCover(currentSlideIndex).className").our-projects__cover
       .our-projects__slider(v-if="content.our_projects")
         transition-sequence(v-bind="getTransitionConfig(1, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
           mq-layout(mq="lg+").our-projects__dotted
@@ -77,13 +77,13 @@ export default {
     },
     paginationConfig() {
       return {
-        current: this.currentProjectIndex + 1,
+        current: this.currentSlideIndex + 1,
         divider: this.content.common.fraction_divider,
         total: this.content.our_projects.length,
       }
     },
-    currentProjectIndex() {
-      return this.$store.state.sections.ourProjects.currentProjectIndex;
+    currentSlideIndex() {
+      return this.$store.state.sections.ourProjects.currentSlideIndex;
     },
     fromLg() {
       return this.$mq === 'lg' || this.$mq === 'xl' || this.$mq === 'xxl';
@@ -109,7 +109,7 @@ export default {
     },
     onSlideChangeEnd() {
       const index = this.ourProjectsSwiperInstance.activeIndex;
-      this.$store.commit('setCurrentProject', { index })
+      this.$store.commit('setCurrentSlideIndex', { key: 'ourProjects', index })
     }
   },
 }

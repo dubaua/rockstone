@@ -7,7 +7,11 @@
         .how-to-work-with-us__details.typographic(v-html="content.common.how_to_work_with_us_content")
       transition-sequence(v-bind="getTransitionConfig(5, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         .how-to-work-with-us__slider
-          swiper(:options="HowToWorkWithUsSwiperOptions", ref="HowToWorkWithUsSwiper", @ready="onInit", @slideChangeTransitionEnd="onSlideChangeTransitionEnd")
+          swiper(
+            :options="HowToWorkWithUsSwiperOptions"
+            ref="HowToWorkWithUsSwiper"
+            @ready="onInit"
+            @slideChangeTransitionEnd="onSlideChangeTransitionEnd")
             swiper-slide(
               v-for="(way, index) in content.how_to_work_with_us"
               :key="way._id")
@@ -82,20 +86,39 @@ export default {
     HowToWorkWithUsSwiperInstance() {
       return this.$refs.HowToWorkWithUsSwiper.swiper;
     },
+    currentSlideIndex() {
+      return this.$store.state.sections.howToWorkWithUs.currentSlideIndex;
+    },
   },
   methods: {
     onInit() {
       this.animateSubsequent();
     },
     onSlideChangeTransitionEnd() {
+      const index = this.HowToWorkWithUsSwiperInstance.activeIndex;
+      this.$store.commit('setCurrentSlideIndex', { key: 'howToWorkWithUs', index });
       this.animateSubsequent();
     },
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },
     animateSubsequent() {
-      const index = this.HowToWorkWithUsSwiperInstance.activeIndex;
-      const count = this.HowToWorkWithUsSwiperInstance.params.slidesPerView;
+      const index = this.currentSlideIndex;
+      let count;
+      switch (this.$mq) {
+        case 'xs':
+        case 'sm':
+        default:
+          count = 1;
+          break;
+        case 'md':
+          count = 2;
+          break;
+        case 'lg':
+        case 'xl':
+          count = 3;
+          break;
+      }
       for (let i = 0; i < count; i++) {
         const delay = i * 333;
         const nextIndex = i + index;

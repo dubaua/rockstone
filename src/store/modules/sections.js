@@ -1,7 +1,7 @@
 const state = {
   homescreen: {
     prev: null,
-    next: 'whoWeAre',
+    next: "whoWeAre",
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -10,8 +10,8 @@ const state = {
     isSwiperReady: false
   },
   whoWeAre: {
-    prev: 'homescreen',
-    next: 'howWeWork',
+    prev: "homescreen",
+    next: "howWeWork",
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -20,8 +20,8 @@ const state = {
     isSwiperReady: false
   },
   howWeWork: {
-    prev: 'whoWeAre',
-    next: 'ourProjects',
+    prev: "whoWeAre",
+    next: "ourProjects",
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -31,29 +31,30 @@ const state = {
     currentSlideIndex: 0
   },
   ourProjects: {
-    prev: 'howWeWork',
-    next: 'howToWorkWithUs',
+    prev: "howWeWork",
+    next: "howToWorkWithUs",
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
     isSwiperReady: false,
-    currentProjectIndex: 0
+    currentSlideIndex: 0
   },
   howToWorkWithUs: {
-    prev: 'ourProjects',
-    next: 'careers',
+    prev: "ourProjects",
+    next: "careers",
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
     isInViewport: false,
     animationStep: 0,
-    isSwiperReady: false
+    isSwiperReady: false,
+    currentSlideIndex: 0
   },
   careers: {
-    prev: 'howToWorkWithUs',
-    next: 'contact',
+    prev: "howToWorkWithUs",
+    next: "contact",
     isAboveViewport: false,
     isBelowViewport: false,
     isFullyInViewport: false,
@@ -62,7 +63,7 @@ const state = {
     isSwiperReady: false
   },
   contact: {
-    prev: 'careers',
+    prev: "careers",
     next: null,
     isAboveViewport: false,
     isBelowViewport: false,
@@ -100,11 +101,8 @@ const mutations = {
   swiperReady(state, payload) {
     state[payload.key].isSwiperReady = true;
   },
-  setCurrentProject(state, payload) {
-    state.ourProjects.currentProjectIndex = payload.index;
-  },
-  setHowWeWorkSlideProject(state, payload) {
-    state.howWeWork.currentSlideIndex = payload.index;
+  setCurrentSlideIndex(state, payload) {
+    state[payload.key].currentSlideIndex = payload.index;
   },
   resetTransitions(state, payload) {
     Object.keys(state).forEach(key => {

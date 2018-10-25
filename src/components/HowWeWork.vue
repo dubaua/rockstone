@@ -108,7 +108,7 @@ export default {
     onSlideChangeEnd() {
       const index = this.howWeWorkSwiperInstance.activeIndex;
       this.animateIcon(index);
-      this.$store.commit('setHowWeWorkSlideProject', { index });
+      this.$store.commit('setCurrentSlideIndex', { key: 'howWeWork', index });
     },
     showNext(key) {
       this.$store.commit('nextStep', { key })
