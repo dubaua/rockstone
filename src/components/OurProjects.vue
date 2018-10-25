@@ -150,15 +150,14 @@ export default {
   }
   &__cover {
     position: absolute;
-    top: 10vh;
-    bottom: -20vh;
+    top: 0;
+    bottom: 0;
     right: 0;
     left: 50%;
     z-index: 0;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    box-shadow: 0 200px 0 $color-background--dark;
     @include breakpoint("xl") {
       left: 42%;
     }
@@ -168,7 +167,7 @@ export default {
       bottom: -1px;
       right: 0;
       left: 0;
-      background: linear-gradient(transparent, $color-background--dark);
+      background: linear-gradient(transparent, $color-background);
       height: 38%;
     }
     &--left {
