@@ -22,7 +22,7 @@
                     back="work-back",
                     :width="250",
                     :height="250",
-                    :id="index",
+                    :id="'howToWorkWithUs-'+index",
                   )
                 h2.subtitle.way__title {{way.title}}
                 div(v-html="way.details").way__details.typographic
@@ -77,7 +77,8 @@ export default {
             slidesPerView: 3,
             slidesPerGroup: 3,
           }
-        }
+        },
+        loop: true,
       },
     }
   },
@@ -90,7 +91,7 @@ export default {
       this.animateSubsequent(0);
     },
     onSlideChangeEnd() {
-      const index = this.$refs.HowToWorkWithUsSwiper.swiper.activeIndex;
+      const index = this.$refs.HowToWorkWithUsSwiper.swiper.realIndex;
       this.$store.commit('setCurrentSlideIndex', { key: 'howToWorkWithUs', index });
       this.animateSubsequent(index);
     },
@@ -117,7 +118,7 @@ export default {
         const delay = i * 333;
         const nextIndex = i + index;
         setTimeout(() => {
-          EventBus.$emit('animateWorkIcon', nextIndex);
+          EventBus.$emit('animateWorkIcon', `howToWorkWithUs-${nextIndex}`);
         }, delay);
       }
     },

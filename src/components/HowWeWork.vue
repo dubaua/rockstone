@@ -31,7 +31,7 @@
                     back="principles-back",
                     :width="iconSize",
                     :height="iconSize",
-                    :id="index",
+                    :id="'howWeWork-'+index",
                   )
         transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')")
           button.js-how-we-work-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-we-work__prev
@@ -72,6 +72,7 @@ export default {
           disabledClass: 'slider-button--disabled',
         },
         parallax: true,
+        loop: true,
       },
       isReady: false,
     }
@@ -108,12 +109,12 @@ export default {
       this.$store.commit('setSwiperState', { key: 'howWeWork', value: true })
     },
     onSlideChangeEnd() {
-      const index = this.$refs.howWeWorkSwiper.swiper.activeIndex;
+      const index = this.$refs.howWeWorkSwiper.swiper.realIndex;
       this.$store.commit('setCurrentSlideIndex', { key: 'howWeWork', index });
       this.animateIcon(index);
     },
     animateIcon(index) {
-      EventBus.$emit('animateWorkIcon', index);
+      EventBus.$emit('animateWorkIcon', `howWeWork-${index}`);
     },
     showNext(key) {
       this.$store.commit('nextStep', { key })
@@ -127,13 +128,8 @@ export default {
 
 .how-we-work {
   &.section {
-    min-height: 88vh;
     @include breakpoint("lg") {
-      padding-top: 25vh !important;
-    }
-    @include breakpoint("lg-height") {
-      min-height: 100vh;
-      padding-top: 37vh !important;
+      padding-top: 37vh;
     }
   }
   &__title,

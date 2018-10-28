@@ -32,9 +32,9 @@
               :key="project._id"
               )
               our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
-        button.js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--light.our-projects__prev
+        button(:class="{'our-projects__prev--active': isPrevButtonVisible}").js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--light.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
-        button.js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--light.our-projects__next
+        button(:class="{'our-projects__next--active': isNextButtonVisible}").js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--light.our-projects__next
           icon(glyph="arrow-right--square", :width="24", :height="24").slider-button__glyph
     parallax-scene(offset-y="-20%").section__mountain.section__mountain--4-1.section__mountain--d-n
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
@@ -71,7 +71,10 @@ export default {
             allowTouchMove: false,
           }
         },
+        loop: true,
       },
+      isPrevButtonVisible: false,
+      isNextButtonVisible: false,
     }
   },
   computed: {
@@ -95,16 +98,25 @@ export default {
   },
   methods: {
     onSwiperInit() {
-      this.$store.commit('setSwiperState', { key: 'ourProjects', value: true })
+      this.$store.commit('setSwiperState', { key: 'ourProjects', value: true });
+      const self = this;
+      setTimeout(() => {
+        self.isPrevButtonVisible = true;
+        setTimeout(() => {
+          self.isNextButtonVisible = true;
+        }, 666);
+      }, 1000);
     },
     onSlideChangeEnd() {
-      const index = this.$refs.ourProjectsSwiper.swiper.activeIndex;
+      const index = this.$refs.ourProjectsSwiper.swiper.realIndex;
       this.$store.commit('setCurrentSlideIndex', { key: 'ourProjects', index })
     },
     showNext(key) {
       this.$store.commit('nextStep', { key })
     },
     getCover(index) {
+      console.log(index);
+      
       const url = this.content.our_projects[index].cover ? this.content.our_projects[index].cover.path : null;
       const align = this.content.our_projects[index].cover_align;
       return {
@@ -118,6 +130,7 @@ export default {
 
 <style lang="scss">
 @import "~@/styles/_globals";
+@import "~@/styles/easings";
 
 .our-projects {
   @include breakpoint("lg-height") {
@@ -180,18 +193,29 @@ export default {
       background-position: right center;
     }
   }
-  &__prev {
-    @include global-arrow-prev;
+  &__prev,
+  &__next {
     top: 125px;
+    opacity: 0;
+    transition: all $timing * 2.5 !important;
+    transition-timing-function: $easeInCubic;
+    transform: translate(0, $base * 2);
     @include breakpoint("lg") {
       top: 16px;
     }
   }
+  &__prev {
+    @include global-arrow-prev;
+    &--active {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
   &__next {
     @include global-arrow-next;
-    top: 125px;
-    @include breakpoint("lg") {
-      top: 16px;
+    &--active {
+      opacity: 1;
+      transform: translate(0, 0);
     }
   }
   &__cover-placeholder {
