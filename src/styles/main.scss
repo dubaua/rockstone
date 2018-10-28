@@ -28,6 +28,16 @@ body {
   @include breakpoint("lg") {
     overflow: inherit;
   }
+  &--ru {
+    .hidden-ru {
+      display: none;
+    }
+  }
+  &--en {
+    .hidden-en {
+      display: none;
+    }
+  }
 }
 
 // * {

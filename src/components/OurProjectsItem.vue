@@ -1,7 +1,9 @@
 <template lang="pug">
   .project
-    h2.title.project__title {{project.title}}
-    .project__details.typographic(v-html="project.details")
+    h2.title.project__title.hidden-en {{project.title_ru}}
+    h2.title.project__title.hidden-ru {{project.title_en}}
+    .project__details.typographic.hidden-en(v-html="project.details_ru")
+    .project__details.typographic.hidden-ru(v-html="project.details_en")
     .project__readmore(@click="openProject(id)")
       | {{readmore}}
     .project__social-links

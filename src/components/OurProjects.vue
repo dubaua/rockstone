@@ -7,7 +7,7 @@
     )
     .section__container
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
-        h1.subtitle.title--display.our-projects__title {{ content.common.our_projects_title }}
+        h1.subtitle.title--display.our-projects__title {{ currentLanguage.common.our_projects_title }}
       transition-sequence(v-bind="getTransitionConfig(3, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')" :isBlocking="!isSwiperReady") 
         .our-projects__pagination(v-if="isSwiperReady")
           pagination(:config="paginationConfig")
@@ -31,7 +31,7 @@
               v-for="(project, index) in content.our_projects"
               :key="project._id"
               )
-              our-projects-item(:project="project", :readmore="content.common.readmore", :id="index")
+              our-projects-item(:project="project", :readmore="currentLanguage.common.readmore", :id="index")
         button(:class="{'our-projects__prev--active': isPrevButtonVisible}").js-our-projects-swiper-prev.slider-button.slider-button--round.slider-button--light.our-projects__prev
           icon(glyph="arrow-left--square", :width="24", :height="24").slider-button__glyph
         button(:class="{'our-projects__next--active': isNextButtonVisible}").js-our-projects-swiper-next.slider-button.slider-button--round.slider-button--light.our-projects__next
@@ -82,7 +82,7 @@ export default {
     paginationConfig() {
       return {
         current: this.currentSlideIndex + 1,
-        divider: this.content.common.fraction_divider,
+        divider: this.currentLanguage.common.fraction_divider,
         total: this.content.our_projects.length,
       }
     },
@@ -95,6 +95,10 @@ export default {
     isSwiperReady() {
       return this.$store.state.sections.ourProjects.isSwiperReady;
     },
+    currentLanguage() {
+      return this.content[this.$store.state.page.currentLanguageCode];
+    },
+
   },
   methods: {
     onSwiperInit() {
@@ -115,8 +119,6 @@ export default {
       this.$store.commit('nextStep', { key })
     },
     getCover(index) {
-      console.log(index);
-      
       const url = this.content.our_projects[index].cover ? this.content.our_projects[index].cover.path : null;
       const align = this.content.our_projects[index].cover_align;
       return {
