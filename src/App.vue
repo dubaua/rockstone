@@ -16,7 +16,7 @@
       scroll-item(id="howToWorkWithUs")
         how-to-work-with-us(:content="content" id="howToWorkWithUs")
       scroll-item(id="careers")
-        the-careers(:content="currentLanguage" id="careers")
+        the-careers(:content="content" id="careers")
       scroll-item(id="contact")
         the-contact(:content="currentLanguage" id="contact")
       slide-in(
@@ -31,9 +31,12 @@
         :isActive="page.isPositionOpen",
         :onClose="closePosition",
         )
-        h2.subtitle {{currentPosition.title}}
-        p {{currentPosition.city}}
-        .typographic(v-html="currentPosition.details")
+        h2.subtitle.hidden-en {{currentPosition.title_ru}}
+        h2.subtitle.hidden-ru {{currentPosition.title_en}}
+        p.hidden-en {{currentPosition.city_ru}}
+        p.hidden-ru {{currentPosition.city_en}}
+        .typographic.hidden-en(v-html="currentPosition.details_ru")
+        .typographic.hidden-ru(v-html="currentPosition.details_en")
       slide-in(
         direction="left",
         :isActive="page.isFeedbackOpen",
@@ -95,13 +98,12 @@ export default {
         ourProjects: null,
         HowWeWork: null,
         howToWorkWithUs: null,
+        careers: null,
         ru: {
           common: null,
-          careers: null,
         },
         en: {
           common: null,
-          careers: null,
         },
       },
     }
@@ -112,7 +114,7 @@ export default {
       return this.content[this.page.currentLanguageCode];
     },
     currentPosition() {
-      return this.currentLanguage.careers[this.page.currentPosition];
+      return this.content.careers[this.page.currentPosition];
     },
     currentProject() {
       return this.content.ourProjects[this.page.currentProject];
@@ -132,8 +134,7 @@ export default {
     Promise.all([
       api.getRegionByKey('common_ru'),
       api.getRegionByKey('common_en'),
-      api.getCollectionByKey('careers_ru'),
-      api.getCollectionByKey('careers_en'),
+      api.getCollectionByKey('careers'),
       api.getCollectionByKey('howToWorkWithUs'),
       api.getCollectionByKey('howWeWork'),
       api.getCollectionByKey('ourProjects'),
@@ -141,16 +142,14 @@ export default {
       var [
           common_ru,
           common_en,
-          careers_ru,
-          careers_en,
+          careers,
           howToWorkWithUs,
           howWeWork,
           ourProjects,
         ] = result;
       self.content.ru.common = common_ru;
       self.content.en.common = common_en;
-      self.content.ru.careers = careers_ru;
-      self.content.en.careers = careers_en;
+      self.content.careers = careers;
       self.content.howToWorkWithUs = howToWorkWithUs;
       self.content.howWeWork = howWeWork;
       self.content.ourProjects = ourProjects;

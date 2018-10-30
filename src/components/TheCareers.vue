@@ -2,7 +2,7 @@
   section.section.careers
     .section__container
       transition-sequence(v-bind="getTransitionConfig(0, 3, 'careers')" @transitionAnimated="showNext('careers')")
-        h1.title.careers__title {{ content.common.careers_title }}
+        h1.title.careers__title {{ currentLanguage.common.careers_title }}
       transition-sequence(v-bind="getTransitionConfig(1, 3, 'careers')" @transitionAnimated="showNext('careers')")
         .careers__cover(:style="coverStyle")
       transition-sequence(v-bind="getTransitionConfig(2, 3, 'careers')" @transitionAnimated="showNext('careers')")
@@ -11,12 +11,14 @@
             v-for="(position, index) in content.careers"
             :key="position._id"
             @click="openPosition(index)")
-            h2.subtitle.position__title {{position.title}}
-            .position__city {{position.city}}
+            h2.subtitle.position__title.hidden-en {{position.title_ru}}
+            h2.subtitle.position__title.hidden-ru {{position.title_en}}
+            .position__city.hidden-en {{position.city_ru}}
+            .position__city.hidden-ru {{position.city_en}}
             icon(glyph="arrow-right", :width="24", :height="24").position__icon
       transition-sequence(v-bind="getTransitionConfig(3, 3, 'careers')" @transitionAnimated="showNext('careers')")
         .careers__apply
-          button.button.button--wide(@click="openFeedback") {{ content.common.apply_button_text }}
+          button.button.button--wide(@click="openFeedback") {{ currentLanguage.common.apply_button_text }}
     mq-layout(mq="lg+").scrolldown.scrolldown--above.scrolldown--accent
       .scrolldown__text
         running-text(text="scroll down")
@@ -36,7 +38,10 @@ export default {
   computed: {
     ...mapGetters(['getTransitionConfig']),
     coverStyle() {
-      return `background-image: url(${this.content.common.careers_cover.path})`;
+      return `background-image: url(${this.currentLanguage.common.careers_cover.path})`;
+    },
+    currentLanguage() {
+      return this.content[this.$store.state.page.currentLanguageCode];
     },
   },
   methods: {
@@ -63,7 +68,7 @@ export default {
     @include global-padding;
   }
   &__cover {
-    @include breakpoint('lg') {
+    @include breakpoint("lg") {
       position: absolute;
       bottom: -10vw;
       top: 0;
