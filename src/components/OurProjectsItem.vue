@@ -17,7 +17,7 @@
         swiper-slide(
           v-for="(photo, index) in project.gallery"
           :key="project._id+'-photo-'+index")
-          img(:src="photo.path").project__shot
+          img(:src="photo.path" width="599" height="352").project__shot
       button(:class="'js-project-'+id+'-prev'").slider-button.slider-button--light.project__prev
         icon(glyph="arrow-left", :width="24", :height="24").slider-button__glyph
       button(:class="'js-project-'+id+'-next'").slider-button.slider-button--light.project__next
