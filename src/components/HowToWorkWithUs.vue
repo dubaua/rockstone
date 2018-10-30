@@ -2,9 +2,9 @@
   section.section.how-to-work-with-us
     .section__container
       transition-sequence(v-bind="getTransitionConfig(3, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
-        h1.title.how-to-work-with-us__title {{ content.common.how_to_work_with_us_title }}
+        h1.title.how-to-work-with-us__title {{ currentLanguage.common.how_to_work_with_us_title }}
       transition-sequence(v-bind="getTransitionConfig(4, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
-        .how-to-work-with-us__details.typographic(v-html="content.common.how_to_work_with_us_content")
+        .how-to-work-with-us__details.typographic(v-html="currentLanguage.common.how_to_work_with_us_content")
       transition-sequence(v-bind="getTransitionConfig(5, 5, 'howToWorkWithUs')" @transitionAnimated="showNext('howToWorkWithUs')")
         .how-to-work-with-us__slider
           swiper(
@@ -13,7 +13,7 @@
             @ready="onSwiperInit"
             @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
-              v-for="(way, index) in content.how_to_work_with_us"
+              v-for="(way, index) in content.howToWorkWithUs"
               :key="way._id")
               .way
                 .way__icon
@@ -24,8 +24,10 @@
                     :height="250",
                     :id="'howToWorkWithUs-'+index",
                   )
-                h2.subtitle.way__title {{way.title}}
-                div(v-html="way.details").way__details.typographic
+                h2.subtitle.way__title.hidden-en {{way.title_ru}}
+                h2.subtitle.way__title.hidden-ru {{way.title_en}}
+                .way__details.typographic.hidden-en(v-html="way.details_ru")
+                .way__details.typographic.hidden-ru(v-html="way.details_en")
           mq-layout(mq="lg+").how-to-work-with-us__dots
             .dots
           button.js-how-to-work-with-us-swiper-prev.slider-button.slider-button--round.slider-button--dark.how-to-work-with-us__prev
@@ -84,6 +86,9 @@ export default {
   },
   computed: {
     ...mapGetters(['getTransitionConfig']),
+    currentLanguage() {
+      return this.content[this.$store.state.page.currentLanguageCode];
+    },
   },
   methods: {
     onSwiperInit() {

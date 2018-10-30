@@ -1,13 +1,13 @@
 <template lang="pug">
   section.section.our-projects
     .our-projects__cover-placeholder(
-      v-for="(project, index) in content.our_projects"
+      v-for="(project, index) in content.ourProjects"
       :key="project._id"
       :style="getCover(index).style",
     )
     .section__container
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
-        h1.subtitle.title--display.our-projects__title {{ currentLanguage.common.our_projects_title }}
+        h1.subtitle.title--display.our-projects__title {{ currentLanguage.common.ourProjects_title }}
       transition-sequence(v-bind="getTransitionConfig(3, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')" :isBlocking="!isSwiperReady") 
         .our-projects__pagination(v-if="isSwiperReady")
           pagination(:config="paginationConfig")
@@ -17,7 +17,7 @@
           mq="lg+",
           :style="getCover(currentSlideIndex).style",
           :class="getCover(currentSlideIndex).className").our-projects__cover
-      .our-projects__slider(v-if="content.our_projects")
+      .our-projects__slider(v-if="content.ourProjects")
         transition-sequence(v-bind="getTransitionConfig(1, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
           mq-layout(mq="lg+").our-projects__dotted
             .dots
@@ -28,7 +28,7 @@
             @ready="onSwiperInit"
             @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
-              v-for="(project, index) in content.our_projects"
+              v-for="(project, index) in content.ourProjects"
               :key="project._id"
               )
               our-projects-item(:project="project", :readmore="currentLanguage.common.readmore", :id="index")
@@ -81,7 +81,7 @@ export default {
       return {
         current: this.currentSlideIndex + 1,
         divider: this.currentLanguage.common.fraction_divider,
-        total: this.content.our_projects.length,
+        total: this.content.ourProjects.length,
       }
     },
     currentSlideIndex() {
@@ -96,7 +96,6 @@ export default {
     currentLanguage() {
       return this.content[this.$store.state.page.currentLanguageCode];
     },
-
   },
   methods: {
     onSwiperInit() {
@@ -110,8 +109,8 @@ export default {
       this.$store.commit('nextStep', { key })
     },
     getCover(index) {
-      const url = this.content.our_projects[index].cover ? this.content.our_projects[index].cover.path : null;
-      const align = this.content.our_projects[index].cover_align;
+      const url = this.content.ourProjects[index].cover ? this.content.ourProjects[index].cover.path : null;
+      const align = this.content.ourProjects[index].cover_align;
       return {
         style: `background-image: url(${url})`,
         className: `our-projects__cover--${align}`,

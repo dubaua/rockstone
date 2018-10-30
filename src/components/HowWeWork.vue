@@ -1,9 +1,8 @@
 <template lang="pug">
   section.section.how-we-work
-    a(name="how_we_work")
     .section__container
       transition-sequence(v-bind="getTransitionConfig(2, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
-        h1.title.how-we-work__title {{  content.common.how_we_work_title }}
+        h1.title.how-we-work__title {{ currentLanguage.common.how_we_work_title }}
       transition-sequence(v-bind="getTransitionConfig(3, 4, 'howWeWork')" @transitionAnimated="showNext('howWeWork')")
         .how-we-work__dotted
           .dots
@@ -18,13 +17,15 @@
             @ready="onSwiperInit"
             @slideChangeTransitionEnd="onSlideChangeEnd")
             swiper-slide(
-              v-for="(principle, index) in content.how_we_work"
+              v-for="(principle, index) in content.howWeWork"
               :key="principle._id"
               )
               .principle
                 .principle__about(data-swiper-parallax="-400", data-swiper-parallax-opacity="0")
-                  h2.subtitle.principle__title {{principle.title}}
-                  .principle__details.typographic(v-html="principle.details")
+                  h2.subtitle.principle__title.hidden-en {{principle.title_ru}}
+                  h2.subtitle.principle__title.hidden-ru {{principle.title_en}}
+                  .principle__details.typographic.hidden-en(v-html="principle.details_ru")
+                  .principle__details.typographic.hidden-ru(v-html="principle.details_en")
                 .principle__icon(data-swiper-parallax="-800", data-swiper-parallax-opacity="0")
                   animated-icon(
                     :front="'principles-'+(index+1)",
@@ -82,8 +83,8 @@ export default {
     paginationConfig() {
       return {
         current: this.$store.state.sections.howWeWork.currentSlideIndex + 1,
-        divider: this.content.common.fraction_divider,
-        total: this.content.how_we_work.length,
+        divider: this.content[this.$store.state.page.currentLanguageCode].common.fraction_divider,
+        total: this.content.howWeWork.length,
       }
     },
     iconSize() {
@@ -101,6 +102,9 @@ export default {
     },
     isSwiperReady() {
       return this.$store.state.sections.howWeWork.isSwiperReady;
+    },
+    currentLanguage() {
+      return this.content[this.$store.state.page.currentLanguageCode];
     },
   },
   methods: {
