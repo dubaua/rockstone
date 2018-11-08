@@ -7,7 +7,7 @@
     )
     .section__container
       transition-sequence(v-bind="getTransitionConfig(0, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')") 
-        h1.subtitle.title--display.our-projects__title {{ currentLanguage.common.ourProjects_title }}
+        h1.subtitle.title--display.our-projects__title {{ currentLanguage.common.our_projects_title }}
       transition-sequence(v-bind="getTransitionConfig(3, 4, 'ourProjects')" @transitionAnimated="showNext('ourProjects')" :isBlocking="!isSwiperReady") 
         .our-projects__pagination(v-if="isSwiperReady")
           pagination(:config="paginationConfig")
