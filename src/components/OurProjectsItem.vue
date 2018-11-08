@@ -110,14 +110,16 @@ export default {
     z-index: 6;
     bottom: 0;
     left: $base * 2;
-    transform: translate(0, 0);
+    // fix arrows glitch on iOS
+    transform: translate3d(0, 0, 1000px) !important;
   }
   &__next {
     position: absolute;
     z-index: 6;
     bottom: 0;
     left: $base * 2;
-    transform: translate(120%, 0);
+    // fix arrows glitch on iOS
+    transform: translate3d(120%, 0, 1000px) !important;
   }
   &__shot {
     max-width: 100%;
