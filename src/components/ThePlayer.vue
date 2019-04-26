@@ -10,7 +10,6 @@
 
 <script>
 import track from './soundtrack.mp3';
-import Cookies from 'js-cookie';
 
 export default {
   name: 'ThePlayer',
@@ -34,11 +33,9 @@ export default {
     },
     play () {
       this.audio.play();
-      Cookies.set('noautoplay', 'false');
     },
     pause () {
       this.audio.pause();
-      Cookies.set('noautoplay', 'true');
     },
     onAudioPlay () {
       this.isPlaying = true;
@@ -58,9 +55,6 @@ export default {
   },
   mounted () {
     this.initAudio();
-    if (Cookies.get('noautoplay') !== 'true') {
-      this.play(); // check cookie
-    }
   },
 }
 </script>
