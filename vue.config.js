@@ -1,6 +1,6 @@
 module.exports = {
   devServer: {
-    proxy: "http://rockstone.dubaua.ru/"
+    proxy: "https://rockstonedev.com/"
   },
   chainWebpack: config => {
     config.module.rules.delete("svg");
