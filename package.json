@@ -11,7 +11,7 @@
     "disable-scroll": "^0.4.0",
     "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
-    "node-sass": "^4.9.3",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
